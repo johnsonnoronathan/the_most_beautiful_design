@@ -80,7 +80,8 @@ rectangles in chapter 2, a cascade on the final 8/3 in chapter 3).
 python3 src/projects/learning/calculus/score/compose.py   # → public/learning/calculus/ch0N-score.mp3
 ```
 
-Both scores use the small numpy synthesizer in `src/lib/score/synth.py`.
+These scores use the small numpy synthesizer in `src/lib/score/synth.py`;
+Afterglow's script keeps its own copy of the same instruments.
 
 ## Afterglow score
 

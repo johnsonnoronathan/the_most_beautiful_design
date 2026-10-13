@@ -1,5 +1,6 @@
 import React from 'react';
-import {Easing} from 'remotion';
+import {Audio, Easing} from 'remotion';
+import {asset} from '../../../lib/assets';
 import {MONO, SANS} from '../../../lib/fonts';
 import {
   Axes,
@@ -87,6 +88,7 @@ export const Ch1Derivative: React.FC = () => {
 
   return (
     <Board>
+      <Audio src={asset('learning/calculus/ch01-score.mp3')} />
       <svg width="1920" height="1080" style={{position: 'absolute', inset: 0}}>
         <defs>
           <clipPath id={`${uid}-plot`}>

@@ -10,8 +10,8 @@ const root = path.resolve('out/preview');
 const types = {'.html': 'text/html', '.mp3': 'audio/mpeg'};
 const server = http.createServer((req, res) => {
   const file = path.join(root, decodeURIComponent(req.url.split('?')[0]).replace(/\/$/, '/index.html'));
-  if (!file.startsWith(root) || !fs.existsSync(file)) return res.writeHead(404).end();
   if (req.url === '/favicon.ico') return res.writeHead(204).end();
+  if (!file.startsWith(root) || !fs.existsSync(file)) return res.writeHead(404).end();
   res.writeHead(200, {'content-type': types[path.extname(file)] ?? 'application/octet-stream'});
   // mimic the publish skeleton, which supplies doctype, charset and viewport
   if (file.endsWith('.html')) {
@@ -26,6 +26,8 @@ const page = await browser.newPage({viewport: {width: 1440, height: 1000}});
 const problems = [];
 page.on('console', (m) => (m.type() === 'error' || m.type() === 'warning') && problems.push(`${m.type()}: ${m.text()}`));
 page.on('pageerror', (e) => problems.push(`pageerror: ${e.message}`));
+page.on('response', (r) => r.status() >= 400 && problems.push(`http ${r.status()}: ${r.url()}`));
+page.on('request', (r) => r.url().endsWith('.mp3') && problems.push(`requested: ${r.url()}`));
 
 const hash = process.argv[2] ? `#${process.argv[2]}` : '';
 await page.goto(`http://localhost:4917/index.html${hash}`);

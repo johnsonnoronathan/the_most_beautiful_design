@@ -33,7 +33,14 @@ const html = `<title>Screening Room</title>
 <script>${js}</script>
 `;
 
-fs.mkdirSync(path.join(outDir, 'art/afterglow'), {recursive: true});
+fs.mkdirSync(outDir, {recursive: true});
 fs.writeFileSync(path.join(outDir, 'index.html'), html);
-fs.copyFileSync('public/art/afterglow/score.mp3', path.join(outDir, 'art/afterglow/score.mp3'));
+
+// Scores are published next to the page at the same paths they have under public/.
+const scores = fs.readdirSync('public', {recursive: true}).filter((f) => f.endsWith('.mp3'));
+for (const rel of scores) {
+  fs.mkdirSync(path.join(outDir, path.dirname(rel)), {recursive: true});
+  fs.copyFileSync(path.join('public', rel), path.join(outDir, rel));
+}
+console.log(`scores: ${scores.join(', ')}`);
 console.log(`out/preview/index.html  ${(html.length / 1024 / 1024).toFixed(2)} MB`);

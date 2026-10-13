@@ -40,13 +40,14 @@ single frames, which is the quickest way to check a change.
 src/
   catalog.ts                     one catalog → Studio folders and the preview page
   Root.tsx                       Category / Project / Video folders
-  lib/                           shared fonts and asset paths
+  lib/                           shared fonts, asset paths and the score synthesizer
   projects/
-    learning/calculus/           kit.tsx (plots, KaTeX, captions) + one file per chapter
+    learning/calculus/           kit.tsx (plots, KaTeX, captions), one file per chapter, score/
     art/afterglow/               engine.ts, Valley.tsx, Afterglow.tsx, score/compose.py
 public/
   shared/fonts/                  Bodoni Moda, Geist, Geist Mono (SIL OFL)
   art/afterglow/                 grain texture and the synthesized score
+  learning/calculus/             one synthesized score per chapter
 preview/                         the Screening Room page and its build script
 scripts/                         stills renderer and a headless smoke test for the page
 ```
@@ -68,6 +69,18 @@ always amber, slopes and derivatives teal, accumulated area coral.
 3. **The fundamental theorem.** The area function `A(x)` is traced as the edge
    moves; a magnified sliver shows `dA/dx = f(x)`; the theorem turns chapter 2's
    256 rectangles into one line: `∫₀² t² dt = [t³/3]₀² = 8/3`.
+
+Each chapter has its own background score, quieter than Afterglow's so it sits
+under the captions. A shared four-note motif opens every chapter and is answered
+on its closing card; chords change with the scenes; small accents mark the
+reveals (a rising note per table row in chapter 1, per doubling of the
+rectangles in chapter 2, a cascade on the final 8/3 in chapter 3).
+
+```sh
+python3 src/projects/learning/calculus/score/compose.py   # → public/learning/calculus/ch0N-score.mp3
+```
+
+Both scores use the small numpy synthesizer in `src/lib/score/synth.py`.
 
 ## Afterglow score
 

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Easing} from 'remotion';
+import {Audio, Easing} from 'remotion';
+import {asset} from '../../../lib/assets';
 import {MONO, SANS} from '../../../lib/fonts';
 import {
   areaPath,
@@ -106,6 +107,7 @@ export const Ch3Fundamental: React.FC = () => {
 
   return (
     <Board>
+      <Audio src={asset('learning/calculus/ch03-score.mp3')} />
       <svg width="1920" height="1080" style={{position: 'absolute', inset: 0}}>
         <g opacity={dim}>
           <Axes b={TOP} p={axesTop} xTicks={[0.5, 1, 1.5, 2]} yTicks={[1, 2, 3, 4]} xLabel="t" yLabel="f(t)" tickFmt={(n) => (n % 1 === 0 ? String(n) : n.toFixed(1))} />

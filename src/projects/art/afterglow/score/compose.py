@@ -4,9 +4,9 @@ Written to the film's timeline (30 fps, 48 s). Chords change with the light,
 a felt-piano arpeggio carries the day, high bells are the stars, and the
 "Afterglow" title is answered by a nine-note cascade, one note per letter.
 
-    python3 music/compose.py            # writes out/afterglow-score.wav
+    python3 src/projects/art/afterglow/score/compose.py   # writes out/afterglow-score.wav
     ffmpeg -i out/afterglow-score.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 \
-        -ar 48000 -c:a libmp3lame -b:a 192k public/afterglow-score.mp3
+        -ar 48000 -c:a libmp3lame -b:a 192k public/art/afterglow/score.mp3
 """
 
 import os
@@ -271,7 +271,7 @@ def write_wav(path, stereo):
 
 
 if __name__ == '__main__':
-    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', '..'))
     out = os.path.join(root, 'out', 'afterglow-score.wav')
     write_wav(out, compose())
     print('wrote', out)

@@ -1,35 +1,17 @@
 import React, {useMemo} from 'react';
-import {
-  AbsoluteFill,
-  Audio,
-  cancelRender,
-  continueRender,
-  delayRender,
-  Easing,
-  interpolate,
-  staticFile,
-  useCurrentFrame,
-  useVideoConfig,
-} from 'remotion';
+import {AbsoluteFill, Audio, Easing, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
+import {asset} from '../../../lib/assets';
+import {loadStudioFonts, MONO, SANS, SERIF} from '../../../lib/fonts';
 import {buildGeometry, elevation} from './engine';
 import {Valley} from './Valley';
 
-const fontHandle = delayRender('Loading fonts');
-const faces = [
-  new FontFace('Bodoni Moda', `url(${staticFile('fonts/BodoniModa-Italic.woff2')}) format('woff2')`, {style: 'italic', weight: '400'}),
-  new FontFace('Geist', `url(${staticFile('fonts/Geist.woff2')}) format('woff2')`, {weight: '100 900'}),
-  new FontFace('Geist Mono', `url(${staticFile('fonts/GeistMono.woff2')}) format('woff2')`, {weight: '400'}),
-];
-Promise.all(faces.map((f) => f.load()))
-  .then((loaded) => {
-    loaded.forEach((f) => (document.fonts as unknown as Set<FontFace>).add(f));
-    continueRender(fontHandle);
-  })
-  .catch((err) => cancelRender(err));
+loadStudioFonts();
 
-const SERIF = "'Bodoni Moda', serif";
-const SANS = "'Geist', sans-serif";
-const MONO = "'Geist Mono', monospace";
+export type AfterglowProps = {
+  /** 'preview' lightens the cloud and water filters for real-time playback in a browser. */
+  quality: 'preview' | 'final';
+};
+
 const INK = '#FFF4E6';
 const BAR = 138;
 
@@ -105,7 +87,7 @@ const Title: React.FC<{frame: number}> = ({frame}) => {
   );
 };
 
-export const Afterglow: React.FC = () => {
+export const Afterglow: React.FC<AfterglowProps> = ({quality}) => {
   const frame = useCurrentFrame();
   const {durationInFrames} = useVideoConfig();
   const geo = useMemo(() => buildGeometry(7, 2100, 1080, 500, 690, 705), []);
@@ -126,16 +108,16 @@ export const Afterglow: React.FC = () => {
 
   return (
     <AbsoluteFill style={{backgroundColor: '#000'}}>
-      <Audio src={staticFile('afterglow-score.mp3')} />
+      <Audio src={asset('art/afterglow/score.mp3')} />
       <AbsoluteFill style={{transform: `scale(${zoom})`, transformOrigin: '50% 56%'}}>
         <svg width="1920" height="1080" viewBox="0 0 1920 1080" style={{display: 'block'}}>
-          <Valley frame={frame} hour={hour} pan={pan} geo={geo} />
+          <Valley frame={frame} hour={hour} pan={pan} geo={geo} lite={quality === 'preview'} />
         </svg>
       </AbsoluteFill>
 
       <AbsoluteFill
         style={{
-          backgroundImage: `url(${staticFile('grain.png')})`,
+          backgroundImage: `url(${asset('art/afterglow/grain.png')})`,
           backgroundSize: '256px 256px',
           backgroundPosition: `${(frame * 37) % 256}px ${(frame * 91) % 256}px`,
           mixBlendMode: 'overlay',

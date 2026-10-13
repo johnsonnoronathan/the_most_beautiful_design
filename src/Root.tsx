@@ -1,7 +1,29 @@
 import React from 'react';
-import {Composition} from 'remotion';
-import {Afterglow} from './Afterglow';
+import {Composition, Folder} from 'remotion';
+import {CATALOG} from './catalog';
 
+// Studio sidebar mirrors the catalog: Category / Project / Video.
 export const RemotionRoot: React.FC = () => (
-  <Composition id="Afterglow" component={Afterglow} durationInFrames={1440} fps={30} width={1920} height={1080} />
+  <>
+    {CATALOG.map((cat) => (
+      <Folder key={cat.id} name={cat.folder}>
+        {cat.projects.map((project) => (
+          <Folder key={project.id} name={project.id}>
+            {project.videos.map((v) => (
+              <Composition
+                key={v.id}
+                id={v.id}
+                component={v.component}
+                durationInFrames={v.durationInFrames}
+                fps={v.fps}
+                width={v.width}
+                height={v.height}
+                defaultProps={v.defaultProps ?? {}}
+              />
+            ))}
+          </Folder>
+        ))}
+      </Folder>
+    ))}
+  </>
 );

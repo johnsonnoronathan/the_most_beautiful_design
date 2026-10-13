@@ -7,7 +7,15 @@
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
-    "lib": ["DOM", "ES2020"]
+    "lib": [
+      "DOM",
+      "ES2020"
+    ]
   },
-  "include": ["src", "remotion.config.ts"]
+  "include": [
+    "src",
+    "preview",
+    "scripts",
+    "remotion.config.ts"
+  ]
 }

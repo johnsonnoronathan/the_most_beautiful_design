@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useId} from 'react';
 import {clamp, elevation, Geometry, mix, paletteAt} from './engine';
 
 // The valley at one instant: sky, weather, mountains, forest, and a lake that
@@ -29,8 +29,9 @@ const V = [
   [-104, 52],
 ];
 
-export const Valley: React.FC<{frame: number; hour: number; pan: number; geo: Geometry}> = ({frame, hour, pan, geo}) => {
+export const Valley: React.FC<{frame: number; hour: number; pan: number; geo: Geometry; lite?: boolean}> = ({frame, hour, pan, geo, lite = false}) => {
   const {W, H, horizon, shore} = geo;
+  const uid = 'v' + useId().replace(/[^a-zA-Z0-9]/g, '');
   const p = paletteAt(hour);
   const e = elevation(hour);
   const day = clamp(e * 3);
@@ -59,81 +60,81 @@ export const Valley: React.FC<{frame: number; hour: number; pan: number; geo: Ge
   return (
     <>
       <defs>
-        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${uid}-sky`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor={p.skyTop} />
           <stop offset="0.5" stopColor={p.skyMid} />
           <stop offset="0.84" stopColor={p.skyLow} />
           <stop offset="1" stopColor={p.horizon} />
         </linearGradient>
-        <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+        <radialGradient id={`${uid}-glow`} cx="0.5" cy="0.5" r="0.5">
           <stop offset="0" stopColor={p.sun} stopOpacity="0.85" />
           <stop offset="0.25" stopColor={p.sun} stopOpacity="0.32" />
           <stop offset="1" stopColor={p.sun} stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="sunHalo" cx="0.5" cy="0.5" r="0.5">
+        <radialGradient id={`${uid}-sunHalo`} cx="0.5" cy="0.5" r="0.5">
           <stop offset="0.3" stopColor={p.sun} stopOpacity="0.55" />
           <stop offset="1" stopColor={p.sun} stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="rayFade" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1300">
+        <radialGradient id={`${uid}-rayFade`} gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1300">
           <stop offset="0" stopColor={p.sun} stopOpacity="0.6" />
           <stop offset="1" stopColor={p.sun} stopOpacity="0" />
         </radialGradient>
-        <linearGradient id="mist" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${uid}-mist`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor={p.horizon} stopOpacity="0" />
           <stop offset="0.5" stopColor={p.horizon} stopOpacity="0.3" />
           <stop offset="1" stopColor={p.horizon} stopOpacity="0" />
         </linearGradient>
-        <linearGradient id="cloudShade" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${uid}-cloudShade`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor={cloudHigh} />
           <stop offset="1" stopColor={cloudLow} />
         </linearGradient>
-        <linearGradient id="cloudFade" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${uid}-cloudFade`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#000" />
           <stop offset="0.3" stopColor="#fff" />
           <stop offset="0.7" stopColor="#fff" />
           <stop offset="1" stopColor="#000" />
         </linearGradient>
-        <mask id="cloudMask" maskUnits="userSpaceOnUse" x="-200" y="0" width={W + 400} height={horizon + 40}>
-          <rect x="-200" y="110" width={W + 400} height={horizon - 120} fill="url(#cloudFade)" />
+        <mask id={`${uid}-cloudMask`} maskUnits="userSpaceOnUse" x="-200" y="0" width={W + 400} height={horizon + 40}>
+          <rect x="-200" y="110" width={W + 400} height={horizon - 120} fill={`url(#${uid}-cloudFade)`} />
         </mask>
-        <filter id="cumulus" x="0" y="0" width="1" height="1" colorInterpolationFilters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.0011 0.0042" numOctaves={5} seed={11} result="n" />
+        <filter id={`${uid}-cumulus`} x="0" y="0" width="1" height="1" colorInterpolationFilters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0011 0.0042" numOctaves={lite ? 3 : 5} seed={11} result="n" />
           <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  3.4 0 0 0 -1.55" result="a" />
           <feComposite in="SourceGraphic" in2="a" operator="in" />
         </filter>
-        <filter id="cirrus" x="0" y="0" width="1" height="1" colorInterpolationFilters="sRGB">
-          <feTurbulence type="fractalNoise" baseFrequency="0.0005 0.016" numOctaves={3} seed={23} result="n" />
+        <filter id={`${uid}-cirrus`} x="0" y="0" width="1" height="1" colorInterpolationFilters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency="0.0005 0.016" numOctaves={lite ? 2 : 3} seed={23} result="n" />
           <feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  3.0 0 0 0 -1.5" result="a" />
           <feComposite in="SourceGraphic" in2="a" operator="in" />
         </filter>
-        <filter id="ripple" filterUnits="userSpaceOnUse" x="-200" y={shore - 1300} width={W + 400} height={H - shore + 1400} colorInterpolationFilters="sRGB">
+        <filter id={`${uid}-ripple`} filterUnits="userSpaceOnUse" x="-200" y={shore - 1300} width={W + 400} height={H - shore + 1400} colorInterpolationFilters="sRGB">
           <feTurbulence type="turbulence" baseFrequency="0.0022 0.07" numOctaves={2} seed={4} result="w" />
           <feOffset in="w" dx={Math.sin(frame * 0.02) * 6} dy={frame * 0.45} result="wm" />
           <feDisplacementMap in="SourceGraphic" in2="wm" scale="24" xChannelSelector="R" yChannelSelector="G" result="d" />
-          <feGaussianBlur in="d" stdDeviation="0.5 1.6" />
+          {lite ? null : <feGaussianBlur in="d" stdDeviation="0.5 1.6" />}
         </filter>
-        <clipPath id="lakeClip">
+        <clipPath id={`${uid}-lakeClip`}>
           <rect x="-200" y={shore} width={W + 400} height={H - shore + 20} />
         </clipPath>
-        <linearGradient id="lakeTint" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={`${uid}-lakeTint`} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor={p.near} stopOpacity="0.18" />
           <stop offset="1" stopColor={p.near} stopOpacity="0.78" />
         </linearGradient>
-        <radialGradient id="ff" cx="0.5" cy="0.5" r="0.5">
+        <radialGradient id={`${uid}-ff`} cx="0.5" cy="0.5" r="0.5">
           <stop offset="0" stopColor="#FFE9A0" stopOpacity="0.9" />
           <stop offset="1" stopColor="#FFE9A0" stopOpacity="0" />
         </radialGradient>
-        <radialGradient id="vignette" cx="0.5" cy="0.48" r="0.75">
+        <radialGradient id={`${uid}-vignette`} cx="0.5" cy="0.48" r="0.75">
           <stop offset="0.55" stopColor="#000" stopOpacity="0" />
           <stop offset="1" stopColor="#000" stopOpacity="0.6" />
         </radialGradient>
-        <linearGradient id="meteor" x1="0" y1="0" x2="1" y2="0">
+        <linearGradient id={`${uid}-meteor`} x1="0" y1="0" x2="1" y2="0">
           <stop offset="0" stopColor="#FFFFFF" stopOpacity="0.95" />
           <stop offset="1" stopColor="#FFFFFF" stopOpacity="0" />
         </linearGradient>
 
-        <g id="scene">
-          <rect x="-200" y="-20" width={W + 400} height={shore + 40} fill="url(#sky)" />
+        <g id={`${uid}-scene`}>
+          <rect x="-200" y="-20" width={W + 400} height={shore + 40} fill={`url(#${uid}-sky)`} />
 
           <g opacity={p.starO}>
             {geo.stars.map((s, i) => (
@@ -153,18 +154,18 @@ export const Valley: React.FC<{frame: number; hour: number; pan: number; geo: Ge
           <circle cx={moonX} cy={moonY} r="20" fill="#F4EEE2" opacity={moonO} />
 
           <g transform={`translate(${sunX} ${sunY}) rotate(${frame * 0.03})`} opacity={raysO} style={{mixBlendMode: 'screen'}}>
-            <path d={geo.rays} fill="url(#rayFade)" />
+            <path d={geo.rays} fill={`url(#${uid}-rayFade)`} />
           </g>
-          <circle cx={sunX} cy={sunY} r="1050" fill="url(#glow)" opacity={p.glowO} />
-          <circle cx={sunX} cy={sunY} r="150" fill="url(#sunHalo)" />
+          <circle cx={sunX} cy={sunY} r="1050" fill={`url(#${uid}-glow)`} opacity={p.glowO} />
+          <circle cx={sunX} cy={sunY} r="150" fill={`url(#${uid}-sunHalo)`} />
           <circle cx={sunX} cy={sunY} r="46" fill={p.sun} />
 
-          <g mask="url(#cloudMask)">
+          <g mask={`url(#${uid}-cloudMask)`}>
             <g transform={`translate(${-drift2 + pan * 0.05} 0)`} opacity={0.5}>
-              <rect x={drift2 - 260} y="110" width={W + 480} height="240" fill="url(#cloudShade)" filter="url(#cirrus)" />
+              <rect x={drift2 - 260} y="110" width={W + 480} height="240" fill={`url(#${uid}-cloudShade)`} filter={`url(#${uid}-cirrus)`} />
             </g>
             <g transform={`translate(${-drift1 + pan * 0.08} 0)`} opacity={0.92}>
-              <rect x={drift1 - 260} y="150" width={W + 480} height={horizon - 150} fill="url(#cloudShade)" filter="url(#cumulus)" />
+              <rect x={drift1 - 260} y="150" width={W + 480} height={horizon - 150} fill={`url(#${uid}-cloudShade)`} filter={`url(#${uid}-cumulus)`} />
             </g>
           </g>
 
@@ -189,7 +190,7 @@ export const Valley: React.FC<{frame: number; hour: number; pan: number; geo: Ge
             <g key={i} transform={`translate(${X0 + pan * (0.1 + 0.9 * r.t)} 0)`}>
               <path d={r.d} fill={mix(p.far, p.near, Math.pow(r.t, 0.7))} />
               {[2, 5, 8, 11].includes(i) ? (
-                <rect x="-200" y={r.base - 60} width={W + 400} height="110" fill="url(#mist)" opacity={mistO * (1 - r.t * 0.6)} />
+                <rect x="-200" y={r.base - 60} width={W + 400} height="110" fill={`url(#${uid}-mist)`} opacity={mistO * (1 - r.t * 0.6)} />
               ) : null}
             </g>
           ))}
@@ -201,14 +202,14 @@ export const Valley: React.FC<{frame: number; hour: number; pan: number; geo: Ge
         </g>
       </defs>
 
-      <use href="#scene" />
+      <use href={`#${uid}-scene`} />
 
-      <g clipPath="url(#lakeClip)">
-        <g filter="url(#ripple)">
-          <use href="#scene" transform={`matrix(1 0 0 -1 0 ${2 * shore})`} />
+      <g clipPath={`url(#${uid}-lakeClip)`}>
+        <g filter={`url(#${uid}-ripple)`}>
+          <use href={`#${uid}-scene`} transform={`matrix(1 0 0 -1 0 ${2 * shore})`} />
         </g>
-        <rect x="-200" y={shore} width={W + 400} height={H - shore} fill="url(#lakeTint)" />
-        <rect x="-200" y={shore - 30} width={W + 400} height="70" fill="url(#mist)" opacity={mistO} />
+        <rect x="-200" y={shore} width={W + 400} height={H - shore} fill={`url(#${uid}-lakeTint)`} />
+        <rect x="-200" y={shore - 30} width={W + 400} height="70" fill={`url(#${uid}-mist)`} opacity={mistO} />
         <rect x="-200" y={shore} width={W + 400} height="1.4" fill={p.horizon} opacity="0.35" />
 
         <g transform={`translate(${sunX} 0)`} fill={p.sun} opacity={glitterO}>
@@ -231,7 +232,7 @@ export const Valley: React.FC<{frame: number; hour: number; pan: number; geo: Ge
             const blink = clamp(0.4 + 0.9 * Math.sin(frame * f.sp * 3 + f.ph * 2));
             return (
               <g key={i} opacity={blink}>
-                <circle cx={x} cy={y} r={f.r * 6} fill="url(#ff)" opacity="0.55" />
+                <circle cx={x} cy={y} r={f.r * 6} fill={`url(#${uid}-ff)`} opacity="0.55" />
                 <circle cx={x} cy={y} r={f.r} fill="#FFF4C2" />
               </g>
             );
@@ -245,7 +246,7 @@ export const Valley: React.FC<{frame: number; hour: number; pan: number; geo: Ge
         ))}
       </g>
 
-      <rect x="0" y="0" width="1920" height="1080" fill="url(#vignette)" />
+      <rect x="0" y="0" width="1920" height="1080" fill={`url(#${uid}-vignette)`} />
     </>
   );
 };

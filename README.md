@@ -11,6 +11,17 @@ and sunset, glitter tracks the sun and moon on the water, fireflies come out at
 dusk, birds cross at morning and golden hour, and a shooting star or two falls
 at night. Letterboxed 2.39:1 with a live clock, film grain and a vignette.
 
+The score is original and synthesized from scratch in `music/compose.py`
+(numpy only): pads that change chord with the light, a felt-piano arpeggio
+through the day, bells for the stars and shooting stars, and a nine-note
+cascade on the title, one note per letter. Regenerate it with:
+
+```sh
+python3 music/compose.py
+ffmpeg -i out/afterglow-score.wav -af loudnorm=I=-16:TP=-1.5:LRA=11 \
+  -ar 48000 -c:a libmp3lame -b:a 192k public/afterglow-score.mp3
+```
+
 ## Run
 
 ```sh
@@ -29,5 +40,6 @@ sandbox), set `REMOTION_BROWSER` to its executable before rendering.
 - `src/Valley.tsx` — the scene as a pure function of frame, hour and camera pan.
 - `src/Afterglow.tsx` — the timeline: hour curve, camera push-in, captions,
   title sequence, letterbox and HUD.
-- `public/` — bundled fonts (Bodoni Moda, Geist, Geist Mono; SIL OFL) and the
+- `music/compose.py` — the score, written to the film's timeline.
+- `public/` — the score (`afterglow-score.mp3`), bundled fonts (Bodoni Moda, Geist, Geist Mono; SIL OFL) and the
   grain texture.

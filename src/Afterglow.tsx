@@ -1,6 +1,7 @@
 import React, {useMemo} from 'react';
 import {
   AbsoluteFill,
+  Audio,
   cancelRender,
   continueRender,
   delayRender,
@@ -125,6 +126,7 @@ export const Afterglow: React.FC = () => {
 
   return (
     <AbsoluteFill style={{backgroundColor: '#000'}}>
+      <Audio src={staticFile('afterglow-score.mp3')} />
       <AbsoluteFill style={{transform: `scale(${zoom})`, transformOrigin: '50% 56%'}}>
         <svg width="1920" height="1080" viewBox="0 0 1920 1080" style={{display: 'block'}}>
           <Valley frame={frame} hour={hour} pan={pan} geo={geo} />

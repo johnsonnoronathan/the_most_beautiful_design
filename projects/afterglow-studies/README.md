@@ -14,7 +14,9 @@ page can grow a new set of mountains.
 | `day-of-light.html` | "A day of light": 1440 × 900, scrub or play 24 hours (space bar plays and pauses) |
 | `four-hours.html` | Study No. 03, "One valley, four hours": the same valley at four times of day, 2200 × 1080 |
 | `valley.js` | The landscape engine: seeded ridgelines and stars, and the light at any hour |
-| `frame.css`, `frame.js` | The dark viewing room, scale-to-fit and `#embed` mode for previews |
+| `frame.css`, `frame.js` | The dark viewing room, scale-to-fit and `#embed` mode for previews, `#stage` mode for the Screening Room |
+| `pages.json` | Title, kind, size and summary of each design (read by the Screening Room and the design gallery) |
+| `assets/thumbs/` | A screenshot of each design, from `node scripts/page-thumbs.mjs projects/afterglow-studies` |
 | `canvas/*.dc.html` | The original design-canvas source of each page |
 
 `valley.js` uses the same algorithms as the canvas, so seed 7 draws the same

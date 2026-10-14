@@ -1,38 +1,18 @@
 // Assemble the design-page projects into one previewable site:
 //   out/design-preview/index.html          gallery of every design (thumbnails, links)
 //   out/design-preview/<project>/<page>    the standalone pages, unchanged except the back link
-//   out/design-preview/thumbs/*.jpg        screenshots taken in headless Chromium
+//   out/design-preview/thumbs/*.jpg        the screenshots stored in each project's assets/thumbs
 //   node scripts/build-design-preview.mjs
-import {chromium} from 'playwright-core';
+// Titles, sizes and descriptions come from each project's pages.json; refresh the
+// screenshots with scripts/page-thumbs.mjs after changing a design.
 import fs from 'node:fs';
-import http from 'node:http';
 import path from 'node:path';
 
 const OUT = path.resolve('out/design-preview');
 const PROJECTS = [
-  {
-    dir: 'ma',
-    name: 'Ma',
-    mark: '間',
-    blurb: 'A first study in restraint. Ma is the Japanese idea of the interval: the pause between notes, the space between pillars. One accent, light type and a lot of room.',
-    pages: [
-      ['poster.html', 'No. 01 · Poster', '1080 × 1350', 'A study in empty space', 'A setting sun cut by the horizon, its reflection breaking into bars on dark water.'],
-      ['timer.html', 'App · working', '390 × 844', 'A timer for doing nothing', 'Pick 5, 10 or 20 minutes; a thin ring of sun fills as the time passes.'],
-      ['principles.html', 'Sheet', '1280 × 1340', 'Beauty is mostly what you leave out', 'Six principles, the palette and the typefaces behind the series.'],
-    ],
-  },
-  {
-    dir: 'afterglow-studies',
-    name: 'Afterglow Studies',
-    mark: '',
-    blurb: 'Design studies for the Afterglow film: one generated mountain valley, drawn from code and lit by the hour. The poster and the series grow a new valley from a seed.',
-    pages: [
-      ['poster.html', 'Study No. 02 · Poster', '1080 × 1350', 'Afterglow', 'The minutes after sunset, with the real stages of twilight on the side.'],
-      ['day-of-light.html', 'Interactive', '1440 × 900', 'A day of light', 'Scrub or play 24 hours over the valley: sun, moon, stars and ten lighting moods.'],
-      ['four-hours.html', 'Study No. 03 · Series', '2200 × 1080', 'One valley, four hours', 'First light, noon, golden hour and blue hour. Nothing moves but the light.'],
-    ],
-  },
-];
+  {dir: 'ma', name: 'Ma', mark: '間'},
+  {dir: 'afterglow-studies', name: 'Afterglow Studies', mark: ''},
+].map((p) => ({...p, ...JSON.parse(fs.readFileSync(path.resolve('projects', p.dir, 'pages.json'), 'utf8'))}));
 
 fs.rmSync(OUT, {recursive: true, force: true});
 fs.mkdirSync(path.join(OUT, 'thumbs'), {recursive: true});
@@ -49,27 +29,13 @@ for (const p of PROJECTS) {
   }
 }
 
-// 2. thumbnails: each page in its #embed mode, which fills the frame with the artboard
-const server = http.createServer((req, res) => {
-  const file = path.join(OUT, decodeURIComponent(req.url.split('?')[0]));
-  if (!file.startsWith(OUT) || !fs.existsSync(file)) return res.writeHead(404).end();
-  const type = {'.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8'}[path.extname(file)] ?? 'application/octet-stream';
-  res.writeHead(200, {'content-type': type});
-  fs.createReadStream(file).pipe(res);
-});
-await new Promise((r) => server.listen(4919, r));
-const args = process.env.HTTPS_PROXY ? [`--proxy-server=${process.env.HTTPS_PROXY}`, '--proxy-bypass-list=localhost;127.0.0.1'] : [];
-const browser = await chromium.launch({executablePath: process.env.CHROME ?? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args});
-const page = await browser.newPage({viewport: {width: 1200, height: 900}, deviceScaleFactor: 1});
+// 2. thumbnails: each page in its #embed mode, taken by scripts/page-thumbs.mjs
 for (const p of PROJECTS) {
-  for (const [file] of p.pages) {
-    await page.goto(`http://localhost:4919/${p.dir}/${file}#embed`);
-    await page.waitForTimeout(2200);
-    await page.screenshot({path: path.join(OUT, 'thumbs', `${p.dir}-${file.replace('.html', '')}.jpg`), type: 'jpeg', quality: 86});
+  for (const {file} of p.pages) {
+    const stem = file.replace('.html', '');
+    fs.copyFileSync(path.resolve('projects', p.dir, 'assets/thumbs', `${stem}.jpg`), path.join(OUT, 'thumbs', `${p.dir}-${stem}.jpg`));
   }
 }
-await browser.close();
-server.close();
 
 // 3. the gallery page (published as the artifact's main page: the host adds doctype and head)
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
@@ -83,12 +49,12 @@ const shelves = PROJECTS.map(
     <ul class="works">
       ${p.pages
         .map(
-          ([file, kicker, size, name, desc]) => `<li>
+          ({file, kicker, width, height, title, summary}) => `<li>
         <a class="work" href="${p.dir}/${file}">
-          <span class="thumb"><img src="thumbs/${p.dir}-${file.replace('.html', '')}.jpg" alt="${esc(name)}" width="1200" height="900" loading="lazy"></span>
-          <span class="meta"><span>${esc(kicker)}</span><span>${size}</span></span>
-          <span class="name">${esc(name)}</span>
-          <span class="desc">${esc(desc)}</span>
+          <span class="thumb"><img src="thumbs/${p.dir}-${file.replace('.html', '')}.jpg" alt="${esc(title)}" width="1200" height="900" loading="lazy"></span>
+          <span class="meta"><span>${esc(kicker)}</span><span>${width} × ${height}</span></span>
+          <span class="name">${esc(title)}</span>
+          <span class="desc">${esc(summary)}</span>
         </a>
       </li>`,
         )

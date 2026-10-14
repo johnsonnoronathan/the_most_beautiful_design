@@ -3,9 +3,13 @@ import {Afterglow} from '../projects/afterglow/Afterglow';
 import {Ch1Derivative, CH1_SECONDS} from '../projects/calculus-visually/Ch1Derivative';
 import {Ch2Integral, CH2_SECONDS} from '../projects/calculus-visually/Ch2Integral';
 import {Ch3Fundamental, CH3_SECONDS} from '../projects/calculus-visually/Ch3Fundamental';
+import afterglowStudies from '../projects/afterglow-studies/pages.json';
+import ma from '../projects/ma/pages.json';
 
 // One catalog drives both the Remotion Studio folders and the Screening Room.
 // Each project lives in projects/<project id>/; the category is a label, not a folder.
+// Videos are Remotion compositions; pages are standalone HTML designs, each described
+// by its project's pages.json.
 
 export type Video = {
   /** Remotion composition id: letters, digits and '-' only. */
@@ -25,12 +29,29 @@ export type Video = {
   poster: number;
 };
 
+export type Page = {
+  /** '<project id>-<file stem>', also the Screening Room's link to it. */
+  id: string;
+  /** The page's file in the project folder. */
+  file: string;
+  title: string;
+  /** Short label, e.g. 'No. 01 · Poster'. */
+  kicker: string;
+  /** One word: Poster, App, Sheet, Interactive, Series. */
+  kind: string;
+  summary: string;
+  /** Artboard size in px. */
+  width: number;
+  height: number;
+};
+
 export type Project = {
   /** Also the project's folder name under projects/. */
   id: string;
   title: string;
   blurb: string;
   videos: Video[];
+  pages: Page[];
 };
 
 export type Category = {
@@ -43,6 +64,16 @@ export type Category = {
 };
 
 const FPS = 30;
+
+type PagesJson = {title: string; blurb: string; pages: Omit<Page, 'id'>[]};
+
+const pageProject = (id: string, json: PagesJson): Project => ({
+  id,
+  title: json.title,
+  blurb: json.blurb,
+  videos: [],
+  pages: json.pages.map((p) => ({...p, id: `${id}-${p.file.replace(/\.html$/, '')}`})),
+});
 
 export const CATALOG: Category[] = [
   {
@@ -90,6 +121,7 @@ export const CATALOG: Category[] = [
             poster: 27 * FPS,
           },
         ],
+        pages: [],
       },
     ],
   },
@@ -118,7 +150,15 @@ export const CATALOG: Category[] = [
             poster: 960,
           },
         ],
+        pages: [],
       },
     ],
+  },
+  {
+    id: 'design',
+    folder: 'Design',
+    name: 'Design',
+    blurb: 'Posters, an app and studies, made on the design canvas and rebuilt as live pages.',
+    projects: [pageProject('ma', ma), pageProject('afterglow-studies', afterglowStudies)],
   },
 ];

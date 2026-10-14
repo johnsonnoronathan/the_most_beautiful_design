@@ -1,5 +1,5 @@
-/* Layout: one big screen up top, the reel library shelved by category below.
-   A single dark look on purpose: it is a room for watching video. */
+/* Layout: one big screen up top, the library shelved by category below.
+   A single dark look on purpose: it is a room for watching films and looking at designs. */
 :root {
   --bg: #0c0d10;
   --surface: #15171c;
@@ -7,6 +7,7 @@
   --fg: #ece7df;
   --muted: #9ea2aa;
   --accent: #f4b860;
+  --wall: #0b0c0f; /* the design pages' own room colour, so a live page sits flush */
   --display: 'Bodoni Moda', 'Bodoni 72', Didot, Georgia, serif;
   --body: 'Geist', 'Helvetica Neue', Arial, sans-serif;
   --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
@@ -132,6 +133,83 @@ body {
   background: #000;
 }
 
+/* a live design: its screenshot holds the place until the page says it is up */
+.screen.is-design {
+  background: var(--wall);
+}
+
+.design {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  max-height: min(80vh, 880px);
+}
+
+.design-poster,
+.design-frame {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  transition: opacity 420ms ease;
+}
+
+.design-poster {
+  top: 56px;
+  height: calc(100% - 68px);
+  object-fit: contain;
+}
+
+.design-frame {
+  top: 0;
+  height: 100%;
+  border: 0;
+  opacity: 0;
+}
+
+.design[data-state='ready'] .design-frame {
+  opacity: 1;
+}
+
+.design[data-state='ready'] .design-poster {
+  opacity: 0;
+}
+
+.design-blocked {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 32px);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 16px;
+  padding: 10px 10px 10px 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(12, 13, 16, 0.88);
+  font-size: 14px;
+}
+
+.design-blocked p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.open {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 16px;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-weight: 500;
+  text-decoration: none;
+}
+
 .details {
   min-width: 0;
   display: flex;
@@ -174,10 +252,10 @@ body {
 
 .specs {
   margin: 0;
-  display: grid;
-  grid-template-columns: repeat(4, auto);
+  display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 12px;
+  gap: 12px 20px;
   padding-block: 14px;
   border-block: 1px solid var(--line);
 }
@@ -303,6 +381,13 @@ body {
   cursor: pointer;
 }
 
+a.copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
 .copy:hover {
   border-color: var(--muted);
 }
@@ -411,6 +496,18 @@ body {
   transition: outline-color 160ms ease;
 }
 
+.thumb.is-design {
+  aspect-ratio: 4 / 3;
+  background: var(--wall);
+}
+
+.thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .reel:hover .thumb {
   outline-color: var(--muted);
 }
@@ -461,7 +558,8 @@ body {
 /* ---------------------------------------------------------------- focus & motion */
 
 button:focus-visible,
-input:focus-visible {
+input:focus-visible,
+a:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }

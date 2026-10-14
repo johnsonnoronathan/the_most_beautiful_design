@@ -26,9 +26,14 @@ table and quick start.
   './assets/score.mp3'`); do not use `staticFile` or a `public/` folder. Remotion
   ids and Folder names allow only letters, digits and `-`.
 - **Pages**: standalone HTML that opens straight from disk. Fixed-size designs
-  sit in a `frame.css`/`frame.js` viewing room (scale to fit, `#embed` mode for
-  the previews on the project's `index.html`). Google Fonts with real fallback
-  stacks. Keep the original design-canvas source in `canvas/`.
+  sit in a `frame.css`/`frame.js` viewing room (scale to fit; `#embed` mode for
+  the previews on the project's `index.html`, `#stage` mode for the Screening
+  Room). Google Fonts with real fallback stacks. Keep the original design-canvas
+  source in `canvas/`.
+- **Designs in the Screening Room**: each page project lists its designs in
+  `pages.json` and keeps a screenshot of each in `assets/thumbs/`
+  (`scripts/page-thumbs.mjs`); `studio/catalog.ts` puts the project on the Design
+  shelf. The design gallery reads the same files.
 - **Visual language**: each project commits to one palette and type system and
   keeps it everywhere (e.g. Calculus: function amber, slopes teal, area coral).
 - **Generated outputs** go to `out/` (git-ignored). Tool caches go to `.cache/`
@@ -39,8 +44,9 @@ table and quick start.
 ```sh
 npm run typecheck                         # tsc
 npm run studio                            # Remotion Studio
-npm run screening-room                    # build the video preview page → out/screening-room/
-node scripts/check-preview.mjs [hash]     # smoke-test the Screening Room
+npm run screening-room                    # build the preview page (videos + designs) → out/screening-room/
+node scripts/check-preview.mjs [hash]     # smoke-test the Screening Room (hash e.g. ma-timer)
+node scripts/page-thumbs.mjs projects/ma  # re-take design thumbnails → projects/ma/assets/thumbs/
 node scripts/check-pages.mjs projects/ma  # smoke-test page projects (errors, overflow, screenshots → out/pages/)
 node scripts/build-design-preview.mjs     # gallery + design pages + thumbnails → out/design-preview/ (publish this)
 npm run stills -- Afterglow:960 Calculus-02-Integral:300,1180   # stills → out/stills/
@@ -73,7 +79,7 @@ a file is actually wanted.
   cinematic finish, and show real craft in the details.
 - Prefers previews on a page over downloading files. Two private preview links,
   republished to the same URL after changes:
-  Screening Room (videos) https://claude.ai/artifact/KwRAsKmAEMQq8MqyFmesB1 ·
+  Screening Room (videos and designs) https://claude.ai/artifact/KwRAsKmAEMQq8MqyFmesB1 ·
   design pages https://claude.ai/artifact/Ljwwi9GLwWSp35FjGYJsVZ.
 - Wants learning content (the Calculus series) with the same level of polish.
 - Branch `claude/happy-wozniak-73ik3t`, PR
@@ -136,6 +142,13 @@ what went wrong or cost time, and what to do instead.
   than iframes of the pages (`scripts/build-design-preview.mjs`).
 - 2026-10-14 · Local test servers must send `charset=utf-8`; without it `·` and `間`
   look garbled in screenshots, a false alarm (published pages get a charset).
+- 2026-10-14 · A parent page cannot see whether a framed page loaded (a refused frame
+  still fires `load`). Have the framed page `postMessage` when ready, and show its
+  screenshot plus an "Open the page" link until then (Screening Room designs).
+- 2026-10-14 · `loading="lazy"` images stay blank in full-page screenshots; scroll to
+  the bottom first. Not a broken thumbnail.
+- 2026-10-14 · ffmpeg `tile` contact sheets need `-frames:v 1 -update 1`, or ffmpeg
+  refuses to write a single output image.
 
 ### Audio and voice
 

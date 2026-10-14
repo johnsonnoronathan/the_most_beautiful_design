@@ -154,3 +154,17 @@ a:focus-visible {
 .seed button:hover {
   border-color: var(--muted);
 }
+
+/* inside the Screening Room's stage: keep the tools, drop the back link */
+.in-stage .crumbs {
+  display: none;
+}
+
+.in-stage .bar {
+  justify-content: flex-end;
+  padding-block: 10px;
+}
+
+.in-stage .room {
+  padding-bottom: 12px;
+}

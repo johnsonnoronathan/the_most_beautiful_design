@@ -13,7 +13,9 @@ scaled to fit the window, with the sun-colour swatches from the canvas.
 | `poster.html` | No. 01, "A study in empty space": poster, 1080 × 1350 |
 | `timer.html` | "A timer for doing nothing": phone app, 390 × 844, fully working |
 | `principles.html` | "Beauty is mostly what you leave out": six principles, palette, type; 1280 × 1340 |
-| `frame.css`, `frame.js` | The dark viewing room, scale-to-fit, `#embed` mode for previews, sun swatches |
+| `frame.css`, `frame.js` | The dark viewing room, scale-to-fit, `#embed` mode for previews, `#stage` mode for the Screening Room, sun swatches |
+| `pages.json` | Title, kind, size and summary of each design (read by the Screening Room and the design gallery) |
+| `assets/thumbs/` | A screenshot of each design, from `node scripts/page-thumbs.mjs projects/ma` |
 | `canvas/*.dc.html` | The original design-canvas source of each page |
 
 Fonts: Hanken Grotesk, IBM Plex Mono and Noto Serif JP from Google Fonts.

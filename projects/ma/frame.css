@@ -120,3 +120,17 @@ a:focus-visible {
   box-shadow: none;
   border-radius: 0;
 }
+
+/* inside the Screening Room's stage: keep the tools, drop the back link */
+.in-stage .crumbs {
+  display: none;
+}
+
+.in-stage .bar {
+  justify-content: flex-end;
+  padding-block: 10px;
+}
+
+.in-stage .room {
+  padding-bottom: 12px;
+}

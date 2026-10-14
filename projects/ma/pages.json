@@ -1,0 +1,9 @@
+{
+  "title": "Ma 間",
+  "blurb": "A first study in restraint: the pause between notes, the space between pillars. One accent, light type and a lot of room.",
+  "pages": [
+    {"file": "poster.html", "title": "A study in empty space", "kicker": "No. 01 · Poster", "kind": "Poster", "summary": "A setting sun cut by the horizon, its reflection breaking into bars on dark water. Try the sun swatches.", "width": 1080, "height": 1350},
+    {"file": "timer.html", "title": "A timer for doing nothing", "kicker": "App · working", "kind": "App", "summary": "Pick 5, 10 or 20 minutes and press Begin; a thin ring of sun fills as the time passes.", "width": 390, "height": 844},
+    {"file": "principles.html", "title": "Beauty is mostly what you leave out", "kicker": "Sheet", "kind": "Sheet", "summary": "Six principles, the palette and the typefaces behind the Ma series.", "width": 1280, "height": 1340}
+  ]
+}

@@ -8,7 +8,7 @@ project, with everything it needs inside it.
 | --- | --- | --- | --- |
 | **Calculus, visually** | [`projects/calculus-visually`](projects/calculus-visually/) | Learning | Video series, 3 chapters (3:22), narrated and scored |
 | **Afterglow** | [`projects/afterglow`](projects/afterglow/) | Art | Film (0:48) with an original score |
-| **Screening Room** | [`projects/screening-room`](projects/screening-room/) | Page | Live previews of every video, shelved by category |
+| **Screening Room** | [`projects/screening-room`](projects/screening-room/) | Page | Every project live, shelved by category: videos play, designs work on the stage |
 | **Afterglow Studies** | [`projects/afterglow-studies`](projects/afterglow-studies/) | Design | Pages: poster, interactive day of light, four-hours series |
 | **Ma 間** | [`projects/ma`](projects/ma/) | Design | Pages: poster, working timer app, principles sheet |
 
@@ -16,7 +16,7 @@ project, with everything it needs inside it.
 
 ```sh
 npm install
-npm run screening-room   # → out/screening-room/index.html: watch every video live, no rendering
+npm run screening-room   # → out/screening-room/index.html: every video and design, live, no rendering
 npm run studio           # Remotion Studio: scrub and edit the videos
 npx remotion render Calculus-01-Derivative out/calculus-01.mp4   # an MP4, only when you need a file
 open projects/ma/index.html  # design pages open directly in a browser
@@ -34,14 +34,14 @@ projects/                      one folder per project, named after it
   calculus-visually/           chapters, plotting kit, assets/, score/, voice/
   afterglow/                   the film, its landscape engine, assets/, score/
   screening-room/              the preview page and its build
-  afterglow-studies/           design pages: poster, day of light, four hours (+ canvas/ source)
-  ma/                          design pages: poster, timer app, principles (+ canvas/ source)
+  afterglow-studies/           design pages: poster, day of light, four hours (+ pages.json, canvas/ source)
+  ma/                          design pages: poster, timer app, principles (+ pages.json, canvas/ source)
 studio/                        shared by every project (not a project itself)
   index.ts, Root.tsx           Remotion entry; Studio folders mirror the catalog
-  catalog.ts                   every video, its category and its project folder
+  catalog.ts                   every video and design, its category and its project folder
   lib/fonts.ts, lib/synth.py   typefaces and the music synthesizer
   fonts/                       Bodoni Moda, Geist, Geist Mono (SIL OFL)
-scripts/                       stills renderer, page and Screening Room smoke tests, voice setup
+scripts/                       stills, page thumbnails, page and Screening Room smoke tests, voice setup
 CLAUDE.md                      how to work in this repo, and the lessons learned so far
 ```
 
@@ -61,4 +61,8 @@ unit.
    (like `projects/ma/`), or a `build.mjs` that writes to `out/<project-name>/`
    (like `projects/screening-room/`). Check it with
    `node scripts/check-pages.mjs projects/<project-name>`.
+   **A design for the Screening Room:** describe each page in the project's
+   `pages.json`, take its thumbnails with
+   `node scripts/page-thumbs.mjs projects/<project-name>`, and add the project to
+   the Design category in `studio/catalog.ts`.
 4. Add a row to the table above.

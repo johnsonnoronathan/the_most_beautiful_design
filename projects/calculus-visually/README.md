@@ -1,9 +1,10 @@
 # Calculus, visually
 
-**Learning · video series · 3 chapters, 3:22**
+**Learning · video series · 4 chapters, 4:39**
 
-A three-chapter tutorial in one visual language: the function is always amber,
-slopes and derivatives teal, accumulated area coral.
+A four-chapter tutorial in one visual language: the function is always amber,
+slopes and derivatives teal, accumulated area coral. In chapter 4 the ε band is
+coral and the δ window teal.
 
 1. **The derivative** (`Calculus-01-Derivative`, 1:08). A car travels
    `s(t) = t²`. Secant lines shrink into the tangent while a table of slopes
@@ -16,13 +17,19 @@ slopes and derivatives teal, accumulated area coral.
    area function `A(x)` is traced as the edge moves; a magnified sliver shows
    `dA/dx = f(x)`; the theorem turns chapter 2's 256 rectangles into one line:
    `∫₀² t² dt = [t³/3]₀² = 8/3`.
+4. **The limit** (`Calculus-04-Limit`, 1:17). The idea under all three: the
+   "shrink toward zero" moment of each chapter merges into one `lim`. `sin x / x`
+   reads `0/0` at 0, yet a table and a ×1000 zoom into the hole both close in on
+   1. The ε–δ challenge (a band around 1, a window around 0, three shrinking
+   rounds) makes "approaches" exact, and a jump shows a limit that does not
+   exist.
 
 ## Files
 
 | Path | What it is |
 | --- | --- |
 | `kit.tsx` | Shared toolkit: plots, KaTeX equations, captions, title and recap cards, soundtrack with ducking |
-| `Ch1Derivative.tsx`, `Ch2Integral.tsx`, `Ch3Fundamental.tsx` | One composition per chapter |
+| `Ch1Derivative.tsx` … `Ch4Limit.tsx` | One composition per chapter |
 | `voice/chNN.json` | Narration script: on-screen caption (with math) and spoken wording per line |
 | `voice/chNN.timing.json` | When speech happens, written by `narrate.py`; the music dips under it |
 | `voice/narrate.py` | Synthesizes the voiceover |
@@ -35,10 +42,11 @@ Each chapter has its own score, quieter than Afterglow's so it sits under the
 narration. A shared four-note motif opens every chapter and is answered on its
 closing card; chords change with the scenes; small accents mark the reveals (a
 rising note per table row in chapter 1, per doubling of the rectangles in
-chapter 2, a cascade on the final 8/3 in chapter 3).
+chapter 2, a cascade on the final 8/3 in chapter 3, a note per zoom level and a
+falling step per ε round in chapter 4). Keys: D, F, D, G.
 
 ```sh
-python3 projects/calculus-visually/score/compose.py   # → assets/chNN-score.mp3
+python3 projects/calculus-visually/score/compose.py [4]   # → assets/chNN-score.mp3 (all chapters, or the ones named)
 ```
 
 ## Voiceover
@@ -51,5 +59,5 @@ text only so the phonemizer says them right ("Eigh" for the letter A,
 
 ```sh
 scripts/setup-tts.sh                                   # once: model from npm, runtime from PyPI, into .cache/
-.cache/tts/venv/bin/python projects/calculus-visually/voice/narrate.py   # → assets/chNN-voice.mp3
+.cache/tts/venv/bin/python projects/calculus-visually/voice/narrate.py [4]   # → assets/chNN-voice.mp3
 ```

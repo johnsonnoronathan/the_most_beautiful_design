@@ -125,6 +125,10 @@ what went wrong or cost time, and what to do instead.
 - 2026-10-14 · Import assets instead of `staticFile`: both Remotion's webpack and
   the Screening Room's esbuild turn imports into URLs, and project folders stay
   self-contained.
+- 2026-10-14 · Zooming axes: fade ticks in by on-screen spacing, from a nested
+  1-5-10 ladder. With 1-2-5, labels of two step sizes interleave (−0.6 −0.5 −0.4).
+- 2026-10-14 · `Mono` labels are uppercase, which turns δ into Δ (a different
+  symbol). Wrap Greek letters in a span with `textTransform: 'none'`.
 
 ### Pages and artifacts
 

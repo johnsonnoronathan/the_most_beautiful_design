@@ -9,6 +9,7 @@ loadMathFonts();
 
 export const FPS = 30;
 export const SERIES = 'Calculus, visually';
+export const CHAPTERS = 4;
 
 // Ink on a near-black board. Each mathematical object keeps one colour all series long:
 // the function is amber, slopes/derivatives are teal, accumulated area is coral.
@@ -111,7 +112,7 @@ export const Mono: React.FC<{size?: number; color?: string; children: React.Reac
   <span style={{fontFamily: MONO, fontSize: size, letterSpacing: '0.18em', textTransform: 'uppercase', color, ...style}}>{children}</span>
 );
 
-export const Readout: React.FC<{label: string; value: string; color?: string; size?: number}> = ({label, value, color = C.ink, size = 40}) => (
+export const Readout: React.FC<{label: React.ReactNode; value: string; color?: string; size?: number}> = ({label, value, color = C.ink, size = 40}) => (
   <div style={{display: 'flex', flexDirection: 'column', gap: 6}}>
     <Mono size={14}>{label}</Mono>
     <span style={{fontFamily: MONO, fontSize: size, color, fontVariantNumeric: 'tabular-nums'}}>{value}</span>
@@ -276,7 +277,7 @@ export const Header: React.FC<{t: number; chapter: number; title: string; durati
       {SERIES} · {String(chapter).padStart(2, '0')} · {title}
     </Mono>
     <div style={{display: 'flex', gap: 8}}>
-      {[1, 2, 3].map((c) => (
+      {Array.from({length: CHAPTERS}, (_, i) => i + 1).map((c) => (
         <div key={c} style={{width: 64, height: 3, borderRadius: 2, background: C.faint, overflow: 'hidden'}}>
           <div style={{width: `${c < chapter ? 100 : c === chapter ? clamp01(t / duration) * 100 : 0}%`, height: '100%', background: c === chapter ? C.f : C.muted}} />
         </div>

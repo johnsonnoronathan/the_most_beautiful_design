@@ -1,0 +1,20 @@
+{
+  "voice": "af_heart",
+  "lines": [
+    {"from": 0.6, "to": 4.4, "say": "Chapter four: the limit."},
+    {"from": 4.8, "to": 9.6, "text": "Every chapter so far made one move: let something [[w|shrink toward zero]]…", "say": "Every chapter so far made the same move: let something shrink toward zero,"},
+    {"from": 9.6, "to": 14.2, "text": "…and watch where the answer is [[w|heading]]. That move is called a [[w|limit]].", "say": "and watch where the answer is heading. That move is called a limit."},
+    {"from": 14.2, "to": 19.2, "text": "Take [[f|$f(x) = \\frac{\\sin x}{x}$]]. At $x = 0$ it reads $\\frac{0}{0}$: no value at all.", "say": "Take sine x over x. At zero it's zero over zero: no value at all."},
+    {"from": 19.2, "to": 24.2, "text": "Yet walk toward 0 from either side, and the values close in on [[w|one number]].", "say": "Yet walk toward zero from either side, and the values close in on one number."},
+    {"from": 24.2, "to": 30.0, "text": "Zoom in a thousand times: the curve still runs straight into the hole, at height [[w|1]].", "say": "Zoom in a thousand times: the curve still runs straight into the hole, at height one."},
+    {"from": 30.0, "to": 34.6, "text": "So $\\lim_{x \\to 0} \\frac{\\sin x}{x} = 1$: where it's heading, not where it is.", "say": "So the limit is one: where the function is heading, not where it is."},
+    {"from": 34.6, "to": 39.6, "text": "But what does [[w|approaches]] mean, exactly? Turn it into a challenge.", "say": "But what does approaches mean, exactly? Let's turn it into a challenge."},
+    {"from": 39.6, "to": 44.8, "text": "You draw a band around 1, as thin as you like. Its half-width is [[a|$\\varepsilon$]].", "say": "You draw a band around one, as thin as you like. Its half width is epsilon."},
+    {"from": 44.8, "to": 50.0, "text": "I answer with a window, [[d|$\\delta$]] each side of 0, where the curve stays in your band.", "say": "I answer with a window, delta each side of zero, where the curve stays in your band."},
+    {"from": 50.0, "to": 55.2, "text": "Thinner band, narrower window. If I can [[w|always]] answer, the limit is 1.", "say": "Thinner band, narrower window. If I can always answer, the limit is one."},
+    {"from": 55.2, "to": 60.2, "text": "That is the definition: for every [[a|$\\varepsilon$]], there is a [[d|$\\delta$]] that works.", "say": "That's the definition: for every epsilon, there's a delta that works."},
+    {"from": 60.2, "to": 65.2, "text": "Now a curve that [[w|jumps]]. From the left it heads to $\\tfrac12$; from the right, to 1.", "say": "Now a curve that jumps. From the left it heads to a half; from the right, to one."},
+    {"from": 65.2, "to": 70.4, "text": "A thin band catches only one side, so no number wins: this limit [[w|does not exist]].", "say": "A thin band can only catch one side, so no number wins. This limit doesn't exist."},
+    {"from": 71.2, "to": 76.6, "say": "A limit is where a function is heading, not where it is. The whole series stands on it."}
+  ]
+}

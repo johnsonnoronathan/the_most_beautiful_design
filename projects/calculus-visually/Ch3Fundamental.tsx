@@ -272,7 +272,7 @@ export const Ch3Fundamental: React.FC = () => {
         end={CH3_SECONDS}
         statement={['Derivatives measure how fast things [[d|change]]. Integrals [[a|add change up]].', 'The fundamental theorem says each one undoes the other.']}
         tex="\frac{d}{dx}\int_0^x f(t)\,dt = f(x) \qquad \int_a^b F'(x)\,dx = F(b) - F(a)"
-        next="End of series · Calculus, visually"
+        next="Next · Chapter 4 · The limit"
       />
     </Board>
   );

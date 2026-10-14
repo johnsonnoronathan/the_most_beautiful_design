@@ -9,7 +9,7 @@ Writes projects/calculus-visually/assets/chNN-voice.mp3 and chNN.timing.json (sp
 intervals, used to duck the music under the voice).
 
     scripts/setup-tts.sh                                   # once
-    .cache/tts/venv/bin/python projects/calculus-visually/voice/narrate.py [1 2 3]
+    .cache/tts/venv/bin/python projects/calculus-visually/voice/narrate.py [1 2 3 4]
 """
 
 import glob
@@ -24,7 +24,7 @@ import numpy as np
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(ROOT, '.cache', 'tts')
-SECONDS = {1: 68, 2: 64, 3: 70}
+SECONDS = {1: 68, 2: 64, 3: 70, 4: 77}
 CAPTION_LEAD = 0.2   # speech starts just after its caption begins to fade in
 GAP = 0.15           # minimum silence before the next line
 MAX_SPEED = 1.15
@@ -114,5 +114,5 @@ def narrate(chapter, tts):
 
 if __name__ == '__main__':
     tts = load_voice()
-    for ch in [int(a) for a in sys.argv[1:]] or [1, 2, 3]:
+    for ch in [int(a) for a in sys.argv[1:]] or [1, 2, 3, 4]:
         narrate(ch, tts)

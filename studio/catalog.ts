@@ -3,6 +3,7 @@ import {Afterglow} from '../projects/afterglow/Afterglow';
 import {Ch1Derivative, CH1_SECONDS} from '../projects/calculus-visually/Ch1Derivative';
 import {Ch2Integral, CH2_SECONDS} from '../projects/calculus-visually/Ch2Integral';
 import {Ch3Fundamental, CH3_SECONDS} from '../projects/calculus-visually/Ch3Fundamental';
+import {Ch4Limit, CH4_SECONDS} from '../projects/calculus-visually/Ch4Limit';
 import afterglowStudies from '../projects/afterglow-studies/pages.json';
 import ma from '../projects/ma/pages.json';
 
@@ -85,7 +86,7 @@ export const CATALOG: Category[] = [
       {
         id: 'calculus-visually',
         title: 'Calculus, visually',
-        blurb: 'Three short chapters: the derivative, the integral, and the theorem that joins them.',
+        blurb: 'Four short chapters: the derivative, the integral, the theorem that joins them, and the limit underneath all three.',
         videos: [
           {
             id: 'Calculus-01-Derivative',
@@ -119,6 +120,17 @@ export const CATALOG: Category[] = [
             width: 1920,
             height: 1080,
             poster: 27 * FPS,
+          },
+          {
+            id: 'Calculus-04-Limit',
+            title: 'The limit',
+            summary: 'What “approaching” really means: a 0/0 hole, a thousandfold zoom, and the ε–δ challenge that makes it exact.',
+            component: Ch4Limit,
+            durationInFrames: CH4_SECONDS * FPS,
+            fps: FPS,
+            width: 1920,
+            height: 1080,
+            poster: 49 * FPS,
           },
         ],
         pages: [],

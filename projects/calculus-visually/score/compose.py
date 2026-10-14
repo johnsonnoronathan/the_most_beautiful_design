@@ -1,11 +1,11 @@
-"""Calculus, visually: background scores for the three chapters.
+"""Calculus, visually: background scores for the four chapters.
 
 Each chapter shares one four-note series motif (heard on the title card and
 answered on the closing "Key idea" card), a soft pad bed whose chords change
 with the scenes, a quiet felt-piano pattern, and small accents on the reveals
-(table rows, each doubling of the rectangles, boxed results).
+(table rows, each doubling of the rectangles, zoom levels, boxed results).
 
-    python3 projects/calculus-visually/score/compose.py
+    python3 projects/calculus-visually/score/compose.py [1 2 3 4]
     → out/calculus-0N-score.wav and projects/calculus-visually/assets/ch0N-score.mp3
 """
 
@@ -45,10 +45,19 @@ VOICINGS = {
     'C6': ['C3', 'G3', 'A3', 'E4'],
     'Gm9': ['G2', 'D3', 'F3', 'Bb3', 'A4'],
     'C9sus': ['C3', 'G3', 'Bb3', 'D4', 'F4'],
+    # G major (chapter 4)
+    'G': ['G2', 'D3', 'G3', 'B3', 'D4'],
+    'Gadd9': ['G2', 'D3', 'A3', 'B3', 'D4'],
+    'Cmaj7': ['C3', 'G3', 'B3', 'E4'],
+    'Cmaj9': ['C3', 'G3', 'B3', 'D4', 'E4'],
+    'Cmaj7#11': ['C3', 'G3', 'B3', 'F#4'],
+    'Am9': ['A2', 'E3', 'G3', 'B3', 'C4'],
+    'D9sus': ['D3', 'A3', 'C4', 'E4', 'G4'],
+    'Bm7': ['B2', 'F#3', 'A3', 'D4'],
 }
 
-MOTIF = {'D': ['A4', 'D5', 'E5', 'F#5'], 'F': ['C5', 'F5', 'G5', 'A5']}
-ANSWER = {'D': ['F#5', 'E5', 'D5', 'A4'], 'F': ['A5', 'G5', 'F5', 'C5']}
+MOTIF = {'D': ['A4', 'D5', 'E5', 'F#5'], 'F': ['C5', 'F5', 'G5', 'A5'], 'G': ['D5', 'G5', 'A5', 'B5']}
+ANSWER = {'D': ['F#5', 'E5', 'D5', 'A4'], 'F': ['A5', 'G5', 'F5', 'C5'], 'G': ['B5', 'A5', 'G5', 'D5']}
 EIGHTH = 60 / 84 / 2
 
 
@@ -73,6 +82,21 @@ def h_crossing_times():
         p = math.acos(1 - 2 * e) / math.pi    # invert ease-in-out-sine
         times.append(26 + 11 * p)
     return times
+
+
+def inv_inout_sine(e):
+    """Progress at which Remotion's Easing.inOut(Easing.sin) reaches e."""
+    return math.acos(1 - 2 * e) / math.pi
+
+
+def walk_crossing_times():
+    """When chapter 4's walkers (6 → 0.0008 over 19.6–23.8 s) pass each table row."""
+    return [19.6 + 4.2 * inv_inout_sine(math.log10(6 / r) / 3.9) for r in (1, 0.1, 0.01, 0.001)]
+
+
+def zoom_times():
+    """When chapter 4's zoom (×1 → ×1000 over 24.6–29.4 s) reaches ×10, ×100 and ×1000."""
+    return [24.6 + 4.8 * inv_inout_sine(k / 3) for k in (1, 2, 3)]
 
 
 def score(spec):
@@ -148,6 +172,8 @@ def score(spec):
 
 
 ROWS = h_crossing_times()
+WALK = walk_crossing_times()
+ZOOM = zoom_times()
 
 CHAPTERS = {
     1: {
@@ -256,16 +282,70 @@ CHAPTERS = {
             (52.6, ['A4'], 'piano', 0.45),
             (54.0, ['B4'], 'piano', 0.45),
             (55.4, ['D5'], 'piano', 0.45),
-            (66.2, ['D4', 'D5'], 'bell', 0.4),   # last word of the series
+            (66.2, ['D4', 'D5'], 'bell', 0.4),
         ],
         'cascades': [(56.8, ['D5', 'E5', 'F#5', 'A5', 'B5', 'D6'])],
         'swells': [(38.6, 1.8)],
         'booms': [(38.6, 'D1')],
     },
+    4: {
+        'seed': 404,
+        'seconds': 77,
+        'key': 'G',
+        'motif_at': 0.7,
+        'answer_at': 71.3,
+        'chords': [
+            (0.0, 4.8, 'Gmaj9', 0.35, 0.9),
+            (4.6, 9.8, 'Gmaj7', 0.45, 0.8),      # three chapters, one move
+            (9.6, 12.2, 'Cmaj9', 0.5, 0.8),
+            (12.0, 14.4, 'Gadd9', 0.6, 0.9),     # lim
+            (14.2, 19.4, 'Em9', 0.45, 0.8),      # the hole
+            (19.2, 24.4, 'Cmaj7', 0.5, 0.8),     # walking in
+            (24.2, 27.4, 'Am9', 0.45, 0.8),      # zoom
+            (27.2, 30.2, 'D9sus', 0.55, 0.85),
+            (30.0, 34.8, 'Gadd9', 0.6, 0.95),    # the limit is 1
+            (34.6, 39.8, 'Em9', 0.45, 0.8),      # the challenge
+            (39.6, 45.0, 'Cmaj7', 0.5, 0.8),
+            (44.8, 50.2, 'Am9', 0.5, 0.8),
+            (50.0, 52.8, 'Bm7', 0.5, 0.8),
+            (52.6, 55.4, 'D9sus', 0.55, 0.85),
+            (55.2, 60.4, 'Gmaj9', 0.6, 1.0),     # the definition
+            (60.2, 65.4, 'Cmaj7#11', 0.5, 0.85), # a jump: left unresolved
+            (65.2, 68.2, 'Am9', 0.45, 0.8),
+            (68.0, 70.8, 'D9sus', 0.5, 0.85),
+            (70.6, 77.0, 'Gmaj9', 0.4, 1.0),
+        ],
+        'arp': [(5.2, 14.0, 0.28), (14.6, 34.6, 0.3), (39.6, 55.0, 0.28), (60.6, 70.2, 0.26)],
+        'accents': [
+            (12.0, ['G5', 'B5', 'D6'], 'bell', 0.38),
+            (17.0, ['B4'], 'piano', 0.45),
+            (17.0, ['D6'], 'bell', 0.3),
+            *[(t, [n], 'bell', 0.3) for t, n in zip(WALK, ['G5', 'A5', 'B5', 'D6'])],
+            *[(t, [n], 'bell', 0.3) for t, n in zip(ZOOM, ['D6', 'E6', 'G6'])],
+            (30.4, ['G5', 'B5', 'D6'], 'bell', 0.4),
+            (39.8, ['E5'], 'piano', 0.42),
+            (45.0, ['B4'], 'piano', 0.42),
+            # the band thins: each settled round a step lower
+            (46.4, ['D6'], 'bell', 0.3),
+            (52.0, ['B5'], 'bell', 0.3),
+            (54.6, ['G5'], 'bell', 0.3),
+            (55.8, ['G5', 'D6'], 'bell', 0.42),
+            (61.4, ['E4'], 'piano', 0.45),
+            (66.4, ['A4'], 'piano', 0.45),
+            (68.4, ['F#4'], 'piano', 0.45),
+            (69.0, ['E5', 'A5'], 'bell', 0.35),
+            (74.6, ['G4', 'G5'], 'bell', 0.4),   # last word of the series
+        ],
+        'swells': [(29.4, 2.0), (55.8, 1.6)],
+        'booms': [(55.8, 'G1')],
+    },
 }
 
 if __name__ == '__main__':
+    only = [int(a) for a in sys.argv[1:]]
     for n, spec in CHAPTERS.items():
+        if only and n not in only:
+            continue
         wav = os.path.join(ROOT, 'out', f'calculus-0{n}-score.wav')
         mp3 = os.path.join(ROOT, 'projects', 'calculus-visually', 'assets', f'ch0{n}-score.mp3')
         s.write_wav(wav, score(spec))

@@ -42,6 +42,7 @@ npm run studio                            # Remotion Studio
 npm run screening-room                    # build the video preview page → out/screening-room/
 node scripts/check-preview.mjs [hash]     # smoke-test the Screening Room
 node scripts/check-pages.mjs projects/ma  # smoke-test page projects (errors, overflow, screenshots → out/pages/)
+node scripts/build-design-preview.mjs     # gallery + design pages + thumbnails → out/design-preview/ (publish this)
 npm run stills -- Afterglow:960 Calculus-02-Integral:300,1180   # stills → out/stills/
 npx remotion render <Id> out/x.wav --codec=wav   # audio-only render, seconds not minutes
 python3 projects/<p>/score/compose.py     # regenerate a score
@@ -70,8 +71,10 @@ a file is actually wanted.
 - Wants bold, impressive work. Tasteful-but-safe first drafts were called
   "very average" and "not impressive enough": push depth, motion, light and a
   cinematic finish, and show real craft in the details.
-- Prefers previews on a page (the Screening Room, published as an artifact) over
-  downloading files.
+- Prefers previews on a page over downloading files. Two private preview links,
+  republished to the same URL after changes:
+  Screening Room (videos) https://claude.ai/artifact/KwRAsKmAEMQq8MqyFmesB1 ·
+  design pages https://claude.ai/artifact/Ljwwi9GLwWSp35FjGYJsVZ.
 - Wants learning content (the Calculus series) with the same level of polish.
 - Branch `claude/happy-wozniak-73ik3t`, PR
   [#1](https://github.com/johnsonnoronathan/the_most_beautiful_design/pull/1).
@@ -128,6 +131,11 @@ what went wrong or cost time, and what to do instead.
 - 2026-10-14 · Design-canvas `.dc.html` files only run inside the canvas editor.
   To ship one as a page, rewrite it as standalone HTML/JS and keep the original
   in `canvas/`.
+- 2026-10-14 · For a published preview of several pages, publish them as supporting
+  HTML files with relative links and scripts, and use screenshot thumbnails rather
+  than iframes of the pages (`scripts/build-design-preview.mjs`).
+- 2026-10-14 · Local test servers must send `charset=utf-8`; without it `·` and `間`
+  look garbled in screenshots, a false alarm (published pages get a charset).
 
 ### Audio and voice
 

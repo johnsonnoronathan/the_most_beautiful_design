@@ -20,6 +20,7 @@ npm run screening-room   # → out/screening-room/index.html: watch every video 
 npm run studio           # Remotion Studio: scrub and edit the videos
 npx remotion render Calculus-01-Derivative out/calculus-01.mp4   # an MP4, only when you need a file
 open projects/ma/index.html  # design pages open directly in a browser
+node scripts/build-design-preview.mjs   # → out/design-preview/: one gallery of every design page
 ```
 
 To use a Chromium that is already installed (for example in a sandbox), set

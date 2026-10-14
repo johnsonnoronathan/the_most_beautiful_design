@@ -7,7 +7,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = path.resolve('.');
-const types = {'.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json'};
+const types = {'.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.json': 'application/json'};
 const server = http.createServer((req, res) => {
   if (req.url === '/favicon.ico') return res.writeHead(204).end();
   const file = path.join(root, decodeURIComponent(req.url.split('?')[0]));

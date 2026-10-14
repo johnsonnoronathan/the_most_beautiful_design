@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Afterglow — A day of light</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&amp;family=Geist:wght@200;300;400;500&amp;family=Geist+Mono:wght@400&amp;display=swap">
+<link rel="stylesheet" href="frame.css">
+<style>
+  @keyframes hr-tw { 0%, 100% { opacity: 1 } 50% { opacity: .3 } }
+  .hr-tw1 { animation: hr-tw 4.6s ease-in-out infinite }
+  .hr-tw2 { animation: hr-tw 6.2s ease-in-out 1.7s infinite }
+  @media (prefers-reduced-motion: reduce) { .hr-tw1, .hr-tw2 { animation: none } }
+  #board button { font-family: inherit; cursor: pointer; }
+  .preset { height: 44px; padding: 0 18px; border-radius: 22px; border: 1px solid rgba(255, 244, 230, 0.35); background: transparent; color: #FFF4E6; font-size: 14px; font-weight: 400; }
+  .preset[aria-pressed='true'] { border-color: #FFF4E6; background: #FFF4E6; color: #0A0814; font-weight: 500; }
+  .mono { font-family: 'Geist Mono', monospace; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Afterglow Studies</a><span class="here">A day of light · 1440 × 900 · interactive</span></nav>
+  <div class="tools"><span>Space plays and pauses</span></div>
+</header>
+<main class="room">
+  <div class="stage">
+    <div id="board" class="board" style="width: 1440px; height: 900px; overflow: hidden; background: #0A0814; color: #FFF4E6; font-family: 'Geist', sans-serif">
+
+      <svg width="1440" height="900" viewBox="0 0 1440 900" aria-hidden="true" style="position: absolute; left: 0; top: 0; display: block">
+        <defs>
+          <linearGradient id="hr-sky" x1="0" y1="0" x2="0" y2="1">
+            <stop id="sky0" offset="0"></stop>
+            <stop id="sky1" offset="0.5"></stop>
+            <stop id="sky2" offset="0.82"></stop>
+            <stop id="sky3" offset="1"></stop>
+          </linearGradient>
+          <radialGradient id="hr-glow" cx="0.5" cy="0.5" r="0.5">
+            <stop class="sunstop" offset="0" stop-opacity="0.85"></stop>
+            <stop class="sunstop" offset="0.3" stop-opacity="0.3"></stop>
+            <stop class="sunstop" offset="1" stop-opacity="0"></stop>
+          </radialGradient>
+          <linearGradient id="hr-mist" x1="0" y1="0" x2="0" y2="1">
+            <stop class="miststop" offset="0" stop-opacity="0"></stop>
+            <stop class="miststop" offset="0.5" stop-opacity="0.26"></stop>
+            <stop class="miststop" offset="1" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="1440" height="600" fill="url(#hr-sky)"></rect>
+        <g id="stars" fill="#FFF4E4">
+          <path id="stars0" opacity="0.9"></path>
+          <path id="stars1" class="hr-tw1"></path>
+          <path id="stars2" class="hr-tw2"></path>
+        </g>
+        <circle id="moonHalo" r="54" fill="#F4EEE2"></circle>
+        <circle id="moon" r="18" fill="#F4EEE2"></circle>
+        <circle id="glow" r="620" fill="url(#hr-glow)"></circle>
+        <circle id="sun" r="42"></circle>
+        <g id="ridges"></g>
+        <rect id="band" x="0" y="790" width="1440" height="110"></rect>
+      </svg>
+
+      <div style="position: absolute; left: 64px; right: 64px; top: 48px; display: flex; justify-content: space-between; align-items: flex-start; gap: 48px">
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <span class="mono" style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.8">A day over one valley</span>
+          <h1 id="phase" style="margin: 0; font-family: 'Bodoni Moda', serif; font-style: italic; font-weight: 400; font-size: 120px; line-height: 1; letter-spacing: -0.03em">Afterglow</h1>
+          <p id="note" style="margin: 0; max-width: 420px; font-size: 19px; font-weight: 300; line-height: 1.45"></p>
+        </div>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px">
+          <span id="clock" style="font-size: 96px; font-weight: 200; line-height: 1; letter-spacing: -0.03em; font-variant-numeric: tabular-nums">19:18</span>
+          <span id="sunLabel" class="mono" style="font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; opacity: 0.8"></span>
+        </div>
+      </div>
+
+      <div style="position: absolute; left: 64px; right: 64px; bottom: 34px; display: flex; align-items: center; gap: 28px">
+        <button id="play" type="button" aria-label="Play time-lapse" style="flex-shrink: 0; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: 28px; border: 1px solid rgba(255,244,230,0.45); background: transparent; color: #FFF4E6">
+          <svg id="icon-play" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M5 2.5 L15 9 L5 15.5 Z" fill="currentColor"></path></svg>
+          <svg id="icon-pause" width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" style="display: none"><rect x="3" y="2" width="4" height="14" rx="1" fill="currentColor"></rect><rect x="11" y="2" width="4" height="14" rx="1" fill="currentColor"></rect></svg>
+        </button>
+        <div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+          <label for="time" class="mono" style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: #CFC6C2">Time of day</label>
+          <input id="time" type="range" min="0" max="24" step="0.05" value="19.3" style="width: 100%; margin: 0">
+          <div class="mono" style="display: flex; justify-content: space-between; font-size: 11px; color: #CFC6C2">
+            <span>00</span><span>03</span><span>06</span><span>09</span><span>12</span><span>15</span><span>18</span><span>21</span><span>24</span>
+          </div>
+        </div>
+        <div id="presets" style="display: flex; gap: 8px; flex-shrink: 0"></div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<script src="valley.js"></script>
+<script src="frame.js"></script>
+<script>
+  const board = document.getElementById('board');
+  fitBoard(board, 1440, 900);
+  const $ = (id) => document.getElementById(id);
+  const W = 1440;
+  const HORIZON = 560;
+  const MIST = {2: 1, 5: 1, 8: 0.7, 11: 0.45};
+
+  // geometry is drawn once; only the light changes
+  const rs = Valley.ridges(7, W, 900, HORIZON, 770);
+  let svg = '';
+  rs.forEach((r, i) => {
+    svg += `<path id="r${i}" d="${r.d}"></path>`;
+    if (MIST[i]) svg += `<rect x="0" y="${Math.round(r.base - 55)}" width="1440" height="90" fill="url(#hr-mist)" opacity="${MIST[i]}"></rect>`;
+  });
+  $('ridges').innerHTML = svg;
+  const ridgeEls = rs.map((_, i) => $('r' + i));
+  Valley.stars(7, W, 500, 300, 3, 1.6).forEach((d, i) => $('stars' + i).setAttribute('d', d));
+
+  const PRESETS = [['First light', 5.3], ['Noon', 12.5], ['Golden hour', 17], ['Afterglow', 19.3], ['Night', 23]];
+  PRESETS.forEach(([label, h]) => {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'preset';
+    b.textContent = label;
+    b.dataset.hour = h;
+    b.addEventListener('click', () => { setPlaying(false); setHour(h); });
+    $('presets').appendChild(b);
+  });
+
+  let hour = 19.3;
+  function setHour(h) {
+    hour = h;
+    const p = Valley.paletteAt(h);
+    [p.skyTop, p.skyMid, p.skyLow, p.horizon].forEach((c, i) => $('sky' + i).setAttribute('stop-color', c));
+    document.querySelectorAll('.sunstop').forEach((s) => s.setAttribute('stop-color', p.sun));
+    document.querySelectorAll('.miststop').forEach((s) => s.setAttribute('stop-color', p.horizon));
+    ridgeEls.forEach((el, i) => el.setAttribute('fill', Valley.mix(p.far, p.near, Math.pow(rs[i].t, 0.7))));
+    $('band').setAttribute('fill', p.near);
+    board.style.background = p.near;
+    $('stars').setAttribute('opacity', p.starO.toFixed(3));
+
+    const e = Valley.elevation(h);
+    const hm = (h + 12) % 24;
+    const em = Valley.elevation(hm);
+    const sx = 120 + 1200 * ((h - 6) / 12);
+    const sy = HORIZON - e * (HORIZON - 110);
+    ['glow', 'sun'].forEach((id) => { $(id).setAttribute('cx', sx.toFixed(1)); $(id).setAttribute('cy', sy.toFixed(1)); });
+    $('sun').setAttribute('fill', p.sun);
+    $('glow').setAttribute('opacity', p.glowO.toFixed(3));
+    const moonVis = em > 0 ? Math.min(1, em * 4) * Math.min(1, p.starO * 1.2 + 0.15) : 0;
+    const mx = 120 + 1200 * ((hm - 6) / 12);
+    const my = HORIZON - em * (HORIZON - 150);
+    ['moon', 'moonHalo'].forEach((id) => { $(id).setAttribute('cx', mx.toFixed(1)); $(id).setAttribute('cy', my.toFixed(1)); });
+    $('moon').setAttribute('opacity', moonVis.toFixed(3));
+    $('moonHalo').setAttribute('opacity', (moonVis * 0.06).toFixed(3));
+
+    const ph = Valley.phaseAt(h);
+    $('phase').textContent = ph.name;
+    $('note').textContent = ph.note;
+    const hh = Math.floor(h) % 24;
+    const mm = Math.floor((h - Math.floor(h)) * 60);
+    $('clock').textContent = `${String(hh).padStart(2, '0')}:${String(mm).padStart(2, '0')}`;
+    const deg = Math.round(e * 62);
+    $('sunLabel').textContent = deg >= 0 ? `Sun ${deg}° above the ridge` : `Sun ${Math.abs(deg)}° below the ridge`;
+    $('time').value = h;
+    $('time').style.accentColor = p.sun;
+    document.querySelectorAll('.preset').forEach((b) => b.setAttribute('aria-pressed', String(Math.abs(h - Number(b.dataset.hour)) < 0.35)));
+  }
+
+  // 24 hours in about 34 seconds, like the canvas version
+  let playing = false;
+  let last = 0;
+  function tick(now) {
+    if (!playing) return;
+    const dt = last ? (now - last) / 1000 : 0;
+    last = now;
+    setHour((hour + dt * 0.7) % 24);
+    requestAnimationFrame(tick);
+  }
+  function setPlaying(on) {
+    playing = on;
+    last = 0;
+    // the hidden attribute does not apply to SVG elements, so toggle display
+    $('icon-play').style.display = on ? 'none' : '';
+    $('icon-pause').style.display = on ? '' : 'none';
+    $('play').setAttribute('aria-label', on ? 'Pause time-lapse' : 'Play time-lapse');
+    if (on) requestAnimationFrame(tick);
+  }
+  $('play').addEventListener('click', () => setPlaying(!playing));
+  $('time').addEventListener('input', (ev) => { setPlaying(false); setHour(parseFloat(ev.target.value)); });
+  document.addEventListener('keydown', (ev) => {
+    if (ev.code === 'Space' && ev.target === document.body) { ev.preventDefault(); setPlaying(!playing); }
+  });
+
+  setHour(19.3);
+  const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (EMBED && !calm) setPlaying(true);
+</script>
+</body>
+</html>

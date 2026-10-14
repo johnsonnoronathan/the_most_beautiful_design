@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Afterglow — One valley, four hours</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&amp;family=Geist:wght@200;300;400;500&amp;family=Geist+Mono:wght@400&amp;display=swap">
+<link rel="stylesheet" href="frame.css">
+</head>
+<body>
+<header class="bar">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Afterglow Studies</a><span class="here">Study No. 03 · Series · 2200 × 1080</span></nav>
+  <div class="tools seed"><span>Valley</span><button type="button" id="prev" aria-label="Previous valley">−</button><output id="seed-out" for="prev next">7</output><button type="button" id="next" aria-label="Next valley">+</button><button type="button" id="random" style="padding: 0 14px">New valley</button></div>
+</header>
+<main class="room">
+  <div class="stage">
+    <div id="board" class="board" style="width: 2200px; height: 1080px; box-sizing: border-box; padding: 80px; display: flex; flex-direction: column; gap: 56px; background: #0B0A12; color: #F4ECE4; font-family: 'Geist', sans-serif">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 64px">
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #A79FA8">Study No. 03 — Series</span>
+          <h1 style="margin: 0; font-family: 'Bodoni Moda', serif; font-style: italic; font-weight: 400; font-size: 76px; line-height: 1; letter-spacing: -0.025em; color: #F8EEE4">One valley, four hours.</h1>
+        </div>
+        <p style="margin: 0; max-width: 400px; font-size: 18px; font-weight: 300; line-height: 1.55; color: #BDB4BC">The same eighteen ridgelines, generated once and lit four times. Nothing moves but the light.</p>
+      </div>
+      <div id="cards" style="display: flex; gap: 40px"></div>
+    </div>
+  </div>
+</main>
+<script src="valley.js"></script>
+<script src="frame.js"></script>
+<script>
+  const board = document.getElementById('board');
+  fitBoard(board, 2200, 1080);
+  const HOURS = [[5.9, 'First light', '05:54'], [12.5, 'Noon', '12:30'], [17.1, 'Golden hour', '17:06'], [20.9, 'Blue hour', '20:54']];
+  const W = 480, H = 640, HORIZON = 400;
+  let seed = 7;
+
+  function card(rs, stars, [h, name, clock], i) {
+    const p = Valley.paletteAt(h);
+    const e = Valley.elevation(h);
+    const hm = (h + 12) % 24;
+    const em = Valley.elevation(hm);
+    const sx = (40 + 400 * ((h - 6) / 12)).toFixed(1);
+    const sy = (HORIZON - e * (HORIZON - 70)).toFixed(1);
+    const mx = (40 + 400 * ((hm - 6) / 12)).toFixed(1);
+    const my = (HORIZON - em * (HORIZON - 90)).toFixed(1);
+    const moonO = em > 0 ? Math.min(1, p.starO * 1.2 + 0.15) : 0;
+    const mist = {2: 1, 5: 1, 8: 0.7};
+    let ridges = '';
+    rs.forEach((r, j) => {
+      ridges += `<path d="${r.d}" fill="${Valley.mix(p.far, p.near, Math.pow(r.t, 0.7))}"></path>`;
+      if (mist[j]) ridges += `<rect x="0" y="${Math.round(r.base - 30)}" width="480" height="50" fill="url(#mist${i})" opacity="${mist[j]}"></rect>`;
+    });
+    return `<figure style="margin: 0; width: 480px; display: flex; flex-direction: column; gap: 20px">
+      <svg width="480" height="640" viewBox="0 0 480 640" role="img" aria-label="The valley at ${name.toLowerCase()}" style="display: block; border-radius: 3px">
+        <defs>
+          <linearGradient id="sky${i}" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="${p.skyTop}"></stop><stop offset="0.5" stop-color="${p.skyMid}"></stop>
+            <stop offset="0.82" stop-color="${p.skyLow}"></stop><stop offset="1" stop-color="${p.horizon}"></stop>
+          </linearGradient>
+          <radialGradient id="glow${i}" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="${p.sun}" stop-opacity="0.85"></stop><stop offset="0.3" stop-color="${p.sun}" stop-opacity="0.3"></stop>
+            <stop offset="1" stop-color="${p.sun}" stop-opacity="0"></stop>
+          </radialGradient>
+          <linearGradient id="mist${i}" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="${p.horizon}" stop-opacity="0"></stop><stop offset="0.5" stop-color="${p.horizon}" stop-opacity="0.26"></stop>
+            <stop offset="1" stop-color="${p.horizon}" stop-opacity="0"></stop>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="480" height="440" fill="url(#sky${i})"></rect>
+        <path d="${stars}" fill="#FFF4E4" opacity="${p.starO.toFixed(3)}"></path>
+        <circle cx="${mx}" cy="${my}" r="9" fill="#F4EEE2" opacity="${moonO.toFixed(3)}"></circle>
+        <circle cx="${sx}" cy="${sy}" r="340" fill="url(#glow${i})" opacity="${p.glowO.toFixed(3)}"></circle>
+        <circle cx="${sx}" cy="${sy}" r="20" fill="${p.sun}"></circle>
+        ${ridges}
+      </svg>
+      <figcaption style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 4px; border-top: 1px solid #2A2633">
+        <span style="font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 32px; line-height: 1.2; color: #F8EEE4">${name}</span>
+        <span style="font-family: 'Geist Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: #A79FA8">${clock}</span>
+      </figcaption>
+    </figure>`;
+  }
+
+  function draw() {
+    const rs = Valley.ridges(seed, W, H, HORIZON, 610, {step: 4, perK: true});
+    const stars = Valley.stars(seed, W, 320, 140, 1, 1.2, 0.3)[0];
+    document.getElementById('cards').innerHTML = HOURS.map((q, i) => card(rs, stars, q, i)).join('');
+    document.getElementById('seed-out').textContent = seed;
+  }
+
+  const setSeed = (s) => { seed = ((s - 1 + 999) % 999) + 1; draw(); };
+  document.getElementById('prev').addEventListener('click', () => setSeed(seed - 1));
+  document.getElementById('next').addEventListener('click', () => setSeed(seed + 1));
+  document.getElementById('random').addEventListener('click', () => setSeed(1 + Math.floor(Math.random() * 999)));
+  draw();
+</script>
+</body>
+</html>

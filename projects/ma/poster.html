@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ma — Poster</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Serif+JP:wght@300;400&amp;display=swap">
+<link rel="stylesheet" href="frame.css">
+</head>
+<body>
+<header class="bar">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="index.html">Ma 間</a><span class="here">Poster · 1080 × 1350</span></nav>
+  <div class="tools"><span>Sun</span><span id="swatches" style="display: flex; gap: 8px"></span></div>
+</header>
+<main class="room">
+  <div class="stage">
+    <div id="board" class="board" style="width: 1080px; height: 1350px; overflow: hidden; background: #11151B; color: #F2F1EC; font-family: 'Hanken Grotesk', sans-serif">
+
+      <div style="position: absolute; left: 0; top: 0; width: 1080px; height: 800px; overflow: hidden">
+        <div style="position: absolute; left: 440px; top: 420px; width: 520px; height: 520px; border-radius: 50%; background: var(--sun)"></div>
+      </div>
+
+      <div style="position: absolute; left: 0; top: 800px; width: 1080px; height: 550px; background: #0C0F14"></div>
+      <div style="position: absolute; left: 0; top: 800px; width: 1080px; height: 1px; background: rgba(242, 241, 236, 0.22)"></div>
+
+      <div aria-hidden="true" style="position: absolute; left: 440px; top: 826px; width: 520px; display: flex; flex-direction: column; align-items: center">
+        <div style="width: 400px; height: 8px; border-radius: 4px; background: var(--sun); opacity: 0.9"></div>
+        <div style="width: 330px; height: 6px; border-radius: 3px; background: var(--sun); opacity: 0.75; margin-top: 12px"></div>
+        <div style="width: 250px; height: 5px; border-radius: 3px; background: var(--sun); opacity: 0.6; margin-top: 16px"></div>
+        <div style="width: 180px; height: 4px; border-radius: 2px; background: var(--sun); opacity: 0.48; margin-top: 21px"></div>
+        <div style="width: 112px; height: 3px; border-radius: 2px; background: var(--sun); opacity: 0.38; margin-top: 27px"></div>
+        <div style="width: 60px; height: 2px; border-radius: 1px; background: var(--sun); opacity: 0.3; margin-top: 34px"></div>
+        <div style="width: 24px; height: 2px; border-radius: 1px; background: var(--sun); opacity: 0.22; margin-top: 42px"></div>
+      </div>
+
+      <div style="position: absolute; left: 96px; top: 80px; right: 96px; display: flex; justify-content: space-between; align-items: baseline; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.14em; text-transform: uppercase; color: #A3A6A8">
+        <span>A study in empty space</span>
+        <span>No. 01</span>
+      </div>
+
+      <h1 style="position: absolute; left: 88px; top: 150px; margin: 0; font-size: 300px; font-weight: 200; letter-spacing: -0.05em; line-height: 0.8; color: #F2F1EC">Ma</h1>
+
+      <div style="position: absolute; right: 96px; top: 156px; writing-mode: vertical-rl; font-family: 'Noto Serif JP', serif; font-weight: 300; font-size: 30px; letter-spacing: 0.5em; color: #F2F1EC" lang="ja">間の美しさ</div>
+
+      <div style="position: absolute; left: 96px; top: 430px; font-family: 'IBM Plex Mono', monospace; font-size: 14px; letter-spacing: 0.06em; color: #A3A6A8">/mä/ · noun · Japanese</div>
+
+      <div style="position: absolute; left: 96px; right: 96px; bottom: 96px; display: flex; justify-content: space-between; align-items: flex-end; gap: 64px">
+        <p style="margin: 0; max-width: 470px; font-size: 24px; font-weight: 300; line-height: 1.45; color: #D9D8D2">The pause between notes. The gap between pillars. The silence that gives a sound its shape.</p>
+        <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 8px; font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: #A3A6A8; text-align: right">
+          <span>35.01° N  135.77° E</span>
+          <span>Kyoto, at dusk</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+<script src="frame.js"></script>
+<script>
+  const board = document.getElementById('board');
+  sunSwatches(document.getElementById('swatches'), board);
+  fitBoard(board, 1080, 1350);
+</script>
+</body>
+</html>

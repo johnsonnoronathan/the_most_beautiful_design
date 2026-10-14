@@ -5,8 +5,8 @@ answered on the closing "Key idea" card), a soft pad bed whose chords change
 with the scenes, a quiet felt-piano pattern, and small accents on the reveals
 (table rows, each doubling of the rectangles, boxed results).
 
-    python3 src/projects/learning/calculus/score/compose.py
-    → out/calculus-0N-score.wav and public/learning/calculus/ch0N-score.mp3
+    python3 projects/calculus-visually/score/compose.py
+    → out/calculus-0N-score.wav and projects/calculus-visually/assets/ch0N-score.mp3
 """
 
 import math
@@ -15,8 +15,8 @@ import sys
 
 import numpy as np
 
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', '..'))
-sys.path.insert(0, os.path.join(ROOT, 'src', 'lib', 'score'))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+sys.path.insert(0, os.path.join(ROOT, 'studio', 'lib'))
 
 import synth as s  # noqa: E402
 
@@ -267,7 +267,7 @@ CHAPTERS = {
 if __name__ == '__main__':
     for n, spec in CHAPTERS.items():
         wav = os.path.join(ROOT, 'out', f'calculus-0{n}-score.wav')
-        mp3 = os.path.join(ROOT, 'public', 'learning', 'calculus', f'ch0{n}-score.mp3')
+        mp3 = os.path.join(ROOT, 'projects', 'calculus-visually', 'assets', f'ch0{n}-score.mp3')
         s.write_wav(wav, score(spec))
         # quieter than Afterglow: this sits under captions people are reading
         s.encode_mp3(wav, mp3, lufs=-19)

@@ -5,7 +5,7 @@ import {renderStill, selectComposition} from '@remotion/renderer';
 import path from 'node:path';
 
 const browserExecutable = process.env.REMOTION_BROWSER ?? null;
-const serveUrl = await bundle({entryPoint: path.resolve('src/index.ts'), publicDir: path.resolve('public')});
+const serveUrl = await bundle({entryPoint: path.resolve('studio/index.ts')});
 
 for (const arg of process.argv.slice(2)) {
   const [id, frames] = arg.split(':');

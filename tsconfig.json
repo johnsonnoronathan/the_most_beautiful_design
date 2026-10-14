@@ -14,8 +14,8 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src",
-    "preview",
+    "studio",
+    "projects",
     "scripts",
     "remotion.config.ts"
   ]

@@ -1,5 +1,7 @@
 import {cancelRender, continueRender, delayRender} from 'remotion';
-import {asset} from './assets';
+import bodoni from '../fonts/BodoniModa-Italic.woff2';
+import geist from '../fonts/Geist.woff2';
+import geistMono from '../fonts/GeistMono.woff2';
 
 export const SERIF = "'Bodoni Moda', serif";
 export const SANS = "'Geist', sans-serif";
@@ -13,9 +15,9 @@ export const loadStudioFonts = () => {
   loaded = true;
   const handle = delayRender('Loading studio fonts');
   const faces = [
-    new FontFace('Bodoni Moda', `url(${asset('shared/fonts/BodoniModa-Italic.woff2')}) format('woff2')`, {style: 'italic', weight: '400'}),
-    new FontFace('Geist', `url(${asset('shared/fonts/Geist.woff2')}) format('woff2')`, {weight: '100 900'}),
-    new FontFace('Geist Mono', `url(${asset('shared/fonts/GeistMono.woff2')}) format('woff2')`, {weight: '400'}),
+    new FontFace('Bodoni Moda', `url(${bodoni}) format('woff2')`, {style: 'italic', weight: '400'}),
+    new FontFace('Geist', `url(${geist}) format('woff2')`, {weight: '100 900'}),
+    new FontFace('Geist Mono', `url(${geistMono}) format('woff2')`, {weight: '400'}),
   ];
   Promise.all(faces.map((f) => f.load()))
     .then((fonts) => {

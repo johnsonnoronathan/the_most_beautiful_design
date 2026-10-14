@@ -1,10 +1,11 @@
 import React from 'react';
-import {Afterglow} from './projects/art/afterglow/Afterglow';
-import {Ch1Derivative, CH1_SECONDS} from './projects/learning/calculus/Ch1Derivative';
-import {Ch2Integral, CH2_SECONDS} from './projects/learning/calculus/Ch2Integral';
-import {Ch3Fundamental, CH3_SECONDS} from './projects/learning/calculus/Ch3Fundamental';
+import {Afterglow} from '../projects/afterglow/Afterglow';
+import {Ch1Derivative, CH1_SECONDS} from '../projects/calculus-visually/Ch1Derivative';
+import {Ch2Integral, CH2_SECONDS} from '../projects/calculus-visually/Ch2Integral';
+import {Ch3Fundamental, CH3_SECONDS} from '../projects/calculus-visually/Ch3Fundamental';
 
-// One catalog drives both the Remotion Studio folders and the preview page.
+// One catalog drives both the Remotion Studio folders and the Screening Room.
+// Each project lives in projects/<project id>/; the category is a label, not a folder.
 
 export type Video = {
   /** Remotion composition id: letters, digits and '-' only. */
@@ -25,6 +26,7 @@ export type Video = {
 };
 
 export type Project = {
+  /** Also the project's folder name under projects/. */
   id: string;
   title: string;
   blurb: string;
@@ -50,7 +52,7 @@ export const CATALOG: Category[] = [
     blurb: 'Explainers that teach one idea properly, with every step drawn.',
     projects: [
       {
-        id: 'calculus',
+        id: 'calculus-visually',
         title: 'Calculus, visually',
         blurb: 'Three short chapters: the derivative, the integral, and the theorem that joins them.',
         videos: [

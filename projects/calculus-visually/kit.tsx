@@ -2,8 +2,7 @@ import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import React, {useId, useMemo} from 'react';
 import {AbsoluteFill, Audio, Easing, useCurrentFrame} from 'remotion';
-import {asset} from '../../../lib/assets';
-import {loadMathFonts, loadStudioFonts, MONO, SANS, SERIF} from '../../../lib/fonts';
+import {loadMathFonts, loadStudioFonts, MONO, SANS, SERIF} from '../../studio/lib/fonts';
 
 loadStudioFonts();
 loadMathFonts();
@@ -375,9 +374,9 @@ const speaking = (t: number, speech: Speech[]) => {
 };
 
 /** Score under the voiceover: the music dips while the narrator speaks. */
-export const Soundtrack: React.FC<{chapter: number; speech: Speech[]}> = ({chapter, speech}) => (
+export const Soundtrack: React.FC<{score: string; voice: string; speech: Speech[]}> = ({score, voice, speech}) => (
   <>
-    <Audio src={asset(`learning/calculus/ch0${chapter}-score.mp3`)} volume={(f) => 1 - 0.42 * speaking(f / FPS, speech)} />
-    <Audio src={asset(`learning/calculus/ch0${chapter}-voice.mp3`)} />
+    <Audio src={score} volume={(f) => 1 - 0.42 * speaking(f / FPS, speech)} />
+    <Audio src={voice} />
   </>
 );

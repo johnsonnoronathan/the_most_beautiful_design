@@ -1,6 +1,6 @@
 import React from 'react';
 import {Easing} from 'remotion';
-import {MONO, SANS} from '../../../lib/fonts';
+import {MONO, SANS} from '../../studio/lib/fonts';
 import {
   areaPath,
   Axes,
@@ -31,6 +31,8 @@ import {
 import {captions, Soundtrack, Speech, VoiceScript} from './kit';
 import script from './voice/ch03.json';
 import speech from './voice/ch03.timing.json';
+import score from './assets/ch03-score.mp3';
+import voice from './assets/ch03-voice.mp3';
 
 export const CH3_SECONDS = 70;
 
@@ -95,7 +97,7 @@ export const Ch3Fundamental: React.FC = () => {
 
   return (
     <Board>
-      <Soundtrack chapter={3} speech={speech as Speech[]} />
+      <Soundtrack score={score} voice={voice} speech={speech as Speech[]} />
       <svg width="1920" height="1080" style={{position: 'absolute', inset: 0}}>
         <g opacity={dim}>
           <Axes b={TOP} p={axesTop} xTicks={[0.5, 1, 1.5, 2]} yTicks={[1, 2, 3, 4]} xLabel="t" yLabel="f(t)" tickFmt={(n) => (n % 1 === 0 ? String(n) : n.toFixed(1))} />

@@ -1,7 +1,8 @@
 import React, {useMemo} from 'react';
 import {AbsoluteFill, Audio, Easing, interpolate, useCurrentFrame, useVideoConfig} from 'remotion';
-import {asset} from '../../../lib/assets';
-import {loadStudioFonts, MONO, SANS, SERIF} from '../../../lib/fonts';
+import {loadStudioFonts, MONO, SANS, SERIF} from '../../studio/lib/fonts';
+import grain from './assets/grain.png';
+import score from './assets/score.mp3';
 import {buildGeometry, elevation} from './engine';
 import {Valley} from './Valley';
 
@@ -108,7 +109,7 @@ export const Afterglow: React.FC<AfterglowProps> = ({quality}) => {
 
   return (
     <AbsoluteFill style={{backgroundColor: '#000'}}>
-      <Audio src={asset('art/afterglow/score.mp3')} />
+      <Audio src={score} />
       <AbsoluteFill style={{transform: `scale(${zoom})`, transformOrigin: '50% 56%'}}>
         <svg width="1920" height="1080" viewBox="0 0 1920 1080" style={{display: 'block'}}>
           <Valley frame={frame} hour={hour} pan={pan} geo={geo} lite={quality === 'preview'} />
@@ -117,7 +118,7 @@ export const Afterglow: React.FC<AfterglowProps> = ({quality}) => {
 
       <AbsoluteFill
         style={{
-          backgroundImage: `url(${asset('art/afterglow/grain.png')})`,
+          backgroundImage: `url(${grain})`,
           backgroundSize: '256px 256px',
           backgroundPosition: `${(frame * 37) % 256}px ${(frame * 91) % 256}px`,
           mixBlendMode: 'overlay',

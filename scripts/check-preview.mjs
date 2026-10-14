@@ -1,4 +1,4 @@
-// Smoke-test the built preview page in headless Chromium: console errors, a screenshot,
+// Smoke-test the built Screening Room in headless Chromium: console errors, a screenshot,
 // and whether the player advances after pressing play.
 //   node scripts/check-preview.mjs [hash]
 import {chromium} from 'playwright-core';
@@ -6,7 +6,7 @@ import http from 'node:http';
 import fs from 'node:fs';
 import path from 'node:path';
 
-const root = path.resolve('out/preview');
+const root = path.resolve('out/screening-room');
 const types = {'.html': 'text/html', '.mp3': 'audio/mpeg'};
 const server = http.createServer((req, res) => {
   const file = path.join(root, decodeURIComponent(req.url.split('?')[0]).replace(/\/$/, '/index.html'));
@@ -23,11 +23,11 @@ await new Promise((r) => server.listen(4917, r));
 
 const browser = await chromium.launch({executablePath: process.env.CHROME ?? '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'});
 const page = await browser.newPage({viewport: {width: 1440, height: 1000}});
-const problems = [];
-page.on('console', (m) => (m.type() === 'error' || m.type() === 'warning') && problems.push(`${m.type()}: ${m.text()}`));
-page.on('pageerror', (e) => problems.push(`pageerror: ${e.message}`));
-page.on('response', (r) => r.status() >= 400 && problems.push(`http ${r.status()}: ${r.url()}`));
-page.on('request', (r) => r.url().endsWith('.mp3') && problems.push(`requested: ${r.url()}`));
+const log = [];
+page.on('console', (m) => (m.type() === 'error' || m.type() === 'warning') && log.push(`${m.type()}: ${m.text()}`));
+page.on('pageerror', (e) => log.push(`pageerror: ${e.message}`));
+page.on('response', (r) => r.status() >= 400 && log.push(`http ${r.status()}: ${r.url()}`));
+page.on('request', (r) => r.url().endsWith('.mp3') && log.push(`requested: ${r.url()}`));
 
 const hash = process.argv[2] ? `#${process.argv[2]}` : '';
 await page.goto(`http://localhost:4917/index.html${hash}`);
@@ -46,6 +46,6 @@ await phone.waitForTimeout(3000);
 const overflow = await phone.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
 await phone.screenshot({path: 'out/preview-phone.png', fullPage: true});
 
-console.log(JSON.stringify({problems, phoneHorizontalOverflowPx: overflow, before: before.slice(0, 80)}, null, 2));
+console.log(JSON.stringify({log, phoneHorizontalOverflowPx: overflow, before: before.slice(0, 80)}, null, 2));
 await browser.close();
 server.close();

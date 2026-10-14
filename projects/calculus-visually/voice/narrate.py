@@ -5,11 +5,11 @@ with the offline Kokoro voice, trims silence, and places it at its caption's
 start. A line that would run into the next one is sped up (at most 15 %); if it
 still does not fit, it is reported so the wording can be tightened.
 
-Writes public/learning/calculus/chNN-voice.mp3 and chNN.timing.json (speech
+Writes projects/calculus-visually/assets/chNN-voice.mp3 and chNN.timing.json (speech
 intervals, used to duck the music under the voice).
 
     scripts/setup-tts.sh                                   # once
-    .cache/tts/venv/bin/python src/projects/learning/calculus/voice/narrate.py [1 2 3]
+    .cache/tts/venv/bin/python projects/calculus-visually/voice/narrate.py [1 2 3]
 """
 
 import glob
@@ -21,7 +21,7 @@ import wave
 
 import numpy as np
 
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', '..'))
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(ROOT, '.cache', 'tts')
 SECONDS = {1: 68, 2: 64, 3: 70}
@@ -100,7 +100,7 @@ def narrate(chapter, tts):
         w.setframerate(sr)
         w.writeframes(pcm.tobytes())
 
-    mp3 = os.path.join(ROOT, 'public', 'learning', 'calculus', f'ch0{chapter}-voice.mp3')
+    mp3 = os.path.join(ROOT, 'projects', 'calculus-visually', 'assets', f'ch0{chapter}-voice.mp3')
     subprocess.run(
         ['ffmpeg', '-v', 'error', '-y', '-i', wav, '-af', 'highpass=f=70,loudnorm=I=-16:TP=-1.5:LRA=11', '-ac', '2', '-ar', '48000', '-c:a', 'libmp3lame', '-b:a', '128k', mp3],
         check=True,

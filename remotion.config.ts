@@ -1,6 +1,6 @@
 import {Config} from '@remotion/cli/config';
 
-Config.setEntryPoint('src/index.ts');
+Config.setEntryPoint('studio/index.ts');
 Config.setVideoImageFormat('jpeg');
 Config.setJpegQuality(95);
 Config.setOverwriteOutput(true);

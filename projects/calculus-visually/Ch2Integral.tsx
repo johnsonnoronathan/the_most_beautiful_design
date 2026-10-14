@@ -1,6 +1,6 @@
 import React from 'react';
 import {Easing} from 'remotion';
-import {MONO, SANS} from '../../../lib/fonts';
+import {MONO, SANS} from '../../studio/lib/fonts';
 import {
   areaPath,
   Axes,
@@ -30,6 +30,8 @@ import {
 import {captions, Soundtrack, Speech, VoiceScript} from './kit';
 import script from './voice/ch02.json';
 import speech from './voice/ch02.timing.json';
+import score from './assets/ch02-score.mp3';
+import voice from './assets/ch02-voice.mp3';
 
 export const CH2_SECONDS = 64;
 
@@ -113,7 +115,7 @@ export const Ch2Integral: React.FC = () => {
 
   return (
     <Board>
-      <Soundtrack chapter={2} speech={speech as Speech[]} />
+      <Soundtrack score={score} voice={voice} speech={speech as Speech[]} />
       <svg width="1920" height="1080" style={{position: 'absolute', inset: 0}}>
         <Axes
           b={B}

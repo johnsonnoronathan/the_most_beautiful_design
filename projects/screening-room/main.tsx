@@ -1,9 +1,8 @@
-import './assets-map';
 import './page.css';
 import {Player, PlayerRef, Thumbnail} from '@remotion/player';
 import React, {useEffect, useMemo, useRef, useState} from 'react';
 import {createRoot} from 'react-dom/client';
-import {CATALOG, Category, Project, Video} from '../src/catalog';
+import {CATALOG, Category, Project, Video} from '../../studio/catalog';
 
 type Entry = {cat: Category; project: Project; video: Video; index: number};
 
@@ -249,7 +248,7 @@ const App: React.FC = () => {
                     <h3>{p.title}</h3>
                     <p>{p.blurb}</p>
                     <span className="project-meta">
-                      {p.videos.length} {p.videos.length > 1 ? 'chapters' : 'film'} · {timecode(total, 1)} · src/projects/{c.id}/{p.id}
+                      {p.videos.length} {p.videos.length > 1 ? 'chapters' : 'film'} · {timecode(total, 1)} · projects/{p.id}
                     </span>
                   </div>
                   <ul className="reels">

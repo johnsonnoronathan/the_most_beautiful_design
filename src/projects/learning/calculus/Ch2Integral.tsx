@@ -1,6 +1,5 @@
 import React from 'react';
-import {Audio, Easing} from 'remotion';
-import {asset} from '../../../lib/assets';
+import {Easing} from 'remotion';
 import {MONO, SANS} from '../../../lib/fonts';
 import {
   areaPath,
@@ -13,7 +12,6 @@ import {
   fmt,
   Header,
   lerp,
-  Line,
   Mono,
   Narration,
   Place,
@@ -29,22 +27,13 @@ import {
   TitleCard,
   useT,
 } from './kit';
+import {captions, Soundtrack, Speech, VoiceScript} from './kit';
+import script from './voice/ch02.json';
+import speech from './voice/ch02.timing.json';
 
 export const CH2_SECONDS = 64;
 
-const LINES: Line[] = [
-  [4.8, 9.8, 'Chapter 1 turned distance into speed. Now go the other way: from [[a|speed back to distance]].'],
-  [9.8, 15.0, 'At a steady 3 m/s for 4 s you cover 3 × 4 = 12 m — exactly the [[a|area of this rectangle]].'],
-  [15.0, 19.0, 'But speed usually changes. Here the car speeds up: [[f|$v(t) = t^2$]].'],
-  [19.0, 22.6, 'There is no single speed to multiply by. So chop the time into short slices.'],
-  [22.6, 27.0, 'Within a slice the speed barely changes, so treat it as constant: a thin [[a|rectangle]].'],
-  [27.0, 32.2, 'Each area is speed × time — the distance covered in that slice. Add them all up.'],
-  [32.2, 37.0, 'Thinner slices leave smaller [[f|gaps]] under the curve. The total creeps upward…'],
-  [37.0, 42.0, '…and closes in on one number: $\\tfrac{8}{3}$, about 2.667 metres.'],
-  [42.0, 47.0, 'Take the limit — infinitely many, infinitely thin slices — and the gaps disappear.'],
-  [47.0, 52.5, 'Leibniz wrote that limit with a long S, for sum: $\\int$. And $\\Delta t$ becomes $dt$.'],
-  [52.5, 57.4, 'The integral of speed over time is the distance travelled: [[a|$\\tfrac{8}{3}$ m]].'],
-];
+const LINES = captions(script as VoiceScript);
 
 // Slices double every few seconds; each split grows the new right-hand child up to the curve.
 const LEVELS: [number, number][] = [
@@ -124,7 +113,7 @@ export const Ch2Integral: React.FC = () => {
 
   return (
     <Board>
-      <Audio src={asset('learning/calculus/ch02-score.mp3')} />
+      <Soundtrack chapter={2} speech={speech as Speech[]} />
       <svg width="1920" height="1080" style={{position: 'absolute', inset: 0}}>
         <Axes
           b={B}

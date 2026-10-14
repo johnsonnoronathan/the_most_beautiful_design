@@ -1,6 +1,5 @@
 import React from 'react';
-import {Audio, Easing} from 'remotion';
-import {asset} from '../../../lib/assets';
+import {Easing} from 'remotion';
 import {MONO, SANS} from '../../../lib/fonts';
 import {
   areaPath,
@@ -14,7 +13,6 @@ import {
   fmt,
   Header,
   lerp,
-  Line,
   Mono,
   Narration,
   Place,
@@ -30,6 +28,9 @@ import {
   TitleCard,
   useT,
 } from './kit';
+import {captions, Soundtrack, Speech, VoiceScript} from './kit';
+import script from './voice/ch03.json';
+import speech from './voice/ch03.timing.json';
 
 export const CH3_SECONDS = 70;
 
@@ -38,20 +39,7 @@ const BOT: Box = {left: 180, top: 580, width: 960, height: 250, x0: 0, x1: 2.3, 
 const f = (x: number) => x * x;
 const A = (x: number) => (x * x * x) / 3;
 
-const LINES: Line[] = [
-  [4.8, 9.4, 'Take the curve [[f|$f(t) = t^2$]] again, and shade the area from 0 up to a movable edge, $x$.'],
-  [9.4, 15.0, 'Call that area [[a|$A(x)$]]. Slide the edge right: the area grows, and $A(x)$ traces its own curve.'],
-  [15.0, 20.0, 'The question that ties everything together: [[d|how fast does the area grow]]?'],
-  [20.0, 25.0, 'Nudge the edge right by a tiny $dx$. The area gains a thin [[d|sliver]].'],
-  [25.0, 30.0, 'The sliver is nearly a rectangle: height $f(x)$, width $dx$. So $dA \\approx f(x)\\,dx$.'],
-  [30.0, 35.0, 'Divide by $dx$ and let it shrink. The corner vanishes: $\\frac{dA}{dx} = f(x)$.'],
-  [35.0, 38.2, 'Check: the slope of $A$ at $x = 1.4$ is 1.96 — exactly $f(1.4)$.'],
-  [38.2, 43.4, 'That is the [[w|fundamental theorem]]: the derivative of the accumulated area is the original function.'],
-  [43.4, 48.0, 'Turned around: to find an area, find any $F$ whose derivative is $f$…'],
-  [48.0, 52.2, '…and subtract its values at the two ends. No rectangles required.'],
-  [52.2, 57.4, 'Back to chapter 2: $F(t) = t^3/3$ has derivative $t^2$, so the area is $F(2) - F(0)$.'],
-  [57.4, 63.0, 'Exactly $\\tfrac{8}{3}$ — the number 256 rectangles were creeping toward, now in one line.'],
-];
+const LINES = captions(script as VoiceScript);
 
 const xAt = (t: number) => {
   if (t < 16) return 2 * ramp(t, 9, 16, Easing.inOut(Easing.sin));
@@ -107,7 +95,7 @@ export const Ch3Fundamental: React.FC = () => {
 
   return (
     <Board>
-      <Audio src={asset('learning/calculus/ch03-score.mp3')} />
+      <Soundtrack chapter={3} speech={speech as Speech[]} />
       <svg width="1920" height="1080" style={{position: 'absolute', inset: 0}}>
         <g opacity={dim}>
           <Axes b={TOP} p={axesTop} xTicks={[0.5, 1, 1.5, 2]} yTicks={[1, 2, 3, 4]} xLabel="t" yLabel="f(t)" tickFmt={(n) => (n % 1 === 0 ? String(n) : n.toFixed(1))} />

@@ -1,7 +1,8 @@
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import React, {useId, useMemo} from 'react';
-import {AbsoluteFill, Easing, useCurrentFrame} from 'remotion';
+import {AbsoluteFill, Audio, Easing, useCurrentFrame} from 'remotion';
+import {asset} from '../../../lib/assets';
 import {loadMathFonts, loadStudioFonts, MONO, SANS, SERIF} from '../../../lib/fonts';
 
 loadStudioFonts();
@@ -352,4 +353,31 @@ export const Board: React.FC<{children: React.ReactNode}> = ({children}) => (
   <AbsoluteFill style={{backgroundColor: C.bg, backgroundImage: 'radial-gradient(ellipse at 45% 40%, #161A22 0%, #0E1014 70%)', fontFamily: SANS, color: C.ink}}>
     {children}
   </AbsoluteFill>
+);
+
+// ------------------------------------------------------------------ sound
+
+export type VoiceLine = {from: number; to: number; text?: string; say: string};
+export type VoiceScript = {voice: string; lines: VoiceLine[]};
+export type Speech = {start: number; end: number};
+
+/** Caption windows come from the same script the narrator reads. */
+export const captions = (script: VoiceScript): Line[] =>
+  script.lines.filter((l) => l.text).map((l) => [l.from, l.to, l.text as string]);
+
+/** 0 → 1 while the narrator is speaking, with soft edges. */
+const speaking = (t: number, speech: Speech[]) => {
+  let v = 0;
+  for (const {start, end} of speech) {
+    v = Math.max(v, Math.min(ramp(t, start - 0.3, start, Easing.out(Easing.quad)), 1 - ramp(t, end, end + 0.6, Easing.inOut(Easing.quad))));
+  }
+  return v;
+};
+
+/** Score under the voiceover: the music dips while the narrator speaks. */
+export const Soundtrack: React.FC<{chapter: number; speech: Speech[]}> = ({chapter, speech}) => (
+  <>
+    <Audio src={asset(`learning/calculus/ch0${chapter}-score.mp3`)} volume={(f) => 1 - 0.42 * speaking(f / FPS, speech)} />
+    <Audio src={asset(`learning/calculus/ch0${chapter}-voice.mp3`)} />
+  </>
 );

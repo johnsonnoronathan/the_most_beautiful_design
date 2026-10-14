@@ -42,14 +42,14 @@ src/
   Root.tsx                       Category / Project / Video folders
   lib/                           shared fonts, asset paths and the score synthesizer
   projects/
-    learning/calculus/           kit.tsx (plots, KaTeX, captions), one file per chapter, score/
+    learning/calculus/           kit.tsx (plots, KaTeX, captions, sound), one file per chapter, score/, voice/
     art/afterglow/               engine.ts, Valley.tsx, Afterglow.tsx, score/compose.py
 public/
   shared/fonts/                  Bodoni Moda, Geist, Geist Mono (SIL OFL)
   art/afterglow/                 grain texture and the synthesized score
-  learning/calculus/             one synthesized score per chapter
+  learning/calculus/             per chapter: synthesized score and narration
 preview/                         the Screening Room page and its build script
-scripts/                         stills renderer and a headless smoke test for the page
+scripts/                         stills renderer, page smoke test, TTS setup
 ```
 
 To add a project, put it under `src/projects/<category>/<project>/` and list
@@ -82,6 +82,23 @@ python3 src/projects/learning/calculus/score/compose.py   # → public/learning/
 
 These scores use the small numpy synthesizer in `src/lib/score/synth.py`;
 Afterglow's script keeps its own copy of the same instruments.
+
+### Voiceover
+
+Each chapter is narrated by an offline neural voice (Kokoro-82M, Apache-2.0,
+voice `af_heart`). One script per chapter, `voice/chNN.json`, holds both the
+on-screen caption (with math) and the spoken wording, so subtitles and speech
+stay in step. The narrator script synthesizes each line, places it at its
+caption's start, speeds a line up slightly (at most 15 %) only if it would run
+into the next, and records when speech happens so the music dips under it.
+
+```sh
+scripts/setup-tts.sh    # once: Kokoro model from npm (expo-kokoro), runtime from PyPI, into .cache/
+.cache/tts/venv/bin/python src/projects/learning/calculus/voice/narrate.py   # → public/learning/calculus/ch0N-voice.mp3
+```
+
+A few words are respelled in the spoken text only so the phonemizer says them
+right ("Eigh" for the letter A, "Libenits" for Leibniz).
 
 ## Afterglow score
 

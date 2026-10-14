@@ -1,6 +1,5 @@
 import React from 'react';
-import {Audio, Easing} from 'remotion';
-import {asset} from '../../../lib/assets';
+import {Easing} from 'remotion';
 import {MONO, SANS} from '../../../lib/fonts';
 import {
   Axes,
@@ -12,7 +11,6 @@ import {
   Draw,
   fmt,
   Header,
-  Line,
   lerp,
   mixHex,
   Mono,
@@ -31,24 +29,16 @@ import {
   useT,
   useUid,
 } from './kit';
+import {captions, Soundtrack, Speech, VoiceScript} from './kit';
+import script from './voice/ch01.json';
+import speech from './voice/ch01.timing.json';
 
 export const CH1_SECONDS = 68;
 
 const B: Box = {left: 180, top: 170, width: 960, height: 620, x0: 0, x1: 3.3, y0: 0, y1: 10};
 const s = (t: number) => t * t;
 
-const LINES: Line[] = [
-  [5.0, 9.6, 'A car pulls away from a stop. After $t$ seconds it has travelled [[f|$s(t) = t^2$ metres]].'],
-  [9.6, 15.0, 'Its speed changes every moment. So what does the speedometer read at exactly $t = 1$?'],
-  [15.0, 20.2, 'Average speed is easy: distance covered ÷ time taken — the [[w|slope of this line]].'],
-  [20.2, 25.0, 'From $t = 1$ to $t = 3$ the car covers 8 m in 2 s: an average of 4 m/s.'],
-  [25.0, 31.0, 'Now shrink the interval. Let the second moment, $t = 1 + h$, slide toward the first.'],
-  [31.0, 40.0, 'The slope settles on one number, 2. The line stops cutting the curve and just [[d|touches]] it.'],
-  [40.0, 46.0, 'Algebra agrees. Expand the square, and the stray 1s cancel…'],
-  [46.0, 52.0, '…leaving $2 + h$. As $h$ shrinks to nothing, only 2 is left: [[d|2 m/s at $t = 1$]].'],
-  [52.0, 57.0, 'Do this at every instant and you get a new function: the [[d|derivative]].'],
-  [57.0, 62.8, 'For $s(t) = t^2$, the slope at time $t$ is always [[d|$2t$]] — the speedometer reading.'],
-];
+const LINES = captions(script as VoiceScript);
 
 const ROWS = [1, 0.5, 0.1, 0.01, 0.001];
 
@@ -88,7 +78,7 @@ export const Ch1Derivative: React.FC = () => {
 
   return (
     <Board>
-      <Audio src={asset('learning/calculus/ch01-score.mp3')} />
+      <Soundtrack chapter={1} speech={speech as Speech[]} />
       <svg width="1920" height="1080" style={{position: 'absolute', inset: 0}}>
         <defs>
           <clipPath id={`${uid}-plot`}>

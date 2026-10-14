@@ -3,7 +3,6 @@ import {Config} from '@remotion/cli/config';
 Config.setEntryPoint('src/index.ts');
 Config.setVideoImageFormat('jpeg');
 Config.setJpegQuality(95);
-Config.setCrf(16);
 Config.setOverwriteOutput(true);
 
 // In environments that ship their own Chromium (e.g. cloud sandboxes), point

@@ -624,7 +624,7 @@ export const Ch4Limit: React.FC = () => {
         end={CH4_SECONDS}
         statement={['A limit is where a function is [[f|heading]], not where it is.', 'For every band [[a|$\\varepsilon$]], some window [[d|$\\delta$]] keeps it inside.']}
         tex="\lim_{x \to a} f(x) = L"
-        next="End of series · Calculus, visually"
+        next="Next · Chapter 5 · Sine and cosine"
       />
     </Board>
   );

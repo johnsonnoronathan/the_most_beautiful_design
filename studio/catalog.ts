@@ -4,6 +4,7 @@ import {Ch1Derivative, CH1_SECONDS} from '../projects/calculus-visually/Ch1Deriv
 import {Ch2Integral, CH2_SECONDS} from '../projects/calculus-visually/Ch2Integral';
 import {Ch3Fundamental, CH3_SECONDS} from '../projects/calculus-visually/Ch3Fundamental';
 import {Ch4Limit, CH4_SECONDS} from '../projects/calculus-visually/Ch4Limit';
+import {Ch5SineCosine, CH5_SECONDS} from '../projects/calculus-visually/Ch5SineCosine';
 import afterglowStudies from '../projects/afterglow-studies/pages.json';
 import ma from '../projects/ma/pages.json';
 
@@ -86,7 +87,7 @@ export const CATALOG: Category[] = [
       {
         id: 'calculus-visually',
         title: 'Calculus, visually',
-        blurb: 'Four short chapters: the derivative, the integral, the theorem that joins them, and the limit underneath all three.',
+        blurb: 'Five short chapters: the derivative, the integral, the theorem that joins them, the limit underneath, and the derivatives that go in circles.',
         videos: [
           {
             id: 'Calculus-01-Derivative',
@@ -131,6 +132,17 @@ export const CATALOG: Category[] = [
             width: 1920,
             height: 1080,
             poster: 49 * FPS,
+          },
+          {
+            id: 'Calculus-05-Sine-Cosine',
+            title: 'Sine and cosine',
+            summary: 'Why the slope of sine is cosine: a point on the unit circle, its velocity a quarter turn ahead, and the four-step cycle behind every spring.',
+            component: Ch5SineCosine,
+            durationInFrames: CH5_SECONDS * FPS,
+            fps: FPS,
+            width: 1920,
+            height: 1080,
+            poster: 45 * FPS,
           },
         ],
         pages: [],

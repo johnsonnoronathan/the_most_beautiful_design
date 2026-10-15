@@ -1,8 +1,8 @@
 # Calculus, visually
 
-**Learning · video series · 4 chapters, 4:39**
+**Learning · video series · 5 chapters, 5:59**
 
-A four-chapter tutorial in one visual language: the function is always amber,
+A five-chapter tutorial in one visual language: the function is always amber,
 slopes and derivatives teal, accumulated area coral. In chapter 4 the ε band is
 coral and the δ window teal.
 
@@ -23,13 +23,21 @@ coral and the δ window teal.
    1. The ε–δ challenge (a band around 1, a window around 0, three shrinking
    rounds) makes "approaches" exact, and a jump shows a limit that does not
    exist.
+5. **Sine and cosine** (`Calculus-05-Sine-Cosine`, 1:20). A tangent rides
+   `sin x` and its slopes trace `cos x`; the slope at 0 is chapter 4's limit.
+   Why: a point turning on the unit circle draws the sine wave beside it, its
+   velocity is a unit arrow along the tangent, and the radius triangle turned a
+   quarter turn becomes the velocity triangle, so `(sin)′ = cos`,
+   `(cos)′ = −sin`. A wheel of four (sin → cos → −sin → −cos) turns a quarter
+   per derivative while the wave slides left by π/2; `f″ = −f` is a spring,
+   which then writes its own sine wave.
 
 ## Files
 
 | Path | What it is |
 | --- | --- |
 | `kit.tsx` | Shared toolkit: plots, KaTeX equations, captions, title and recap cards, soundtrack with ducking |
-| `Ch1Derivative.tsx` … `Ch4Limit.tsx` | One composition per chapter |
+| `Ch1Derivative.tsx` … `Ch5SineCosine.tsx` | One composition per chapter |
 | `voice/chNN.json` | Narration script: on-screen caption (with math) and spoken wording per line |
 | `voice/chNN.timing.json` | When speech happens, written by `narrate.py`; the music dips under it |
 | `voice/narrate.py` | Synthesizes the voiceover |
@@ -43,7 +51,8 @@ narration. A shared four-note motif opens every chapter and is answered on its
 closing card; chords change with the scenes; small accents mark the reveals (a
 rising note per table row in chapter 1, per doubling of the rectangles in
 chapter 2, a cascade on the final 8/3 in chapter 3, a note per zoom level and a
-falling step per ε round in chapter 4). Keys: D, F, D, G.
+falling step per ε round in chapter 4, a bell per wheel station and quarter turn
+in chapter 5). Keys: D, F, D, G, A.
 
 ```sh
 python3 projects/calculus-visually/score/compose.py [4]   # → assets/chNN-score.mp3 (all chapters, or the ones named)

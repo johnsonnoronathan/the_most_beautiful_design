@@ -1,4 +1,4 @@
-"""Calculus, visually: background scores for the four chapters.
+"""Calculus, visually: background scores for the five chapters.
 
 Each chapter shares one four-note series motif (heard on the title card and
 answered on the closing "Key idea" card), a soft pad bed whose chords change
@@ -54,10 +54,18 @@ VOICINGS = {
     'Am9': ['A2', 'E3', 'G3', 'B3', 'C4'],
     'D9sus': ['D3', 'A3', 'C4', 'E4', 'G4'],
     'Bm7': ['B2', 'F#3', 'A3', 'D4'],
+    # A major (chapter 5)
+    'Amaj7': ['A2', 'E3', 'G#3', 'C#4'],
+    'Amaj9': ['A2', 'E3', 'G#3', 'B3', 'C#4'],
+    'Aadd9': ['A2', 'E3', 'B3', 'C#4', 'E4'],
+    'F#m9': ['F#2', 'C#3', 'E3', 'G#3', 'A3'],
+    'E9sus': ['E2', 'B2', 'D3', 'F#3', 'A3'],
+    'C#m7': ['C#3', 'G#3', 'B3', 'E4'],
+    'E6': ['E2', 'B2', 'C#3', 'G#3'],
 }
 
-MOTIF = {'D': ['A4', 'D5', 'E5', 'F#5'], 'F': ['C5', 'F5', 'G5', 'A5'], 'G': ['D5', 'G5', 'A5', 'B5']}
-ANSWER = {'D': ['F#5', 'E5', 'D5', 'A4'], 'F': ['A5', 'G5', 'F5', 'C5'], 'G': ['B5', 'A5', 'G5', 'D5']}
+MOTIF = {'D': ['A4', 'D5', 'E5', 'F#5'], 'F': ['C5', 'F5', 'G5', 'A5'], 'G': ['D5', 'G5', 'A5', 'B5'], 'A': ['E5', 'A5', 'B5', 'C#6']}
+ANSWER = {'D': ['F#5', 'E5', 'D5', 'A4'], 'F': ['A5', 'G5', 'F5', 'C5'], 'G': ['B5', 'A5', 'G5', 'D5'], 'A': ['C#6', 'B5', 'A5', 'E5']}
 EIGHTH = 60 / 84 / 2
 
 
@@ -97,6 +105,11 @@ def walk_crossing_times():
 def zoom_times():
     """When chapter 4's zoom (×1 → ×1000 over 24.6–29.4 s) reaches ×10, ×100 and ×1000."""
     return [24.6 + 4.8 * inv_inout_sine(k / 3) for k in (1, 2, 3)]
+
+
+def sweep_times():
+    """When chapter 5's tangent (0 → 2π over 10.4–15.2 s) reaches π/2, π, 3π/2 and 2π."""
+    return [10.4 + 4.8 * inv_inout_sine(e) for e in (0.25, 0.5, 0.75, 1.0)]
 
 
 def score(spec):
@@ -174,6 +187,7 @@ def score(spec):
 ROWS = h_crossing_times()
 WALK = walk_crossing_times()
 ZOOM = zoom_times()
+SWEEP = sweep_times()
 
 CHAPTERS = {
     1: {
@@ -334,10 +348,58 @@ CHAPTERS = {
             (66.4, ['A4'], 'piano', 0.45),
             (68.4, ['F#4'], 'piano', 0.45),
             (69.0, ['E5', 'A5'], 'bell', 0.35),
-            (74.6, ['G4', 'G5'], 'bell', 0.4),   # last word of the series
+            (74.6, ['G4', 'G5'], 'bell', 0.4),
         ],
         'swells': [(29.4, 2.0), (55.8, 1.6)],
         'booms': [(55.8, 'G1')],
+    },
+    5: {
+        'seed': 505,
+        'seconds': 80,
+        'key': 'A',
+        'motif_at': 0.7,
+        'answer_at': 73.5,
+        'chords': [
+            (0.0, 4.8, 'Amaj9', 0.35, 0.9),
+            (4.6, 9.8, 'Amaj7', 0.45, 0.8),      # sin x
+            (9.6, 15.4, 'F#m9', 0.45, 0.8),      # the tangent rides the wave
+            (15.2, 20.0, 'Dmaj9', 0.55, 0.9),    # it is cos x
+            (19.8, 25.4, 'E9sus', 0.5, 0.8),     # chapter 4's limit
+            (25.2, 30.4, 'Aadd9', 0.5, 0.85),    # the circle
+            (30.2, 35.4, 'C#m7', 0.5, 0.8),
+            (35.2, 40.6, 'F#m9', 0.5, 0.8),      # one turn
+            (40.4, 43.8, 'Dmaj7', 0.5, 0.8),
+            (43.6, 46.2, 'Aadd9', 0.6, 0.95),    # the triangle lands
+            (46.0, 51.8, 'Dmaj9', 0.5, 0.85),
+            (51.6, 57.2, 'E9sus', 0.5, 0.8),     # the wheel
+            (57.0, 62.2, 'F#m9', 0.5, 0.8),
+            (62.0, 67.8, 'Dmaj9', 0.55, 0.9),    # f'' = -f
+            (67.6, 73.0, 'E6', 0.5, 0.85),       # the spring
+            (72.8, 80.0, 'Amaj9', 0.4, 1.0),
+        ],
+        'arp': [(5.2, 25.0, 0.28), (27.0, 51.4, 0.28), (52.0, 72.4, 0.27)],
+        'accents': [
+            *[(t, [n], 'bell', 0.3) for t, n in zip(SWEEP, ['C#6', 'E6', 'C#6', 'A5'])],
+            (15.6, ['A5', 'C#6', 'E6'], 'bell', 0.38),
+            (21.0, ['E5'], 'piano', 0.45),
+            (27.2, ['A5'], 'bell', 0.3),
+            (30.6, ['C#5'], 'piano', 0.42),
+            (32.3, ['E5'], 'piano', 0.42),
+            (35.6, ['B5'], 'bell', 0.3),
+            (40.4, ['A5', 'E6'], 'bell', 0.35),
+            (43.6, ['A5', 'C#6', 'E6'], 'bell', 0.4),
+            (46.6, ['A4'], 'piano', 0.45),
+            (49.0, ['C#5'], 'piano', 0.45),
+            # the four stations as they are named, then each quarter turn as it lands
+            *[(t, [n], 'bell', 0.32) for t, n in zip([53.3, 53.9, 54.6, 55.3, 56.5], ['A5', 'C#6', 'E6', 'F#6', 'A6'])],
+            *[(t + 0.8, [n], 'bell', 0.3) for t, n in zip([57.6, 58.8, 60.0, 61.2], ['C#6', 'E6', 'F#6', 'A6'])],
+            (62.0, ['A5', 'C#6', 'E6'], 'bell', 0.36),
+            (68.8, ['E5'], 'piano', 0.4),
+            (71.2, ['E5'], 'piano', 0.4),
+            (77.0, ['A4', 'A5'], 'bell', 0.4),   # last word of the series
+        ],
+        'swells': [(15.6, 1.6), (43.6, 1.6), (63.0, 1.6)],
+        'booms': [(63.0, 'A1')],
     },
 }
 

@@ -167,6 +167,10 @@ what went wrong or cost time, and what to do instead.
 - 2026-10-14 · Check phonemes for single letters and names before synthesizing:
   "A" alone is read as "uh" (spell it "Eigh"), "Leibniz" as "Laybniz" (spell it
   "Libenits").
+- 2026-10-15 · Spoken lists ("sine, cosine, minus sine, …") run slow: each comma
+  is a pause. Give a list line ~1 s more slot, borrowing from neighbours with slack.
+- 2026-10-15 · To time a reveal to a spoken word, find word groups in
+  `out/calculus-0N-voice.wav` from gaps (> 70 ms) in a 10 ms RMS envelope.
 
 ### Process
 

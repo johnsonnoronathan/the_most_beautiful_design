@@ -9,7 +9,7 @@ loadMathFonts();
 
 export const FPS = 30;
 export const SERIES = 'Calculus, visually';
-export const CHAPTERS = 4;
+export const CHAPTERS = 5;
 
 // Ink on a near-black board. Each mathematical object keeps one colour all series long:
 // the function is amber, slopes/derivatives are teal, accumulated area is coral.

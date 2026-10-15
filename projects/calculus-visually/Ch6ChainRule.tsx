@@ -517,7 +517,7 @@ export const Ch6ChainRule: React.FC = () => {
         end={CH6_SECONDS}
         statement={['A function inside a function: the rates [[w|multiply]].', 'The [[a|outer slope]], at the inner value, times the [[d|inner slope]].']}
         tex="\frac{d}{dx}\,f(g(x)) = f'(g(x))\,g'(x)"
-        next="End of series · Calculus, visually"
+        next="Next · Chapter 7 · The product rule"
       />
     </Board>
   );

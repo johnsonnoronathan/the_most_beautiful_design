@@ -129,8 +129,11 @@ what went wrong or cost time, and what to do instead.
   1-5-10 ladder. With 1-2-5, labels of two step sizes interleave (−0.6 −0.5 −0.4).
 - 2026-10-14 · `Mono` labels are uppercase, which turns δ into Δ (a different
   symbol). Wrap Greek letters in a span with `textTransform: 'none'`.
-- 2026-10-15 · A converging readout must show the limit's digits at its final step:
-  at dx = 0.0002 the chain rule read 1.080 beside the graph's 1.081. Check it numerically.
+- 2026-10-15 · A converging readout must show the limit's digits at its final step.
+  It bit chapters 6 and 7 (1.080 vs 1.081, 2.224 vs 2.223): compute the final value in
+  Python before rendering, and shrink further if the digits differ.
+- 2026-10-15 · Slabs on every visible face of an isometric box hide the box itself.
+  Float them just off the faces (exploded view) so the box and the missing edges show.
 
 ### Pages and artifacts
 

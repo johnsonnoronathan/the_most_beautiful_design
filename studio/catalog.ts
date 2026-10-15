@@ -6,6 +6,7 @@ import {Ch3Fundamental, CH3_SECONDS} from '../projects/calculus-visually/Ch3Fund
 import {Ch4Limit, CH4_SECONDS} from '../projects/calculus-visually/Ch4Limit';
 import {Ch5SineCosine, CH5_SECONDS} from '../projects/calculus-visually/Ch5SineCosine';
 import {Ch6ChainRule, CH6_SECONDS} from '../projects/calculus-visually/Ch6ChainRule';
+import {Ch7ProductRule, CH7_SECONDS} from '../projects/calculus-visually/Ch7ProductRule';
 import afterglowStudies from '../projects/afterglow-studies/pages.json';
 import ma from '../projects/ma/pages.json';
 
@@ -88,7 +89,7 @@ export const CATALOG: Category[] = [
       {
         id: 'calculus-visually',
         title: 'Calculus, visually',
-        blurb: 'Six short chapters: the derivative, the integral, the theorem that joins them, the limit underneath, the derivatives that go in circles, and the chain rule.',
+        blurb: 'Seven short chapters: the derivative, the integral, the theorem that joins them, the limit underneath, the derivatives that go in circles, the chain rule and the product rule.',
         videos: [
           {
             id: 'Calculus-01-Derivative',
@@ -155,6 +156,17 @@ export const CATALOG: Category[] = [
             width: 1920,
             height: 1080,
             poster: 45 * FPS,
+          },
+          {
+            id: 'Calculus-07-Product-Rule',
+            title: 'The product rule',
+            summary: 'Why (fg)′ is not f′g′: a rectangle of sides f and g grows two strips and a corner, and only the corner vanishes.',
+            component: Ch7ProductRule,
+            durationInFrames: CH7_SECONDS * FPS,
+            fps: FPS,
+            width: 1920,
+            height: 1080,
+            poster: 41 * FPS,
           },
         ],
         pages: [],

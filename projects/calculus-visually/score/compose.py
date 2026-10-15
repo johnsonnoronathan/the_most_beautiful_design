@@ -1,4 +1,4 @@
-"""Calculus, visually: background scores for the six chapters.
+"""Calculus, visually: background scores for the seven chapters.
 
 Each chapter shares one four-note series motif (heard on the title card and
 answered on the closing "Key idea" card), a soft pad bed whose chords change
@@ -68,10 +68,14 @@ VOICINGS = {
     'Ebmaj9': ['Eb2', 'Bb2', 'D3', 'F3', 'G3'],
     'Cm9': ['C3', 'G3', 'Bb3', 'D4', 'Eb4'],
     'F9sus': ['F2', 'C3', 'Eb3', 'G3', 'Bb3'],
+    # C major (chapter 7)
+    'Cadd9': ['C3', 'G3', 'D4', 'E4', 'G4'],
+    'G9sus': ['G2', 'D3', 'F3', 'A3', 'C4'],
+    'Em7': ['E2', 'B2', 'D3', 'G3'],
 }
 
-MOTIF = {'D': ['A4', 'D5', 'E5', 'F#5'], 'F': ['C5', 'F5', 'G5', 'A5'], 'G': ['D5', 'G5', 'A5', 'B5'], 'A': ['E5', 'A5', 'B5', 'C#6'], 'Bb': ['F5', 'Bb5', 'C6', 'D6']}
-ANSWER = {'D': ['F#5', 'E5', 'D5', 'A4'], 'F': ['A5', 'G5', 'F5', 'C5'], 'G': ['B5', 'A5', 'G5', 'D5'], 'A': ['C#6', 'B5', 'A5', 'E5'], 'Bb': ['D6', 'C6', 'Bb5', 'F5']}
+MOTIF = {'D': ['A4', 'D5', 'E5', 'F#5'], 'F': ['C5', 'F5', 'G5', 'A5'], 'G': ['D5', 'G5', 'A5', 'B5'], 'A': ['E5', 'A5', 'B5', 'C#6'], 'Bb': ['F5', 'Bb5', 'C6', 'D6'], 'C': ['G4', 'C5', 'D5', 'E5']}
+ANSWER = {'D': ['F#5', 'E5', 'D5', 'A4'], 'F': ['A5', 'G5', 'F5', 'C5'], 'G': ['B5', 'A5', 'G5', 'D5'], 'A': ['C#6', 'B5', 'A5', 'E5'], 'Bb': ['D6', 'C6', 'Bb5', 'F5'], 'C': ['E5', 'D5', 'C5', 'G4']}
 EIGHTH = 60 / 84 / 2
 
 
@@ -452,10 +456,62 @@ CHAPTERS = {
             (55.4, ['D6'], 'bell', 0.32),
             (71.6, ['F5'], 'piano', 0.45),
             (72.4, ['Bb5', 'D6'], 'bell', 0.38),
-            (79.4, ['Bb4', 'Bb5'], 'bell', 0.4),   # last word of the series
+            (79.4, ['Bb4', 'Bb5'], 'bell', 0.4),
         ],
         'swells': [(42.4, 1.8), (65.0, 1.6)],
         'booms': [(42.4, 'Bb0')],
+    },
+    7: {
+        'seed': 707,
+        'seconds': 81,
+        'key': 'C',
+        'motif_at': 0.7,
+        'answer_at': 74.9,
+        'chords': [
+            (0.0, 4.8, 'Cmaj9', 0.35, 0.9),
+            (4.6, 10.2, 'Cmaj7', 0.45, 0.8),     # x² sin x
+            (10.0, 15.8, 'Am9', 0.45, 0.8),      # the tempting guess
+            (15.6, 20.8, 'Fmaj9', 0.5, 0.8),
+            (20.6, 26.0, 'Cmaj9', 0.5, 0.85),    # the rectangle
+            (25.8, 31.4, 'Em7', 0.45, 0.8),      # the nudge
+            (31.2, 36.8, 'Fmaj7', 0.5, 0.8),     # the side strip
+            (36.6, 42.0, 'Dm9', 0.5, 0.8),       # the top strip and the corner
+            (41.8, 47.4, 'G9sus', 0.5, 0.85),    # the corner vanishes
+            (47.2, 52.8, 'Cadd9', 0.6, 1.0),     # the product rule
+            (52.6, 58.2, 'Fmaj9', 0.5, 0.85),
+            (58.0, 63.6, 'Am9', 0.5, 0.8),       # check on the graph
+            (63.4, 69.0, 'Dm9', 0.5, 0.8),
+            (68.8, 74.8, 'Fmaj9', 0.55, 0.9),    # three slabs
+            (74.6, 81.0, 'Cmaj9', 0.4, 1.0),
+        ],
+        'arp': [(5.2, 20.4, 0.28), (21.0, 47.0, 0.28), (52.6, 74.0, 0.27)],
+        'accents': [
+            (8.0, ['E5'], 'piano', 0.42),
+            (12.5, ['G4'], 'piano', 0.42),
+            (14.3, ['C6'], 'bell', 0.32),
+            (14.9, ['F4'], 'piano', 0.4),
+            (21.9, ['C5'], 'piano', 0.42),
+            (22.8, ['E5'], 'piano', 0.42),
+            (24.0, ['G5'], 'bell', 0.32),
+            (27.3, ['E6'], 'bell', 0.3),
+            (28.6, ['G6'], 'bell', 0.3),
+            (33.6, ['C5'], 'piano', 0.45),
+            (36.9, ['E5'], 'piano', 0.45),
+            (39.0, ['G6'], 'bell', 0.24),
+            (43.3, ['D6'], 'bell', 0.3),
+            (46.4, ['C6'], 'bell', 0.3),
+            (47.6, ['C5', 'E5', 'G5'], 'bell', 0.4),
+            (54.2, ['G4'], 'piano', 0.45),
+            (55.2, ['C5'], 'piano', 0.45),
+            (60.9, ['E6'], 'bell', 0.32),
+            (67.5, ['F4'], 'piano', 0.4),
+            (70.1, ['C6'], 'bell', 0.3),
+            (70.5, ['E6'], 'bell', 0.3),
+            (70.9, ['G6'], 'bell', 0.3),
+            (78.5, ['C4', 'C5'], 'bell', 0.4),   # last word of the series
+        ],
+        'swells': [(47.6, 1.8)],
+        'booms': [(47.6, 'C1')],
     },
 }
 

@@ -1,8 +1,8 @@
 # Calculus, visually
 
-**Learning · video series · 6 chapters, 7:21**
+**Learning · video series · 7 chapters, 8:42**
 
-A six-chapter tutorial in one visual language: the function is always amber,
+A seven-chapter tutorial in one visual language: the function is always amber,
 slopes and derivatives teal, accumulated area coral. In chapter 4 the ε band is
 coral and the δ window teal.
 
@@ -38,13 +38,20 @@ coral and the δ window teal.
    on 2 and cos 1, which multiply. The graph confirms the slope 1.081 at x = 1,
    then `h′ = cos(x²)·2x` swings inside its ±2x envelope, and the du's cancel
    in Leibniz's notation.
+7. **The product rule** (`Calculus-07-Product-Rule`, 1:21). For `x² sin x`, the
+   tempting guess "multiply the slopes" (1.08) misses the tangent (2.22). Drawn
+   as a rectangle of sides `f = x²` (amber) and `g = sin x` (teal), a nudge
+   adds a side strip `g df`, a top strip `f dg` and a corner `df dg`. Per unit
+   of dx, the strips settle on 1.683 and 0.540 while the corner goes to 0, which
+   leaves `(fg)′ = f′g + fg′`. The two pieces sum to the true slope across the
+   graph, and an exploded box shows three slabs for `(fgk)′`.
 
 ## Files
 
 | Path | What it is |
 | --- | --- |
 | `kit.tsx` | Shared toolkit: plots, KaTeX equations, captions, title and recap cards, soundtrack with ducking |
-| `Ch1Derivative.tsx` … `Ch6ChainRule.tsx` | One composition per chapter |
+| `Ch1Derivative.tsx` … `Ch7ProductRule.tsx` | One composition per chapter |
 | `voice/chNN.json` | Narration script: on-screen caption (with math) and spoken wording per line |
 | `voice/chNN.timing.json` | When speech happens, written by `narrate.py`; the music dips under it |
 | `voice/narrate.py` | Synthesizes the voiceover |
@@ -59,8 +66,8 @@ closing card; chords change with the scenes; small accents mark the reveals (a
 rising note per table row in chapter 1, per doubling of the rectangles in
 chapter 2, a cascade on the final 8/3 in chapter 3, a note per zoom level and a
 falling step per ε round in chapter 4, a bell per wheel station and quarter turn
-in chapter 5, a bell per number line and stretch in chapter 6). Keys: D, F, D, G,
-A, B♭.
+in chapter 5, a bell per number line and stretch in chapter 6, a rising bell per
+slab in chapter 7). Keys: D, F, D, G, A, B♭, C.
 
 ```sh
 python3 projects/calculus-visually/score/compose.py [4]   # → assets/chNN-score.mp3 (all chapters, or the ones named)

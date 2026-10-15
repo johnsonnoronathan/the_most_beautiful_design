@@ -25,6 +25,7 @@ import {
   sx,
   sy,
   Tex,
+  ticksFor,
   TitleCard,
   useT,
   useUid,
@@ -72,40 +73,8 @@ const boxOf = (v: View): Box => {
 };
 
 // ------------------------------------------------------------------ a grid that zooms
-// Ticks come from a nested 1-5-10 ladder (every step divides the next, so labels of two
-// sizes never interleave). Each step fades in as its spacing on screen grows, so lines
-// and labels arrive smoothly instead of popping as the camera moves.
-
-type Tick = {v: number; line: number; label: number};
-
-const ticksFor = (a: number, z: number, px: number) => {
-  const range = z - a;
-  const lo = Math.floor(Math.log10(range)) - 3;
-  const ticks = new Map<string, Tick>();
-  let labelStep = Infinity;
-  for (let k = lo; k <= lo + 5; k++) {
-    for (const m of [1, 5]) {
-      const step = m * 10 ** k;
-      const spacing = (step / range) * px;
-      const line = clamp01((spacing - 50) / 50);
-      if (line <= 0) continue;
-      const label = clamp01((spacing - 85) / 45);
-      if (label > 0) labelStep = Math.min(labelStep, step);
-      for (let i = Math.ceil(a / step); i * step <= z; i++) {
-        const v = i * step;
-        const key = v.toPrecision(9);
-        const prev = ticks.get(key);
-        ticks.set(key, {v, line: Math.max(line, prev?.line ?? 0), label: Math.max(label, prev?.label ?? 0)});
-      }
-    }
-  }
-  const dec = Math.max(0, -Math.floor(Math.log10(labelStep) + 1e-9));
-  const text = (v: number) => {
-    const s = String(Number(v.toFixed(dec)));
-    return s.startsWith('-') ? `−${s.slice(1)}` : s;
-  };
-  return {ticks: [...ticks.values()], text};
-};
+// Ticks fade in and out by on-screen spacing (ticksFor, in the kit), so lines and labels
+// arrive smoothly instead of popping as the camera moves.
 
 const Grid: React.FC<{b: Box; p: number}> = ({b, p}) => {
   const xs = ticksFor(b.x0, b.x1, b.width);

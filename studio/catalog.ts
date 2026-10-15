@@ -5,6 +5,7 @@ import {Ch2Integral, CH2_SECONDS} from '../projects/calculus-visually/Ch2Integra
 import {Ch3Fundamental, CH3_SECONDS} from '../projects/calculus-visually/Ch3Fundamental';
 import {Ch4Limit, CH4_SECONDS} from '../projects/calculus-visually/Ch4Limit';
 import {Ch5SineCosine, CH5_SECONDS} from '../projects/calculus-visually/Ch5SineCosine';
+import {Ch6ChainRule, CH6_SECONDS} from '../projects/calculus-visually/Ch6ChainRule';
 import afterglowStudies from '../projects/afterglow-studies/pages.json';
 import ma from '../projects/ma/pages.json';
 
@@ -87,7 +88,7 @@ export const CATALOG: Category[] = [
       {
         id: 'calculus-visually',
         title: 'Calculus, visually',
-        blurb: 'Five short chapters: the derivative, the integral, the theorem that joins them, the limit underneath, and the derivatives that go in circles.',
+        blurb: 'Six short chapters: the derivative, the integral, the theorem that joins them, the limit underneath, the derivatives that go in circles, and the chain rule.',
         videos: [
           {
             id: 'Calculus-01-Derivative',
@@ -139,6 +140,17 @@ export const CATALOG: Category[] = [
             summary: 'Why the slope of sine is cosine: a point on the unit circle, its velocity a quarter turn ahead, and the four-step cycle behind every spring.',
             component: Ch5SineCosine,
             durationInFrames: CH5_SECONDS * FPS,
+            fps: FPS,
+            width: 1920,
+            height: 1080,
+            poster: 45 * FPS,
+          },
+          {
+            id: 'Calculus-06-Chain-Rule',
+            title: 'The chain rule',
+            summary: 'Why rates multiply: a nudge stretched by one function, then rescaled by the next, on three number lines that zoom in together.',
+            component: Ch6ChainRule,
+            durationInFrames: CH6_SECONDS * FPS,
             fps: FPS,
             width: 1920,
             height: 1080,

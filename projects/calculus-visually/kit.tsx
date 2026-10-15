@@ -9,7 +9,7 @@ loadMathFonts();
 
 export const FPS = 30;
 export const SERIES = 'Calculus, visually';
-export const CHAPTERS = 5;
+export const CHAPTERS = 6;
 
 // Ink on a near-black board. Each mathematical object keeps one colour all series long:
 // the function is amber, slopes/derivatives are teal, accumulated area is coral.
@@ -201,6 +201,40 @@ export const Axes: React.FC<{
       ) : null}
     </g>
   );
+};
+
+// Ticks for an axis that zooms: a nested 1-5-10 ladder (every step divides the next, so
+// labels of two sizes never interleave). Each step fades in as its spacing on screen grows.
+
+export type ZoomTick = {v: number; line: number; label: number};
+
+export const ticksFor = (a: number, z: number, px: number) => {
+  const range = z - a;
+  const lo = Math.floor(Math.log10(range)) - 3;
+  const ticks = new Map<string, ZoomTick>();
+  let labelStep = Infinity;
+  for (let k = lo; k <= lo + 5; k++) {
+    for (const m of [1, 5]) {
+      const step = m * 10 ** k;
+      const spacing = (step / range) * px;
+      const line = clamp01((spacing - 50) / 50);
+      if (line <= 0) continue;
+      const label = clamp01((spacing - 85) / 45);
+      if (label > 0) labelStep = Math.min(labelStep, step);
+      for (let i = Math.ceil(a / step); i * step <= z; i++) {
+        const v = i * step;
+        const key = v.toPrecision(9);
+        const prev = ticks.get(key);
+        ticks.set(key, {v, line: Math.max(line, prev?.line ?? 0), label: Math.max(label, prev?.label ?? 0)});
+      }
+    }
+  }
+  const dec = Math.max(0, -Math.floor(Math.log10(labelStep) + 1e-9));
+  const text = (v: number) => {
+    const s = String(Number(v.toFixed(dec)));
+    return s.startsWith('-') ? `−${s.slice(1)}` : s;
+  };
+  return {ticks: [...ticks.values()], text};
 };
 
 /** A stroke that draws itself as p goes 0 → 1. */

@@ -6,7 +6,7 @@ project, with everything it needs inside it.
 
 | Project | Folder | Category | Kind |
 | --- | --- | --- | --- |
-| **Calculus, visually** | [`projects/calculus-visually`](projects/calculus-visually/) | Learning | Video series, 5 chapters (5:59), narrated and scored |
+| **Calculus, visually** | [`projects/calculus-visually`](projects/calculus-visually/) | Learning | Video series, 6 chapters (7:21), narrated and scored |
 | **Afterglow** | [`projects/afterglow`](projects/afterglow/) | Art | Film (0:48) with an original score |
 | **Screening Room** | [`projects/screening-room`](projects/screening-room/) | Page | Every project live, shelved by category: videos play, designs work on the stage |
 | **Afterglow Studies** | [`projects/afterglow-studies`](projects/afterglow-studies/) | Design | Pages: poster, interactive day of light, four-hours series |

@@ -129,6 +129,8 @@ what went wrong or cost time, and what to do instead.
   1-5-10 ladder. With 1-2-5, labels of two step sizes interleave (−0.6 −0.5 −0.4).
 - 2026-10-14 · `Mono` labels are uppercase, which turns δ into Δ (a different
   symbol). Wrap Greek letters in a span with `textTransform: 'none'`.
+- 2026-10-15 · A converging readout must show the limit's digits at its final step:
+  at dx = 0.0002 the chain rule read 1.080 beside the graph's 1.081. Check it numerically.
 
 ### Pages and artifacts
 
@@ -178,6 +180,8 @@ what went wrong or cost time, and what to do instead.
   `git status` before every commit.
 - 2026-10-14 · When reorganising, use `git mv` so history follows the files, and
   re-run typecheck, stills, an audio render and the page checks afterwards.
+- 2026-10-15 · A `sed` on `poster: 35 * FPS` in `catalog.ts` also changed chapter 2.
+  Anchor catalog edits to the entry's `id`, and read `git diff` before committing.
 
 ## Keeping this file useful
 

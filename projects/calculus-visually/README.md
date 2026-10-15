@@ -1,8 +1,8 @@
 # Calculus, visually
 
-**Learning · video series · 5 chapters, 5:59**
+**Learning · video series · 6 chapters, 7:21**
 
-A five-chapter tutorial in one visual language: the function is always amber,
+A six-chapter tutorial in one visual language: the function is always amber,
 slopes and derivatives teal, accumulated area coral. In chapter 4 the ε band is
 coral and the δ window teal.
 
@@ -31,13 +31,20 @@ coral and the δ window teal.
    `(cos)′ = −sin`. A wheel of four (sin → cos → −sin → −cos) turns a quarter
    per derivative while the wave slides left by π/2; `f″ = −f` is a spring,
    which then writes its own sine wave.
+6. **The chain rule** (`Calculus-06-Chain-Rule`, 1:22). `sin(x²)` is one
+   function inside another (square, then sine). On three number lines, x, u
+   and y, a nudge `dx` fans out to `du` (teal), then `dy` (coral); as it
+   shrinks ten-thousandfold the lines zoom in with it and the stretches settle
+   on 2 and cos 1, which multiply. The graph confirms the slope 1.081 at x = 1,
+   then `h′ = cos(x²)·2x` swings inside its ±2x envelope, and the du's cancel
+   in Leibniz's notation.
 
 ## Files
 
 | Path | What it is |
 | --- | --- |
 | `kit.tsx` | Shared toolkit: plots, KaTeX equations, captions, title and recap cards, soundtrack with ducking |
-| `Ch1Derivative.tsx` … `Ch5SineCosine.tsx` | One composition per chapter |
+| `Ch1Derivative.tsx` … `Ch6ChainRule.tsx` | One composition per chapter |
 | `voice/chNN.json` | Narration script: on-screen caption (with math) and spoken wording per line |
 | `voice/chNN.timing.json` | When speech happens, written by `narrate.py`; the music dips under it |
 | `voice/narrate.py` | Synthesizes the voiceover |
@@ -52,7 +59,8 @@ closing card; chords change with the scenes; small accents mark the reveals (a
 rising note per table row in chapter 1, per doubling of the rectangles in
 chapter 2, a cascade on the final 8/3 in chapter 3, a note per zoom level and a
 falling step per ε round in chapter 4, a bell per wheel station and quarter turn
-in chapter 5). Keys: D, F, D, G, A.
+in chapter 5, a bell per number line and stretch in chapter 6). Keys: D, F, D, G,
+A, B♭.
 
 ```sh
 python3 projects/calculus-visually/score/compose.py [4]   # → assets/chNN-score.mp3 (all chapters, or the ones named)

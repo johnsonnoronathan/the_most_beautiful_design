@@ -1,4 +1,4 @@
-"""Calculus, visually: background scores for the five chapters.
+"""Calculus, visually: background scores for the six chapters.
 
 Each chapter shares one four-note series motif (heard on the title card and
 answered on the closing "Key idea" card), a soft pad bed whose chords change
@@ -62,10 +62,16 @@ VOICINGS = {
     'E9sus': ['E2', 'B2', 'D3', 'F#3', 'A3'],
     'C#m7': ['C#3', 'G#3', 'B3', 'E4'],
     'E6': ['E2', 'B2', 'C#3', 'G#3'],
+    # B-flat major (chapter 6)
+    'Bbadd9': ['Bb2', 'F3', 'C4', 'D4', 'F4'],
+    'Ebmaj7': ['Eb3', 'Bb3', 'D4', 'G4'],
+    'Ebmaj9': ['Eb2', 'Bb2', 'D3', 'F3', 'G3'],
+    'Cm9': ['C3', 'G3', 'Bb3', 'D4', 'Eb4'],
+    'F9sus': ['F2', 'C3', 'Eb3', 'G3', 'Bb3'],
 }
 
-MOTIF = {'D': ['A4', 'D5', 'E5', 'F#5'], 'F': ['C5', 'F5', 'G5', 'A5'], 'G': ['D5', 'G5', 'A5', 'B5'], 'A': ['E5', 'A5', 'B5', 'C#6']}
-ANSWER = {'D': ['F#5', 'E5', 'D5', 'A4'], 'F': ['A5', 'G5', 'F5', 'C5'], 'G': ['B5', 'A5', 'G5', 'D5'], 'A': ['C#6', 'B5', 'A5', 'E5']}
+MOTIF = {'D': ['A4', 'D5', 'E5', 'F#5'], 'F': ['C5', 'F5', 'G5', 'A5'], 'G': ['D5', 'G5', 'A5', 'B5'], 'A': ['E5', 'A5', 'B5', 'C#6'], 'Bb': ['F5', 'Bb5', 'C6', 'D6']}
+ANSWER = {'D': ['F#5', 'E5', 'D5', 'A4'], 'F': ['A5', 'G5', 'F5', 'C5'], 'G': ['B5', 'A5', 'G5', 'D5'], 'A': ['C#6', 'B5', 'A5', 'E5'], 'Bb': ['D6', 'C6', 'Bb5', 'F5']}
 EIGHTH = 60 / 84 / 2
 
 
@@ -396,10 +402,60 @@ CHAPTERS = {
             (62.0, ['A5', 'C#6', 'E6'], 'bell', 0.36),
             (68.8, ['E5'], 'piano', 0.4),
             (71.2, ['E5'], 'piano', 0.4),
-            (77.0, ['A4', 'A5'], 'bell', 0.4),   # last word of the series
+            (77.0, ['A4', 'A5'], 'bell', 0.4),
         ],
         'swells': [(15.6, 1.6), (43.6, 1.6), (63.0, 1.6)],
         'booms': [(63.0, 'A1')],
+    },
+    6: {
+        'seed': 606,
+        'seconds': 82,
+        'key': 'Bb',
+        'motif_at': 0.7,
+        'answer_at': 75.7,
+        'chords': [
+            (0.0, 4.8, 'Bbmaj9', 0.35, 0.9),
+            (4.6, 10.2, 'Bbmaj7', 0.45, 0.8),    # the chirp
+            (10.0, 15.4, 'Gm9', 0.45, 0.8),      # the pipeline
+            (15.2, 20.6, 'Ebmaj9', 0.5, 0.8),    # each piece's slope
+            (20.4, 25.8, 'Cm9', 0.45, 0.8),      # three number lines
+            (25.6, 31.2, 'Bbmaj7', 0.5, 0.8),    # the nudge
+            (31.0, 36.6, 'Gm9', 0.5, 0.8),
+            (36.4, 39.6, 'Ebmaj7', 0.5, 0.8),    # shrink and zoom
+            (39.4, 42.2, 'F9sus', 0.55, 0.85),   # 2, then cos 1
+            (42.0, 47.8, 'Bbadd9', 0.6, 1.0),    # the chain rule
+            (47.6, 53.2, 'Ebmaj9', 0.5, 0.85),
+            (53.0, 58.6, 'Gm9', 0.5, 0.8),       # check on the graph
+            (58.4, 64.2, 'Cm9', 0.5, 0.8),
+            (64.0, 69.6, 'F9sus', 0.5, 0.85),    # the envelope
+            (69.4, 75.6, 'Ebmaj9', 0.5, 0.85),   # the du's cancel
+            (75.4, 82.0, 'Bbmaj9', 0.4, 1.0),
+        ],
+        'arp': [(5.2, 20.4, 0.28), (21.0, 42.0, 0.28), (47.6, 69.0, 0.27)],
+        'accents': [
+            (12.2, ['D5'], 'piano', 0.45),
+            (13.4, ['F5'], 'piano', 0.45),
+            (13.9, ['Bb5'], 'bell', 0.32),
+            (15.6, ['D6'], 'bell', 0.3),
+            (16.4, ['F6'], 'bell', 0.3),
+            (22.4, ['Bb4'], 'piano', 0.42),
+            (23.05, ['D5'], 'piano', 0.42),
+            (23.7, ['F5'], 'piano', 0.42),
+            (26.4, ['Bb5'], 'bell', 0.3),
+            (27.8, ['D6'], 'bell', 0.3),
+            (31.5, ['F6'], 'bell', 0.3),
+            (39.5, ['C6'], 'bell', 0.34),
+            (40.0, ['F6'], 'bell', 0.34),
+            (42.4, ['Bb5', 'D6', 'F6'], 'bell', 0.42),
+            (50.4, ['G4'], 'piano', 0.45),
+            (51.8, ['Bb4'], 'piano', 0.45),
+            (55.4, ['D6'], 'bell', 0.32),
+            (71.6, ['F5'], 'piano', 0.45),
+            (72.4, ['Bb5', 'D6'], 'bell', 0.38),
+            (79.4, ['Bb4', 'Bb5'], 'bell', 0.4),   # last word of the series
+        ],
+        'swells': [(42.4, 1.8), (65.0, 1.6)],
+        'booms': [(42.4, 'Bb0')],
     },
 }
 

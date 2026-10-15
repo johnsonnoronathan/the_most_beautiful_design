@@ -1,0 +1,20 @@
+{
+  "voice": "af_heart",
+  "lines": [
+    {"from": 0.6, "to": 4.4, "say": "Chapter six: the chain rule."},
+    {"from": 4.8, "to": 10.0, "text": "Here is [[f|$\\sin(x^2)$]], a wave that keeps speeding up. What is its [[d|slope]]?", "say": "Here's sine of x squared, a wave that keeps speeding up. What's its slope?"},
+    {"from": 10.0, "to": 15.2, "text": "It is one function inside another: square first, then take the sine.", "say": "It's one function inside another: square first, then take the sine."},
+    {"from": 15.2, "to": 20.4, "text": "We know each piece's slope: [[d|$(x^2)' = 2x$]] and [[a|$(\\sin u)' = \\cos u$]]. How do they combine?", "say": "We know each piece's slope already. The question is how they combine."},
+    {"from": 20.4, "to": 25.6, "text": "Give each stage its own number line: $x$, then $u = x^2$, then $y = \\sin u$.", "say": "Give each stage its own number line: x, then u, then y."},
+    {"from": 25.6, "to": 31.0, "text": "Nudge $x$ by a little $dx$. Squaring stretches the nudge: [[d|$du \\approx 2x\\,dx$]].", "say": "Nudge x by a little d x. Squaring stretches the nudge by about two x."},
+    {"from": 31.0, "to": 36.4, "text": "Then sine rescales it again, by its own slope: [[a|$dy \\approx \\cos u\\,du$]].", "say": "Then sine rescales it again, by its own slope, cosine u."},
+    {"from": 36.4, "to": 42.0, "text": "Shrink the nudge, and each stretch settles on a number: [[d|2]], then [[a|$\\cos 1 \\approx 0.54$]].", "say": "Shrink the nudge, and each stretch settles on a number: two, then cosine of one."},
+    {"from": 42.0, "to": 47.6, "text": "Stretches in a row [[w|multiply]]. That is the chain rule.", "say": "Stretches in a row multiply. That's the chain rule."},
+    {"from": 47.6, "to": 53.0, "text": "Each factor is a slope at its own stage: [[a|$\\cos(x^2)$]] times [[d|$2x$]].", "say": "Each factor is a slope at its own stage: cosine of x squared, times two x."},
+    {"from": 53.0, "to": 58.4, "text": "Check it on the graph: at $x = 1$ the tangent's slope is $2\\cos 1 \\approx 1.08$.", "say": "Check it on the graph: at one, the tangent's slope is about one point oh eight."},
+    {"from": 58.4, "to": 64.0, "text": "Slide along. The outer factor, [[a|$\\cos(x^2)$]], swings between $-1$ and $1$…", "say": "Slide along. The outer factor, cosine, swings between minus one and one,"},
+    {"from": 64.0, "to": 69.4, "text": "…while the inner factor, [[d|$2x$]], sets the envelope, growing as the wave speeds up.", "say": "while two x, the inner factor, sets the envelope, growing as the wave speeds up."},
+    {"from": 69.4, "to": 74.8, "text": "In Leibniz's notation the $du$'s seem to cancel: not real fractions, but a faithful reminder.", "say": "In Libenits's notation, the d u's seem to cancel. Not real fractions, but a good reminder."},
+    {"from": 75.6, "to": 81.6, "say": "The chain rule: the outer slope, at the inner value, times the inner slope."}
+  ]
+}

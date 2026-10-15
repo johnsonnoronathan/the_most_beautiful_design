@@ -551,7 +551,7 @@ export const Ch5SineCosine: React.FC = () => {
         end={CH5_SECONDS}
         statement={["Sine's slope is [[d|cosine]]. Cosine's slope is [[a|minus sine]].", 'Each derivative turns the circle a [[w|quarter turn]].']}
         tex="\frac{d}{dx}\sin x = \cos x \qquad \frac{d}{dx}\cos x = -\sin x"
-        next="End of series · Calculus, visually"
+        next="Next · Chapter 6 · The chain rule"
       />
     </Board>
   );

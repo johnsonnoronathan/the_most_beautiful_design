@@ -82,6 +82,9 @@ a file is actually wanted.
   Screening Room (videos and designs) https://claude.ai/artifact/KwRAsKmAEMQq8MqyFmesB1 ·
   design pages https://claude.ai/artifact/Ljwwi9GLwWSp35FjGYJsVZ.
 - Wants learning content (the Calculus series) with the same level of polish.
+- 2026-10-17 · Stopped the Calculus series at seven chapters (chapter 8, the quotient
+  rule, was dropped after its narration draft) and asked for PR #1 to be merged, to
+  start on "something better". Ask before extending the series again.
 - Branch `claude/happy-wozniak-73ik3t`, PR
   [#1](https://github.com/johnsonnoronathan/the_most_beautiful_design/pull/1).
   Commit with clear messages and push when a piece of work is finished.

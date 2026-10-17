@@ -1,0 +1,33 @@
+{
+  "name": "afterglow-film",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Afterglow \u2014 a generative valley, one day of light, rendered with Remotion.",
+  "scripts": {
+    "studio": "remotion studio",
+    "screening-room": "node projects/screening-room/build.mjs",
+    "render": "remotion render",
+    "render:afterglow": "remotion render Afterglow out/afterglow.mp4",
+    "render:calculus-visually": "remotion render Calculus-01-Derivative out/calculus-01.mp4 && remotion render Calculus-02-Integral out/calculus-02.mp4 && remotion render Calculus-03-Fundamental-Theorem out/calculus-03.mp4",
+    "stills": "node scripts/stills.mjs",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.535",
+    "@remotion/player": "4.0.535",
+    "katex": "0.16.22",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "remotion": "4.0.535"
+  },
+  "devDependencies": {
+    "@remotion/bundler": "4.0.535",
+    "@remotion/renderer": "4.0.535",
+    "@types/katex": "0.16.7",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
+    "esbuild": "0.25.10",
+    "playwright-core": "1.56.1",
+    "typescript": "5.8.3"
+  }
+}

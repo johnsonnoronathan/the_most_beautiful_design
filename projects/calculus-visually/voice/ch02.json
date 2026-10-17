@@ -1,0 +1,18 @@
+{
+  "voice": "af_heart",
+  "lines": [
+    {"from": 0.6, "to": 4.4, "say": "Chapter two: the integral."},
+    {"from": 4.8, "to": 9.8, "text": "Chapter 1 turned distance into speed. Now go the other way: [[a|from speed to distance]].", "say": "Chapter one turned distance into speed. Now, let's go the other way."},
+    {"from": 9.8, "to": 15.0, "text": "3 m/s for 4 s is 3 × 4 = 12 m: the [[a|area of this rectangle]].", "say": "Three metres per second, for four seconds, is twelve metres: the area of this rectangle."},
+    {"from": 15.0, "to": 19.0, "text": "But here the speed changes: [[f|$v(t) = t^2$]].", "say": "But here, the speed changes: v of t is t squared."},
+    {"from": 19.0, "to": 22.6, "text": "No single speed to multiply by. So slice up the time.", "say": "No single speed to multiply by. So slice up the time."},
+    {"from": 22.6, "to": 27.0, "text": "In a thin slice, speed barely changes. Treat it as a [[a|rectangle]].", "say": "In a thin slice, speed barely changes. Treat it as a rectangle."},
+    {"from": 27.0, "to": 32.2, "text": "Each is speed × time: the distance covered in that slice. Add them all up.", "say": "Each one is speed times time: the distance covered in that slice. Add them all up."},
+    {"from": 32.2, "to": 37.0, "text": "Thinner slices leave smaller [[f|gaps]] under the curve. The total creeps upward…", "say": "Thinner slices leave smaller gaps under the curve. The total creeps upward,"},
+    {"from": 37.0, "to": 42.0, "text": "…and closes in on one number: $\\tfrac{8}{3}$, about 2.667 metres.", "say": "and closes in on one number: eight thirds. About two point six seven metres."},
+    {"from": 42.0, "to": 47.0, "text": "Take the limit, infinitely many, infinitely thin slices, and the gaps disappear.", "say": "Take the limit, infinitely many, infinitely thin slices, and the gaps disappear."},
+    {"from": 47.0, "to": 52.5, "text": "Leibniz wrote that limit with a long S, for sum: $\\int$. And $\\Delta t$ becomes $dt$.", "say": "Libenits wrote that limit with a long S, for sum. And delta t becomes d t."},
+    {"from": 52.5, "to": 57.4, "text": "The integral of speed over time is the distance travelled: [[a|$\\tfrac{8}{3}$ m]].", "say": "The integral of speed over time is the distance travelled: eight thirds of a metre."},
+    {"from": 58.3, "to": 63.4, "say": "The integral adds up infinitely many, infinitely thin slices."}
+  ]
+}

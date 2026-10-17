@@ -1,0 +1,19 @@
+{
+  "voice": "af_heart",
+  "lines": [
+    {"from": 0.6, "to": 4.4, "say": "Chapter three: the fundamental theorem."},
+    {"from": 4.8, "to": 9.4, "text": "Take [[f|$f(t) = t^2$]] again, and shade the area up to a moving edge, $x$.", "say": "Take t squared again, and shade the area up to a moving edge, x."},
+    {"from": 9.4, "to": 15.0, "text": "Call that area [[a|$A(x)$]]. Slide the edge right, and $A(x)$ traces its own curve.", "say": "Call that area, Eigh of x. Slide the edge right, and Eigh of x traces its own curve."},
+    {"from": 15.0, "to": 20.0, "text": "The question that ties it all together: [[d|how fast does the area grow]]?", "say": "Here's the question that ties it all together: how fast does the area grow?"},
+    {"from": 20.0, "to": 25.0, "text": "Nudge the edge right by a tiny $dx$. The area gains a thin [[d|sliver]].", "say": "Nudge the edge right, by a tiny d x. The area gains a thin sliver."},
+    {"from": 25.0, "to": 30.0, "text": "The sliver is nearly a rectangle: height $f(x)$, width $dx$. So $dA \\approx f(x)\\,dx$.", "say": "The sliver is nearly a rectangle: height f of x, width d x."},
+    {"from": 30.0, "to": 35.0, "text": "Divide by $dx$ and let it shrink: $\\frac{dA}{dx} = f(x)$.", "say": "Divide by d x, and let it shrink: d Eigh by d x is f of x."},
+    {"from": 35.0, "to": 38.2, "text": "Check: the slope of $A$ at $x = 1.4$ is 1.96, exactly $f(1.4)$.", "say": "Check: the slope here is one point nine six."},
+    {"from": 38.2, "to": 43.4, "text": "That is the [[w|fundamental theorem]]: the derivative of the accumulated area is the original function.", "say": "That's the fundamental theorem: the derivative of the area is the original function."},
+    {"from": 43.4, "to": 48.0, "text": "Turned around: to find an area, find any $F$ whose derivative is $f$…", "say": "Turned around: to find an area, find any F whose derivative is f,"},
+    {"from": 48.0, "to": 52.2, "text": "…and subtract its values at the two ends. No rectangles required.", "say": "and subtract its values at the two ends. No rectangles required."},
+    {"from": 52.2, "to": 57.4, "text": "Back to chapter 2: $t^3/3$ has derivative $t^2$, so the area is $F(2) - F(0)$.", "say": "Back to chapter two. t cubed over three has derivative t squared."},
+    {"from": 57.4, "to": 63.0, "text": "Exactly $\\tfrac{8}{3}$: the number 256 rectangles were creeping toward, now in one line.", "say": "Exactly eight thirds: the number our rectangles crept toward, now in one line."},
+    {"from": 63.9, "to": 69.2, "say": "Derivatives measure change. Integrals add it up. Each one undoes the other."}
+  ]
+}

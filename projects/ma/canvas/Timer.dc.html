@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ma — Timer</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#E4572E}a:hover{color:#F2F1EC}
+button{font-family:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; box-sizing: border-box; padding: 20px 24px 28px; display: flex; flex-direction: column; background: #11151B; color: #F2F1EC; font-family: 'Hanken Grotesk', sans-serif">
+
+<div style="display: flex; justify-content: space-between; align-items: center; height: 44px">
+<span style="font-size: 22px; font-weight: 400; letter-spacing: -0.01em">Ma <span style="font-weight: 200; color: #A3A6A8">間</span></span>
+<button aria-label="Settings" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 22px; background: transparent; color: #A3A6A8">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"></line><line x1="4" y1="17" x2="20" y2="17"></line><circle cx="9" cy="7" r="2.2" fill="#11151B"></circle><circle cx="15" cy="17" r="2.2" fill="#11151B"></circle></svg>
+</button>
+</div>
+
+<div style="position: relative; width: 280px; height: 280px; align-self: center; margin-top: 52px">
+<svg width="280" height="280" viewBox="0 0 280 280" role="img" aria-label="{{ringLabel}}">
+<circle cx="140" cy="140" r="130" fill="none" stroke="rgba(242,241,236,0.12)" stroke-width="2"></circle>
+<circle cx="140" cy="140" r="130" fill="none" stroke="{{sun}}" stroke-width="3" stroke-linecap="round" stroke-dasharray="816.81" stroke-dashoffset="{{offset}}" transform="rotate(-90 140 140)" style="transition: stroke-dashoffset 1s linear"></circle>
+</svg>
+<div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px">
+<span style="font-size: 76px; font-weight: 200; letter-spacing: -0.03em; line-height: 1; font-variant-numeric: tabular-nums">{{clock}}</span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #A3A6A8">{{status}}</span>
+</div>
+</div>
+
+<div style="display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 44px; text-align: center">
+<span style="font-size: 26px; font-weight: 300; letter-spacing: -0.01em">Sit. Do nothing.</span>
+<span style="font-size: 16px; font-weight: 300; color: #A3A6A8">Let the minutes be empty.</span>
+</div>
+
+<div style="flex-grow: 1"></div>
+
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #A3A6A8">Duration</span>
+<div style="display: flex; gap: 10px">
+<sc-for list="{{durations}}" as="d" hint-placeholder-count="3">
+<sc-if value="{{d.selected}}" hint-placeholder-val="{{ false }}">
+<button onClick="{{d.pick}}" aria-pressed="true" style="flex: 1 1 0; height: 48px; border: 1px solid #F2F1EC; border-radius: 24px; background: #F2F1EC; color: #11151B; font-size: 16px; font-weight: 500">{{d.label}}</button>
+</sc-if>
+<sc-if value="{{d.idle}}" hint-placeholder-val="{{ true }}">
+<button onClick="{{d.pick}}" aria-pressed="false" style="flex: 1 1 0; height: 48px; border: 1px solid rgba(242,241,236,0.28); border-radius: 24px; background: transparent; color: #F2F1EC; font-size: 16px; font-weight: 400">{{d.label}}</button>
+</sc-if>
+</sc-for>
+</div>
+</div>
+
+<button onClick="{{toggle}}" style="margin-top: 20px; height: 56px; border: 0; border-radius: 28px; background: {{sun}}; color: #11151B; font-size: 17px; font-weight: 500; letter-spacing: 0.01em">{{primary}}</button>
+<button onClick="{{reset}}" style="margin-top: 6px; height: 44px; border: 0; background: transparent; color: #A3A6A8; font-size: 15px; font-weight: 400">Reset</button>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"sun":{"editor":"color","default":"#E4572E","options":["#E4572E","#F2B134","#D9D8D2","#7FA7C9"]},"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  s() {
+    return Object.assign({ minutes: 10, left: 600, running: false }, this.state || {});
+  }
+
+  componentDidMount() {
+    this.timer = setInterval(() => {
+      const s = this.s();
+      if (!s.running) return;
+      const left = Math.max(0, s.left - 1);
+      this.setState({ left, running: left > 0 });
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
+  }
+
+  renderVals() {
+    const s = this.s();
+    const total = s.minutes * 60;
+    const C = 816.81;
+    const done = total > 0 ? 1 - s.left / total : 0;
+    const mm = Math.floor(s.left / 60);
+    const ss = String(s.left % 60).padStart(2, '0');
+    const started = s.left < total;
+    let primary = 'Begin';
+    if (s.running) primary = 'Pause';
+    else if (s.left === 0) primary = 'Again';
+    else if (started) primary = 'Resume';
+    let status = 'remaining';
+    if (s.running) status = 'breathe';
+    else if (s.left === 0) status = 'well done';
+    else if (started) status = 'paused';
+
+    return {
+      sun: this.props.sun ?? '#E4572E',
+      clock: mm + ':' + ss,
+      status,
+      primary,
+      offset: (C * (1 - done)).toFixed(2),
+      ringLabel: mm + ' minutes ' + ss + ' seconds remaining',
+      durations: [5, 10, 20].map((m) => ({
+        label: m + ' min',
+        selected: s.minutes === m,
+        idle: s.minutes !== m,
+        pick: () => this.setState({ minutes: m, left: m * 60, running: false })
+      })),
+      toggle: () => {
+        const cur = this.s();
+        if (cur.left === 0) this.setState({ left: cur.minutes * 60, running: true });
+        else this.setState({ running: !cur.running });
+      },
+      reset: () => {
+        const cur = this.s();
+        this.setState({ left: cur.minutes * 60, running: false });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

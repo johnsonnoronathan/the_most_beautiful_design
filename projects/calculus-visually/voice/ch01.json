@@ -1,0 +1,17 @@
+{
+  "voice": "af_heart",
+  "lines": [
+    {"from": 0.6, "to": 4.4, "say": "Calculus, visually. Chapter one: the derivative."},
+    {"from": 5.0, "to": 9.6, "text": "A car pulls away. After $t$ seconds it has gone [[f|$t^2$ metres]].", "say": "A car pulls away. After t seconds, it's gone t squared metres."},
+    {"from": 9.6, "to": 15.0, "text": "Its speed keeps changing. What does the speedometer say at exactly $t = 1$?", "say": "Its speed keeps changing. What does the speedometer say at exactly one second?"},
+    {"from": 15.0, "to": 20.2, "text": "Average speed is easy: distance ÷ time, the [[w|slope of this line]].", "say": "Average speed is easy: distance over time. The slope of this line."},
+    {"from": 20.2, "to": 25.0, "text": "From $t = 1$ to $t = 3$: 8 m in 2 s, an average of 4 m/s.", "say": "From one second to three: eight metres in two seconds. Four metres per second."},
+    {"from": 25.0, "to": 31.0, "text": "Now shrink the interval. Let the second moment, $t = 1 + h$, slide toward the first.", "say": "Now shrink the interval. Let the second moment, one plus h, slide toward the first."},
+    {"from": 31.0, "to": 40.0, "text": "The slope settles on one number, 2. The line stops cutting the curve and just [[d|touches]] it.", "say": "The slope settles on a single number: two. The line stops cutting through the curve, and just touches it."},
+    {"from": 40.0, "to": 46.0, "text": "The algebra agrees. Expand the square, and the 1s cancel…", "say": "The algebra agrees. Expand the square, and the ones cancel."},
+    {"from": 46.0, "to": 52.0, "text": "…leaving $2 + h$. As $h$ shrinks to nothing, only 2 is left: [[d|2 m/s at $t = 1$]].", "say": "That leaves two plus h. As h shrinks to nothing, only two is left. Two metres per second."},
+    {"from": 52.0, "to": 57.0, "text": "Do this at every instant and you get a new function: the [[d|derivative]].", "say": "Do this at every instant, and you get a new function: the derivative."},
+    {"from": 57.0, "to": 62.8, "text": "For $s(t) = t^2$, the slope at time $t$ is always [[d|$2t$]]. That is the speedometer reading.", "say": "For t squared, the slope at time t is always two t. That's the speedometer reading."},
+    {"from": 63.8, "to": 67.6, "say": "The derivative: rise over run, as the run shrinks to zero."}
+  ]
+}

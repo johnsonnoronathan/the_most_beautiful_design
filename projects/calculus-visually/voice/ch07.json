@@ -1,0 +1,20 @@
+{
+  "voice": "af_heart",
+  "lines": [
+    {"from": 0.6, "to": 4.4, "say": "Chapter seven: the product rule."},
+    {"from": 4.8, "to": 10.0, "text": "Here is [[a|$x^2\\sin x$]]: two functions, multiplied. What is its slope?", "say": "Here's x squared times sine x: two functions, multiplied. What's its slope?"},
+    {"from": 10.0, "to": 15.8, "text": "A tempting guess: multiply the slopes, $2x\\cos x$. The tangent says [[w|no]].", "say": "A tempting guess: multiply the slopes, two x cosine x. The tangent says no."},
+    {"from": 15.8, "to": 20.6, "text": "To find the real rule, draw the product as what it is: an [[a|area]].", "say": "To find the real rule, draw the product as what it is: an area."},
+    {"from": 20.6, "to": 25.8, "text": "A rectangle, width [[f|$f = x^2$]] and height [[d|$g = \\sin x$]]. Its area is [[a|$fg$]].", "say": "A rectangle, width x squared and height sine x. Its area is the product."},
+    {"from": 25.8, "to": 31.2, "text": "Nudge $x$: the width grows by [[f|$df$]], the height by [[d|$dg$]].", "say": "Nudge x. The width grows by d f, and the height by d g."},
+    {"from": 31.2, "to": 36.6, "text": "The new area comes in three pieces: a strip on the side, [[f|$g\\,df$]]…", "say": "The new area comes in three pieces: a strip on the side, g d f,"},
+    {"from": 36.6, "to": 41.8, "text": "…a strip on top, [[d|$f\\,dg$]], and a tiny corner, [[w|$df\\,dg$]].", "say": "a strip on top, f d g, and a tiny corner, d f d g."},
+    {"from": 41.8, "to": 47.2, "text": "Shrink the nudge: per unit of $dx$, the strips settle, but the corner [[w|vanishes]].", "say": "Shrink the nudge. Measured per d x, the strips settle, but the corner vanishes."},
+    {"from": 47.2, "to": 52.6, "text": "What's left is the [[w|product rule]]: each factor's change, times the other factor.", "say": "What's left is the product rule: each factor's change, times the other factor."},
+    {"from": 52.6, "to": 58.0, "text": "Per unit of $x$: $(fg)' =$ [[f|$f'g$]] $+$ [[d|$fg'$]].", "say": "Per unit of x: f prime g, plus f g prime."},
+    {"from": 58.0, "to": 63.4, "text": "Here: [[f|$2x\\sin x$]] $+$ [[d|$x^2\\cos x$]]. At $x = 1$ that is 2.22, exactly the tangent's slope.", "say": "At x equals one, that's two point two two, exactly the tangent's slope."},
+    {"from": 63.4, "to": 68.8, "text": "Sweep along: the two pieces add up to the true slope everywhere. The guess never does.", "say": "Sweep along: the two pieces add up to the true slope everywhere. The guess never does."},
+    {"from": 68.8, "to": 74.2, "text": "Three factors? A box grows three slabs: $(fgk)' = $ [[f|$f'gk$]] $+$ [[d|$fg'k$]] $+$ [[a|$fgk'$]].", "say": "Three factors? A box grows three slabs, one for each factor's change."},
+    {"from": 74.8, "to": 80.6, "say": "The product rule: the first one's change times the second, plus the first times the second's change."}
+  ]
+}

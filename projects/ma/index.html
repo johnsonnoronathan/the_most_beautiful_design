@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ma 間</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@200;300;400;500&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Noto+Serif+JP:wght@300;400&amp;display=swap">
+<link rel="stylesheet" href="frame.css">
+<style>
+  .intro { max-width: 1180px; margin: 0 auto; padding: clamp(32px, 6vw, 72px) clamp(16px, 4vw, 48px) 32px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; }
+  .intro h1 { margin: 0; font-size: clamp(96px, 16vw, 200px); font-weight: 200; letter-spacing: -0.05em; line-height: 0.8; }
+  .intro .kanji { font-family: 'Noto Serif JP', serif; font-weight: 300; font-size: 28px; letter-spacing: 0.5em; writing-mode: vertical-rl; color: var(--muted); }
+  .intro p { grid-column: 1 / -1; margin: 0; max-width: 58ch; font-size: 19px; font-weight: 300; line-height: 1.55; color: #d9d8d2; }
+  .works { max-width: 1180px; margin: 0 auto; padding: 8px clamp(16px, 4vw, 48px) 72px; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+  .work { display: flex; flex-direction: column; gap: 12px; color: var(--text); text-decoration: none; }
+  .frame { position: relative; height: 340px; border-radius: 4px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px var(--line); transition: box-shadow 160ms ease; }
+  .frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .work:hover .frame, .work:focus-visible .frame { box-shadow: 0 0 0 2px var(--text); }
+  .work:focus-visible { outline: none; }
+  .meta { display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .name { font-size: 20px; font-weight: 400; }
+  .desc { margin: 0; font-size: 15px; font-weight: 300; line-height: 1.5; color: var(--muted); }
+  .note { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px) 48px; font-size: 13px; color: var(--muted); }
+  @media (max-width: 560px) { .intro { grid-template-columns: minmax(0, 1fr); } .intro .kanji { display: none; } }
+</style>
+</head>
+<body>
+<header class="intro">
+  <h1>Ma</h1>
+  <span class="kanji" lang="ja">間の美しさ</span>
+  <p>A first study in restraint. Ma is the Japanese idea of the interval: the pause between notes, the space between pillars. One accent, light type, and a lot of room.</p>
+</header>
+<ul class="works">
+  <li>
+    <a class="work" href="poster.html">
+      <span class="frame"><iframe src="poster.html#embed" title="Preview: Ma poster" loading="lazy" tabindex="-1"></iframe></span>
+      <span class="meta"><span>No. 01 · Poster</span><span>1080 × 1350</span></span>
+      <span class="name">A study in empty space</span>
+      <p class="desc">A setting sun cut by the horizon, its reflection breaking into bars on dark water.</p>
+    </a>
+  </li>
+  <li>
+    <a class="work" href="timer.html">
+      <span class="frame"><iframe src="timer.html#embed" title="Preview: Ma timer app" loading="lazy" tabindex="-1"></iframe></span>
+      <span class="meta"><span>App · working</span><span>390 × 844</span></span>
+      <span class="name">A timer for doing nothing</span>
+      <p class="desc">Pick 5, 10 or 20 minutes; a thin ring of sun fills as the time passes.</p>
+    </a>
+  </li>
+  <li>
+    <a class="work" href="principles.html">
+      <span class="frame"><iframe src="principles.html#embed" title="Preview: Ma principles" loading="lazy" tabindex="-1"></iframe></span>
+      <span class="meta"><span>Sheet</span><span>1280 × 1340</span></span>
+      <span class="name">Beauty is mostly what you leave out</span>
+      <p class="desc">Six principles, the palette and the typefaces behind the series.</p>
+    </a>
+  </li>
+</ul>
+<p class="note">Every page has the sun-colour swatches from the original design canvas. Source: <code>canvas/*.dc.html</code>.</p>
+</body>
+</html>

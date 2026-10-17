@@ -1,0 +1,9 @@
+{
+  "title": "Afterglow Studies",
+  "blurb": "Design studies for the Afterglow film: one generated valley, drawn from code and lit by the hour. The poster and the series grow a new valley from a seed.",
+  "pages": [
+    {"file": "poster.html", "title": "Afterglow", "kicker": "Study No. 02 · Poster", "kind": "Poster", "summary": "The minutes after sunset, with the real stages of twilight on the side. Step through valleys with − and +.", "width": 1080, "height": 1350},
+    {"file": "day-of-light.html", "title": "A day of light", "kicker": "Interactive", "kind": "Interactive", "summary": "Play or scrub 24 hours over the valley: sun, moon, stars and ten lighting moods.", "width": 1440, "height": 900},
+    {"file": "four-hours.html", "title": "One valley, four hours", "kicker": "Study No. 03 · Series", "kind": "Series", "summary": "First light, noon, golden hour and blue hour. Nothing moves but the light.", "width": 2200, "height": 1080}
+  ]
+}

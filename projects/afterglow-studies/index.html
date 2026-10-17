@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Afterglow Studies</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&amp;family=Geist:wght@200;300;400;500&amp;family=Geist+Mono:wght@400&amp;display=swap">
+<link rel="stylesheet" href="frame.css">
+<style>
+  .intro { max-width: 1180px; margin: 0 auto; padding: clamp(32px, 6vw, 72px) clamp(16px, 4vw, 48px) 32px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px 48px; align-items: end; }
+  .intro h1 { margin: 0; font-family: 'Bodoni Moda', serif; font-style: italic; font-weight: 400; font-size: clamp(64px, 11vw, 150px); letter-spacing: -0.03em; line-height: 0.95; }
+  .intro .kicker { font-family: var(--mono); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); align-self: start; }
+  .intro p { grid-column: 1 / -1; margin: 0; max-width: 58ch; font-size: 19px; font-weight: 300; line-height: 1.55; color: #d9d8d2; }
+  .works { max-width: 1180px; margin: 0 auto; padding: 8px clamp(16px, 4vw, 48px) 72px; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
+  .work { display: flex; flex-direction: column; gap: 12px; color: var(--text); text-decoration: none; }
+  .frame { position: relative; height: 340px; border-radius: 4px; overflow: hidden; background: #000; box-shadow: 0 0 0 1px var(--line); transition: box-shadow 160ms ease; }
+  .frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+  .work:hover .frame, .work:focus-visible .frame { box-shadow: 0 0 0 2px var(--text); }
+  .work:focus-visible { outline: none; }
+  .meta { display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .name { font-size: 20px; font-weight: 400; }
+  .desc { margin: 0; font-size: 15px; font-weight: 300; line-height: 1.5; color: var(--muted); }
+  .note { max-width: 1180px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 48px) 48px; font-size: 13px; color: var(--muted); }
+  @media (max-width: 560px) { .intro { grid-template-columns: minmax(0, 1fr); } }
+</style>
+</head>
+<body>
+<header class="intro">
+  <h1>Afterglow Studies</h1>
+  <span class="kicker">One valley · eighteen ridgelines</span>
+  <p>Design studies for the Afterglow film: one generated mountain valley, drawn from code and lit by the hour. Every page can grow a new valley from a seed.</p>
+</header>
+<ul class="works">
+  <li>
+    <a class="work" href="poster.html">
+      <span class="frame"><iframe src="poster.html#embed" title="Preview: Afterglow poster" loading="lazy" tabindex="-1"></iframe></span>
+      <span class="meta"><span>Study No. 02 · Poster</span><span>1080 × 1350</span></span>
+      <span class="name">Afterglow</span>
+      <p class="desc">The minutes after sunset, with the real stages of twilight on the side.</p>
+    </a>
+  </li>
+  <li>
+    <a class="work" href="day-of-light.html">
+      <span class="frame"><iframe src="day-of-light.html#embed" title="Preview: a day of light" loading="lazy" tabindex="-1"></iframe></span>
+      <span class="meta"><span>Interactive</span><span>1440 × 900</span></span>
+      <span class="name">A day of light</span>
+      <p class="desc">Scrub or play 24 hours over the valley: sun, moon, stars and ten lighting moods.</p>
+    </a>
+  </li>
+  <li>
+    <a class="work" href="four-hours.html">
+      <span class="frame"><iframe src="four-hours.html#embed" title="Preview: one valley, four hours" loading="lazy" tabindex="-1"></iframe></span>
+      <span class="meta"><span>Study No. 03 · Series</span><span>2200 × 1080</span></span>
+      <span class="name">One valley, four hours</span>
+      <p class="desc">First light, noon, golden hour and blue hour. Nothing moves but the light.</p>
+    </a>
+  </li>
+</ul>
+<p class="note">The film itself is in <code>projects/afterglow</code>. Source of these pages: <code>canvas/*.dc.html</code>.</p>
+</body>
+</html>

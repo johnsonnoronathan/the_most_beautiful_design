@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>One valley, four hours</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&amp;family=Geist:wght@200;300;400;500&amp;family=Geist+Mono:wght@400&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#FFCB8E}a:hover{color:#FFF1E2}
+</style>
+</helmet>
+<div style="width: 2200px; height: 1080px; box-sizing: border-box; padding: 80px; display: flex; flex-direction: column; gap: 56px; background: #0B0A12; color: #F4ECE4; font-family: 'Geist', sans-serif">
+
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 64px">
+<div style="display: flex; flex-direction: column; gap: 14px">
+<span style="font-family: 'Geist Mono', monospace; font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: #A79FA8">Study No. 03 — Series</span>
+<h1 style="margin: 0; font-family: 'Bodoni Moda', serif; font-style: italic; font-weight: 400; font-size: 76px; line-height: 1; letter-spacing: -0.025em; color: #F8EEE4">One valley, four hours.</h1>
+</div>
+<p style="margin: 0; max-width: 400px; font-size: 18px; font-weight: 300; line-height: 1.55; color: #BDB4BC">The same eighteen ridgelines, generated once and lit four times. Nothing moves but the light.</p>
+</div>
+
+<div style="display: flex; gap: 40px">
+<sc-for list="{{cards}}" as="c" hint-placeholder-count="4">
+<figure style="margin: 0; width: 480px; display: flex; flex-direction: column; gap: 20px">
+<svg width="480" height="640" viewBox="0 0 480 640" role="img" aria-label="{{c.alt}}" style="display: block; border-radius: 3px">
+<defs>
+<linearGradient id="{{c.skyId}}" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="{{c.skyTop}}"></stop>
+<stop offset="0.5" stop-color="{{c.skyMid}}"></stop>
+<stop offset="0.82" stop-color="{{c.skyLow}}"></stop>
+<stop offset="1" stop-color="{{c.horizon}}"></stop>
+</linearGradient>
+<radialGradient id="{{c.glowId}}" cx="0.5" cy="0.5" r="0.5">
+<stop offset="0" stop-color="{{c.sun}}" stop-opacity="0.85"></stop>
+<stop offset="0.3" stop-color="{{c.sun}}" stop-opacity="0.3"></stop>
+<stop offset="1" stop-color="{{c.sun}}" stop-opacity="0"></stop>
+</radialGradient>
+<linearGradient id="{{c.mistId}}" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0" stop-color="{{c.horizon}}" stop-opacity="0"></stop>
+<stop offset="0.5" stop-color="{{c.horizon}}" stop-opacity="0.26"></stop>
+<stop offset="1" stop-color="{{c.horizon}}" stop-opacity="0"></stop>
+</linearGradient>
+</defs>
+<rect x="0" y="0" width="480" height="440" fill="url(#{{c.skyId}})"></rect>
+<path d="{{c.stars}}" fill="#FFF4E4" opacity="{{c.starO}}"></path>
+<circle cx="{{c.moonX}}" cy="{{c.moonY}}" r="9" fill="#F4EEE2" opacity="{{c.moonO}}"></circle>
+<circle cx="{{c.sunX}}" cy="{{c.sunY}}" r="340" fill="url(#{{c.glowId}})" opacity="{{c.glowO}}"></circle>
+<circle cx="{{c.sunX}}" cy="{{c.sunY}}" r="20" fill="{{c.sun}}"></circle>
+<path d="{{c.r0.d}}" fill="{{c.r0.fill}}"></path>
+<path d="{{c.r1.d}}" fill="{{c.r1.fill}}"></path>
+<path d="{{c.r2.d}}" fill="{{c.r2.fill}}"></path>
+<rect x="0" y="{{c.m2}}" width="480" height="50" fill="url(#{{c.mistId}})"></rect>
+<path d="{{c.r3.d}}" fill="{{c.r3.fill}}"></path>
+<path d="{{c.r4.d}}" fill="{{c.r4.fill}}"></path>
+<path d="{{c.r5.d}}" fill="{{c.r5.fill}}"></path>
+<rect x="0" y="{{c.m5}}" width="480" height="50" fill="url(#{{c.mistId}})"></rect>
+<path d="{{c.r6.d}}" fill="{{c.r6.fill}}"></path>
+<path d="{{c.r7.d}}" fill="{{c.r7.fill}}"></path>
+<path d="{{c.r8.d}}" fill="{{c.r8.fill}}"></path>
+<rect x="0" y="{{c.m8}}" width="480" height="50" fill="url(#{{c.mistId}})" opacity="0.7"></rect>
+<path d="{{c.r9.d}}" fill="{{c.r9.fill}}"></path>
+<path d="{{c.r10.d}}" fill="{{c.r10.fill}}"></path>
+<path d="{{c.r11.d}}" fill="{{c.r11.fill}}"></path>
+<path d="{{c.r12.d}}" fill="{{c.r12.fill}}"></path>
+<path d="{{c.r13.d}}" fill="{{c.r13.fill}}"></path>
+<path d="{{c.r14.d}}" fill="{{c.r14.fill}}"></path>
+<path d="{{c.r15.d}}" fill="{{c.r15.fill}}"></path>
+<path d="{{c.r16.d}}" fill="{{c.r16.fill}}"></path>
+<path d="{{c.r17.d}}" fill="{{c.r17.fill}}"></path>
+</svg>
+<figcaption style="display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding-top: 4px; border-top: 1px solid #2A2633">
+<span style="font-family: 'Bodoni Moda', serif; font-style: italic; font-size: 32px; line-height: 1.2; color: #F8EEE4">{{c.name}}</span>
+<span style="font-family: 'Geist Mono', monospace; font-size: 13px; letter-spacing: 0.08em; color: #A79FA8">{{c.clock}}</span>
+</figcaption>
+</figure>
+</sc-for>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"seed":{"editor":"int","default":7,"min":1,"max":999,"section":"Landscape"},"$preview":{"width":2200,"height":1080}}'>
+class Component extends DCLogic {
+  rng(seed) {
+    let a = seed | 0;
+    return function () {
+      a = (a + 0x6D2B79F5) | 0;
+      let t = Math.imul(a ^ (a >>> 15), 1 | a);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+
+  hex(h) {
+    const n = parseInt(h.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  }
+
+  mix(a, b, t) {
+    const A = this.hex(a), B = this.hex(b);
+    return '#' + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, '0')).join('');
+  }
+
+  ridges(seed, W, H, horizon, floor) {
+    const rnd = this.rng(seed);
+    const k = (floor - horizon) / 440;
+    const n = 18, step = 4, out = [];
+    for (let i = 0; i < n; i++) {
+      const t = i / (n - 1);
+      const base = horizon + 6 + Math.pow(t, 1.7) * (floor - horizon);
+      const amp = (36 - 26 * t + 150 * Math.pow(t, 1.25)) * k;
+      const w = [];
+      for (let j = 0; j < 5; j++) w.push({ f: ((0.0035 + rnd() * 0.004) * Math.pow(1.95, j)) / k, p: rnd() * 6.2832, a: Math.pow(0.5, j) });
+      const rp = rnd() * 6.2832;
+      let d = 'M0,' + H;
+      for (let x = 0; x <= W + step; x += step) {
+        let v = 0;
+        for (const q of w) v += q.a * Math.sin(x * q.f + q.p);
+        v = v * 0.75 + (1 - Math.abs(Math.sin(x * w[0].f * 0.8 + rp))) * 0.6;
+        d += 'L' + x + ',' + (base - amp * (v + 1) * 0.5).toFixed(1);
+      }
+      d += 'L' + (W + step) + ',' + H + 'Z';
+      out.push({ d, t, base });
+    }
+    return out;
+  }
+
+  stars(seed, W, maxY, count) {
+    const rnd = this.rng(seed * 31 + 7);
+    let g = '';
+    for (let i = 0; i < count; i++) {
+      const x = rnd() * W;
+      const y = Math.pow(rnd(), 1.5) * maxY;
+      const r = 0.3 + Math.pow(rnd(), 3) * 1.2;
+      const rs = r.toFixed(2), d = (2 * r).toFixed(2);
+      g += 'M' + (x - r).toFixed(1) + ',' + y.toFixed(1) + 'a' + rs + ',' + rs + ' 0 1,0 ' + d + ',0a' + rs + ',' + rs + ' 0 1,0 -' + d + ',0';
+    }
+    return g;
+  }
+
+  keys() {
+    const night = { skyTop: '#03040C', skyMid: '#0A1130', skyLow: '#16224A', horizon: '#25335E', far: '#283458', near: '#03050B', sun: '#FFB06A', starO: 1, glowO: 0 };
+    return [
+      Object.assign({ h: 0 }, night),
+      { h: 4.6, skyTop: '#070B22', skyMid: '#1E2456', skyLow: '#5A4A84', horizon: '#C98A8E', far: '#4F4775', near: '#080A16', sun: '#FFB06A', starO: 0.7, glowO: 0.12 },
+      { h: 6, skyTop: '#2A3A78', skyMid: '#7F78B0', skyLow: '#F0A98C', horizon: '#FFD3A1', far: '#9C88AE', near: '#16152A', sun: '#FFC27A', starO: 0.08, glowO: 0.75 },
+      { h: 8.5, skyTop: '#3C78C4', skyMid: '#86B6E2', skyLow: '#CFE2F0', horizon: '#F6EAD6', far: '#A3B9CF', near: '#22323F', sun: '#FFF6E4', starO: 0, glowO: 0.45 },
+      { h: 12.5, skyTop: '#2762C4', skyMid: '#6FA8EA', skyLow: '#B8DAF6', horizon: '#E6F3FC', far: '#AFC6DB', near: '#1C3236', sun: '#FFFFFF', starO: 0, glowO: 0.35 },
+      { h: 16.5, skyTop: '#3767AE', skyMid: '#8FA6C8', skyLow: '#F1C38E', horizon: '#FFDCA4', far: '#C9A188', near: '#261C20', sun: '#FFD08A', starO: 0, glowO: 0.75 },
+      { h: 18, skyTop: '#1B2158', skyMid: '#6A4A86', skyLow: '#E9805E', horizon: '#FFB873', far: '#B66F86', near: '#120D1C', sun: '#FFB06A', starO: 0.05, glowO: 0.95 },
+      { h: 19.3, skyTop: '#0A0D2C', skyMid: '#33285A', skyLow: '#A2506A', horizon: '#F08A5D', far: '#9A5C7E', near: '#0A0814', sun: '#FFB06A', starO: 0.45, glowO: 0.5 },
+      { h: 20.8, skyTop: '#050822', skyMid: '#141C4A', skyLow: '#2F3A78', horizon: '#5B5E98', far: '#363C6C', near: '#05060F', sun: '#FFB06A', starO: 0.85, glowO: 0.08 },
+      Object.assign({ h: 24 }, night)
+    ];
+  }
+
+  paletteAt(h) {
+    const K = this._keys || (this._keys = this.keys());
+    let i = 0;
+    while (i < K.length - 2 && h > K[i + 1].h) i++;
+    const a = K[i], b = K[i + 1];
+    let t = Math.min(1, Math.max(0, (h - a.h) / (b.h - a.h)));
+    t = t * t * (3 - 2 * t);
+    const p = {};
+    ['skyTop', 'skyMid', 'skyLow', 'horizon', 'far', 'near', 'sun'].forEach((k) => { p[k] = this.mix(a[k], b[k], t); });
+    p.starO = a.starO + (b.starO - a.starO) * t;
+    p.glowO = a.glowO + (b.glowO - a.glowO) * t;
+    return p;
+  }
+
+  renderVals() {
+    const seed = this.props.seed ?? 7;
+    if (this._seed === seed && this._vals) return this._vals;
+    this._seed = seed;
+    const W = 480, H = 640, horizon = 400;
+    const rs = this.ridges(seed, W, H, horizon, 610);
+    const hours = [[5.9, 'First light', '05:54'], [12.5, 'Noon', '12:30'], [17.1, 'Golden hour', '17:06'], [20.9, 'Blue hour', '20:54']];
+    const cards = hours.map((q, idx) => {
+      const h = q[0];
+      const p = this.paletteAt(h);
+      const e = Math.sin(Math.PI * (h - 6) / 12);
+      const hm = (h + 12) % 24;
+      const em = Math.sin(Math.PI * (hm - 6) / 12);
+      const c = {
+        name: q[1], clock: q[2], alt: 'The valley at ' + q[1].toLowerCase(),
+        skyId: 'sr-sky' + idx, glowId: 'sr-glow' + idx, mistId: 'sr-mist' + idx,
+        skyTop: p.skyTop, skyMid: p.skyMid, skyLow: p.skyLow, horizon: p.horizon, sun: p.sun,
+        starO: p.starO.toFixed(3), glowO: p.glowO.toFixed(3),
+        sunX: (40 + 400 * ((h - 6) / 12)).toFixed(1),
+        sunY: (horizon - e * (horizon - 70)).toFixed(1),
+        moonX: (40 + 400 * ((hm - 6) / 12)).toFixed(1),
+        moonY: (horizon - em * (horizon - 90)).toFixed(1),
+        moonO: (em > 0 ? Math.min(1, p.starO * 1.2 + 0.15) : 0).toFixed(3)
+      };
+      rs.forEach((r, i) => { c['r' + i] = { d: r.d, fill: this.mix(p.far, p.near, Math.pow(r.t, 0.7)) }; });
+      return c;
+    });
+    const stars = this.stars(seed, W, 320, 140);
+    cards.forEach((c) => {
+      c.stars = stars;
+      [2, 5, 8].forEach((i) => { c['m' + i] = Math.round(rs[i].base - 30); });
+    });
+    const v = { cards };
+    this._vals = v;
+    return v;
+  }
+}
+</script>
+</body>
+</html>

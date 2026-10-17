@@ -1,0 +1,20 @@
+{
+  "voice": "af_heart",
+  "lines": [
+    {"from": 0.6, "to": 4.4, "say": "Chapter five: sine and cosine."},
+    {"from": 4.8, "to": 9.6, "text": "Here is [[f|$\\sin x$]]. What is its [[d|slope]] at each point?", "say": "Here's sine x. What is its slope at each point?"},
+    {"from": 9.6, "to": 14.8, "text": "Slide a tangent along the wave, and plot each slope as a [[d|teal dot]].", "say": "Slide a tangent along the wave, and plot each slope as a dot."},
+    {"from": 14.8, "to": 19.8, "text": "The slopes trace a wave of their own. It is exactly [[d|$\\cos x$]].", "say": "The slopes trace a wave of their own. It's exactly cosine x."},
+    {"from": 19.8, "to": 25.0, "text": "At 0 the slope is 1: chapter 4's limit, $\\frac{\\sin h}{h} \\to 1$, is this very slope.", "say": "At zero the slope is one. Chapter four's limit is this very slope."},
+    {"from": 25.0, "to": 30.2, "text": "Why cosine? Put a point on a circle of radius 1, at angle $\\theta$.", "say": "Why cosine? Put a point on a circle of radius one, at angle theta."},
+    {"from": 30.2, "to": 35.2, "text": "Its height is [[f|$\\sin\\theta$]]. Its distance across is $\\cos\\theta$.", "say": "Its height is sine theta. Its distance across is cosine theta."},
+    {"from": 35.2, "to": 40.6, "text": "Turn the angle steadily: the point moves at speed 1, along the [[d|tangent]].", "say": "Turn the angle steadily, and the point moves at speed one, along the tangent."},
+    {"from": 40.6, "to": 46.0, "text": "Its velocity makes a triangle: the radius triangle, turned a [[w|quarter turn]].", "say": "Its velocity makes a triangle: the radius triangle, turned a quarter turn."},
+    {"from": 46.0, "to": 51.6, "text": "So the height grows at rate [[d|$\\cos\\theta$]], and the distance across at [[a|$-\\sin\\theta$]].", "say": "So the height grows at rate cosine theta, and the distance across at minus sine theta."},
+    {"from": 51.6, "to": 57.1, "text": "Keep differentiating: [[f|$\\sin$]], [[d|$\\cos$]], [[a|$-\\sin$]], $-\\cos$, and [[f|$\\sin$]] again.", "say": "Keep differentiating: sine, cosine, minus sine, minus cosine, and sine again."},
+    {"from": 57.1, "to": 62.4, "text": "Each derivative slides the wave a [[w|quarter period]] left. Four steps make a full circle.", "say": "Each derivative slides the wave a quarter period left. Four steps make a full circle."},
+    {"from": 62.4, "to": 67.6, "text": "Two steps give [[a|$-\\sin x$]]: the second derivative is minus the function itself.", "say": "Two steps give minus sine: the second derivative is minus the function itself."},
+    {"from": 67.6, "to": 72.6, "text": "That is the law of a spring, $x'' = -x$: why sine waves describe everything that [[w|oscillates]].", "say": "That's the law of a spring, which is why sine waves describe everything that oscillates."},
+    {"from": 73.4, "to": 79.6, "say": "Sine's slope is cosine, cosine's is minus sine. Each derivative is a quarter turn."}
+  ]
+}

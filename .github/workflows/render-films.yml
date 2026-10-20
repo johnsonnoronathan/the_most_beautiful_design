@@ -1,0 +1,57 @@
+name: Render films
+
+# Renders every film to MP4 on GitHub's machines and attaches the files to a release.
+# Start it by hand: Actions → Render films → Run workflow. It takes about 35 minutes.
+# Running it again with the same tag replaces the files in that release.
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to create, or to update if it exists
+        required: true
+        default: films-v1
+
+permissions:
+  contents: write
+
+concurrency:
+  group: render-films
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Render every film
+        run: scripts/render-films.sh out/films
+
+      - name: Keep the films as a workflow artifact as well
+        uses: actions/upload-artifact@v4
+        with:
+          name: films
+          path: out/films/*.mp4
+          compression-level: 0
+          retention-days: 30
+
+      - name: Attach the films to the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag }}
+        run: |
+          { cat scripts/films-release-notes.md; echo; echo "Rendered from commit ${GITHUB_SHA::7} by the Render films workflow."; } > "$RUNNER_TEMP/notes.md"
+          if gh release view "$TAG" > /dev/null 2>&1; then
+            gh release upload "$TAG" out/films/*.mp4 --clobber
+            gh release edit "$TAG" --notes-file "$RUNNER_TEMP/notes.md"
+          else
+            gh release create "$TAG" out/films/*.mp4 --target "$GITHUB_SHA" \
+              --title "$TAG · Calculus, visually and Afterglow" --notes-file "$RUNNER_TEMP/notes.md"
+          fi

@@ -51,6 +51,7 @@ node scripts/check-pages.mjs projects/ma  # smoke-test page projects (errors, ov
 node scripts/build-design-preview.mjs     # gallery + design pages + thumbnails → out/design-preview/ (publish this)
 npm run stills -- Afterglow:960 Calculus-02-Integral:300,1180   # stills → out/stills/
 npx remotion render <Id> out/x.wav --codec=wav   # audio-only render, seconds not minutes
+scripts/render-films.sh [out-dir]         # every film as an MP4 (~35 min here); add new films to its list
 python3 projects/<p>/score/compose.py     # regenerate a score
 scripts/setup-tts.sh && .cache/tts/venv/bin/python projects/calculus-visually/voice/narrate.py   # voiceover
 ```
@@ -85,9 +86,13 @@ a file is actually wanted.
 - 2026-10-17 · Stopped the Calculus series at seven chapters (chapter 8, the quotient
   rule, was dropped after its narration draft) and asked for PR #1 to be merged, to
   start on "something better". Ask before extending the series again.
-- Branch `claude/happy-wozniak-73ik3t`, PR
-  [#1](https://github.com/johnsonnoronathan/the_most_beautiful_design/pull/1).
-  Commit with clear messages and push when a piece of work is finished.
+- Branch `claude/happy-wozniak-73ik3t`; PR
+  [#1](https://github.com/johnsonnoronathan/the_most_beautiful_design/pull/1) is merged,
+  so later work starts the branch again from `main`. Commit with clear messages and
+  push when a piece of work is finished.
+- 2026-10-20 · Wants the rendered films kept as a GitHub release. The owner starts the
+  Render films workflow (`.github/workflows/render-films.yml`); add new films to
+  `scripts/render-films.sh` and its release notes.
 
 ## Lessons learned
 
@@ -107,6 +112,8 @@ what went wrong or cost time, and what to do instead.
 - 2026-10-14 · kokoro-onnx 0.4.9 passes `speed` as int32 to models whose input is
   `input_ids`, but this export expects float. `narrate.py` calls the ONNX session
   directly (`synth()`).
+- 2026-10-20 · `gh api` works through the proxy even though `gh auth status` calls the
+  token invalid. But this session type may not create releases (403): the workflow does.
 
 ### Remotion
 

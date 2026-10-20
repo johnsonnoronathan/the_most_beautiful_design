@@ -2,7 +2,8 @@ name: Render films
 
 # Renders every film to MP4 on GitHub's machines and attaches the files to a release.
 # Start it by hand: Actions → Render films → Run workflow. It takes about 35 minutes.
-# Running it again with the same tag replaces the files in that release.
+# Running it again with the same tag replaces that release with a fresh one: its tag,
+# files and notes all come from the commit the workflow runs on.
 on:
   workflow_dispatch:
     inputs:
@@ -42,16 +43,16 @@ jobs:
           compression-level: 0
           retention-days: 30
 
-      - name: Attach the films to the release
+      - name: Publish the release
         env:
           GH_TOKEN: ${{ github.token }}
           TAG: ${{ inputs.tag }}
         run: |
           { cat scripts/films-release-notes.md; echo; echo "Rendered from commit ${GITHUB_SHA::7} by the Render films workflow."; } > "$RUNNER_TEMP/notes.md"
+          # An existing release of this tag is replaced whole, so the tag moves to this
+          # commit and films no longer rendered do not linger.
           if gh release view "$TAG" > /dev/null 2>&1; then
-            gh release upload "$TAG" out/films/*.mp4 --clobber
-            gh release edit "$TAG" --notes-file "$RUNNER_TEMP/notes.md"
-          else
-            gh release create "$TAG" out/films/*.mp4 --target "$GITHUB_SHA" \
-              --title "$TAG · Calculus, visually and Afterglow" --notes-file "$RUNNER_TEMP/notes.md"
+            gh release delete "$TAG" --cleanup-tag --yes
           fi
+          gh release create "$TAG" out/films/*.mp4 --target "$GITHUB_SHA" \
+            --title "$TAG · Calculus, visually and Afterglow" --notes-file "$RUNNER_TEMP/notes.md"

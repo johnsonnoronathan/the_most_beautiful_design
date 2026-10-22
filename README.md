@@ -19,9 +19,14 @@ npm install
 npm run screening-room   # → out/screening-room/index.html: every video and design, live, no rendering
 npm run studio           # Remotion Studio: scrub and edit the videos
 npx remotion render Calculus-01-Derivative out/calculus-01.mp4   # an MP4, only when you need a file
+scripts/render-films.sh  # every film as an MP4 → out/films/
 open projects/ma/index.html  # design pages open directly in a browser
 node scripts/build-design-preview.mjs   # → out/design-preview/: one gallery of every design page
 ```
+
+Rendered films are published as GitHub releases by the **Render films** workflow
+(Actions → Render films → Run workflow, about 35 minutes), which runs
+`scripts/render-films.sh` on GitHub's machines and attaches the MP4s to the release.
 
 To use a Chromium that is already installed (for example in a sandbox), set
 `REMOTION_BROWSER` to its executable. `npm run stills -- Afterglow:960` renders
@@ -41,7 +46,8 @@ studio/                        shared by every project (not a project itself)
   catalog.ts                   every video and design, its category and its project folder
   lib/fonts.ts, lib/synth.py   typefaces and the music synthesizer
   fonts/                       Bodoni Moda, Geist, Geist Mono (SIL OFL)
-scripts/                       stills, page thumbnails, page and Screening Room smoke tests, voice setup
+scripts/                       stills, film renders, page thumbnails, smoke tests, voice setup
+.github/workflows/             Render films: every film as an MP4, attached to a release
 CLAUDE.md                      how to work in this repo, and the lessons learned so far
 ```
 
